@@ -1,0 +1,46 @@
+import type { CaseStudy } from "@/types/portfolio";
+
+export const caseStudies: CaseStudy[] = [
+  {
+    slug: "twain",
+    title: "Twain",
+    caption: "为研究与对外触达打造的 GTM 智能体",
+    year: "'22 − 至今",
+    href: "https://twain.ai",
+    externalHref: "https://twain.ai",
+    video: { src: "/images/case-twain.mp4" },
+    imageBg: "rgba(209, 227, 255, 0.88)",
+    ctaLabel: "查看线上",
+  },
+  {
+    slug: "voiceflow",
+    title: "Voiceflow",
+    caption: "构建对话式智能体体验",
+    year: "'21 − 22",
+    href: "/voiceflow",
+    websiteHref: "https://voiceflow.com",
+    image: { src: "/images/case-voiceflow.png", alt: "Voiceflow case study" },
+    ctaLabel: "查看案例",
+  },
+  {
+    slug: "chattermill",
+    title: "Chattermill",
+    caption: "客户反馈分析平台中的 AI",
+    year: "'19 − 21",
+    href: "/chattermill",
+    websiteHref: "https://chattermill.com",
+    video: { src: "/images/case-chattermill.mp4" },
+    cropVariant: "crop-1",
+    ctaLabel: "查看案例",
+  },
+  {
+    slug: "invocable",
+    title: "Invocable",
+    caption: "对话式 UI 的无代码构建器",
+    year: "'18 − 19",
+    href: "/invocable",
+    video: { src: "/images/case-invocable.mp4" },
+    cropVariant: "crop-2",
+    ctaLabel: "查看案例",
+  },
+];
