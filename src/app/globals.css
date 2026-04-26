@@ -3081,7 +3081,7 @@ a.work-card {
   background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1) 0%, transparent 60%);
 }
 
-.about__hero-photo.about__hero-photo--visible {
+.about__hero-photo.reveal-scroll--visible {
   opacity: 1;
   translate: 0 0;
 }

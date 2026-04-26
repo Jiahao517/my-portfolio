@@ -51,7 +51,7 @@ export function About() {
             </p>
           </div>
 
-          <div className="about__hero-photo" id="aboutHeroPhoto">
+          <div className="about__hero-photo reveal-scroll" id="aboutHeroPhoto">
             <div className="about__hero-glare" />
             <Image src="/images/about-hero.png" alt="Gregory 坐在橙色椅子上" width={700} height={1360} />
           </div>
