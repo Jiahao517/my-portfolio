@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const NAV = [
@@ -49,14 +48,7 @@ export function Sidebar() {
       <div className="sidebar-top">
         <a href="#about" className="sidebar-name reveal-load reveal-load--active" id="sidebarSig">
           <div className="signature-wrap">
-            <Image
-              src="/images/signature.svg"
-              alt="Gregory Muryn-Mukha"
-              className="signature-img"
-              width={123}
-              height={48}
-              priority
-            />
+            <div className="signature-placeholder" aria-hidden />
           </div>
         </a>
         <nav className="sidebar-nav">

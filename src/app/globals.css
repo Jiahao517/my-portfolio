@@ -196,10 +196,11 @@ blockquote {
   align-items: center;
 }
 
-.mobile-logo img {
+.mobile-logo__fill {
   display: block;
+  width: 98px;
   height: 38px;
-  width: auto;
+  background: #EBEBEB;
 }
 
 /* Inline nav in mobile header — hidden by default */
@@ -672,11 +673,11 @@ blockquote {
   position: relative;
 }
 
-.sp-testimonial__avatar img {
+.sp-testimonial__avatar-fill {
   width: 56px;
   height: 56px;
   border-radius: 36px;
-  object-fit: cover;
+  background: #EBEBEB;
   display: block;
 }
 
@@ -1349,7 +1350,7 @@ video.case-study__image {
 .experience__logo {
   width: 56px;
   height: 56px;
-  border-radius: 0;
+  border-radius: 16px;
   background: #EBEBEB;
   flex-shrink: 0;
   transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -2657,14 +2658,11 @@ a.work-card {
   height: 48px;
 }
 
-.signature-wrap svg {
+.signature-placeholder {
   width: 123px;
   height: 48px;
+  background: #EBEBEB;
   display: block;
-}
-
-.signature-wrap svg path {
-  transition: opacity 0.08s ease;
 }
 
 /* ---------- Cat Cursor Easter Egg ---------- */
@@ -2920,10 +2918,9 @@ a.work-card {
     flex-shrink: 0;
   }
 
-  .sidebar-name img {
+  .signature-placeholder {
     width: 123px;
     height: 40px;
-    object-fit: contain;
   }
 
   .sidebar-nav {

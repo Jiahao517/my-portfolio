@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const NAV = [
@@ -57,7 +56,7 @@ export function MobileHeader() {
     <>
       <header className="mobile-header" style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}>
         <a href="#services" className="mobile-logo">
-          <Image src="/images/signature.svg" alt="Gregory Muryn-Mukha" width={98} height={38} />
+          <div className="mobile-logo__fill" aria-hidden />
         </a>
         <nav className="mobile-header__nav">
           {NAV.map((n) => (

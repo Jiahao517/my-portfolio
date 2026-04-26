@@ -6,7 +6,6 @@ import { CtaBlock } from "@/components/CtaBlock";
 import { Experience } from "@/components/Experience";
 import { HeroBio } from "@/components/HeroBio";
 import { HeroVideo } from "@/components/HeroVideo";
-import { LogosSection } from "@/components/LogosSection";
 import { MobileHeader } from "@/components/MobileHeader";
 import { RevealController } from "@/components/RevealController";
 import { Sidebar } from "@/components/Sidebar";
@@ -25,7 +24,6 @@ export default function Home() {
           <div className="centered">
             <HeroBio />
             <SocialProof />
-            <LogosSection />
             <CaseStudies />
           </div>
         </section>
