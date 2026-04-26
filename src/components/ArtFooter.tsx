@@ -18,17 +18,35 @@ function ArtFooterArrowUp() {
   );
 }
 
-function splitChars(text: string, startIndex: number) {
+function buildCenterOutOrder(total: number) {
+  const center = (total - 1) / 2;
+  const indices = Array.from({ length: total }, (_, i) => i);
+
+  indices.sort((a, b) => {
+    const distanceA = Math.abs(a - center);
+    const distanceB = Math.abs(b - center);
+
+    if (distanceA !== distanceB) return distanceA - distanceB;
+    return a - b;
+  });
+
+  const rank = Array.from({ length: total }, () => 0);
+  indices.forEach((index, i) => {
+    rank[index] = i;
+  });
+
+  return rank;
+}
+
+function splitChars(text: string, startIndex: number, order: number[]) {
   return Array.from(text).map((ch, i) => (
     <span
       key={`${ch}-${i}`}
       className="art-footer__char"
-      style={{ "--char-i": startIndex + i } as CSSProperties}
+      style={{ "--char-order": order[startIndex + i] } as CSSProperties}
       aria-hidden="true"
     >
-      <span className="art-footer__char-inner">
-        {ch === " " ? " " : ch}
-      </span>
+      <span className="art-footer__char-inner">{ch === " " ? "\u00A0" : ch}</span>
     </span>
   ));
 }
@@ -44,10 +62,81 @@ function formatYerevanTime() {
   return formatter.format(new Date());
 }
 
+function randomGlyphFor(char: string) {
+  const glyphs = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+  if (char === " ") return " ";
+  if (char === "/") return "/";
+  if (char === ":") return ":";
+  return glyphs[Math.floor(Math.random() * glyphs.length)] ?? "#";
+}
+
+function ScrambleRevealText({
+  text,
+  active,
+  runId,
+  className,
+}: {
+  text: string;
+  active: boolean;
+  runId: number;
+  className?: string;
+}) {
+  const textRef = useRef<HTMLSpanElement | null>(null);
+
+  useEffect(() => {
+    const node = textRef.current;
+    if (!node) return;
+
+    if (!active) {
+      node.textContent = text;
+      return;
+    }
+
+    const targetChars = Array.from(text);
+    const start = performance.now();
+    const duration = 480;
+
+    let frameId = 0;
+
+    const update = (now: number) => {
+      const progress = Math.min(1, (now - start) / duration);
+      const revealCount = Math.floor(progress * targetChars.length);
+
+      const mixed = targetChars
+        .map((ch, i) => (i < revealCount ? ch : randomGlyphFor(ch)))
+        .join("");
+
+      node.textContent = mixed;
+
+      if (progress < 1) {
+        frameId = window.requestAnimationFrame(update);
+      } else {
+        node.textContent = text;
+      }
+    };
+
+    frameId = window.requestAnimationFrame(update);
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [active, runId, text]);
+
+  return (
+    <span ref={textRef} className={className}>
+      {text}
+    </span>
+  );
+}
+
 export function ArtFooter() {
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(() => formatYerevanTime());
   const [isVisualActive, setIsVisualActive] = useState(false);
+  const [isMainVisible, setIsMainVisible] = useState(false);
+  const [utilityStep, setUtilityStep] = useState(0);
+  const [revealRunId, setRevealRunId] = useState(0);
   const visualRef = useRef<HTMLElement | null>(null);
+  const sequenceTimersRef = useRef<number[]>([]);
 
   useEffect(() => {
     const update = () => setTime(formatYerevanTime());
@@ -86,10 +175,49 @@ export function ArtFooter() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    let resetTimer: number | undefined;
+    sequenceTimersRef.current.forEach((id) => window.clearTimeout(id));
+    sequenceTimersRef.current = [];
+
+    if (!isVisualActive) {
+      resetTimer = window.setTimeout(() => {
+        setIsMainVisible(false);
+        setUtilityStep(0);
+      }, 0);
+      return;
+    }
+
+    resetTimer = window.setTimeout(() => {
+      setRevealRunId((value) => value + 1);
+      setIsMainVisible(false);
+      setUtilityStep(0);
+    }, 0);
+
+    const queue = (fn: () => void, delay: number) => {
+      const id = window.setTimeout(fn, delay);
+      sequenceTimersRef.current.push(id);
+    };
+
+    // Match reference feel: hold first, then main text, then 3 bottom lines in order.
+    queue(() => setIsMainVisible(true), 720);
+    queue(() => setUtilityStep(1), 1760);
+    queue(() => setUtilityStep(2), 2060);
+    queue(() => setUtilityStep(3), 2360);
+
+    return () => {
+      if (resetTimer) window.clearTimeout(resetTimer);
+      sequenceTimersRef.current.forEach((id) => window.clearTimeout(id));
+      sequenceTimersRef.current = [];
+    };
+  }, [isVisualActive]);
+
   const mobileSocialText = useMemo(
     () => ["Creative Digital Designer.", "Working Worldwide."],
     [],
   );
+
+  const nameOrder = useMemo(() => buildCenterOutOrder(Array.from("ArtiomYakushev").length), []);
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -118,7 +246,7 @@ export function ArtFooter() {
             </video>
           </div>
 
-          <div className={`art-footer__text-layer${isVisualActive ? " art-footer__text-layer--active" : ""}`}>
+          <div className={`art-footer__text-layer${isMainVisible ? " art-footer__text-layer--main" : ""}`}>
             <div className="art-footer__mobile-utility">
               <button type="button" className="art-footer__top-button art-footer__top-button--mobile" onClick={scrollTop}>
                 <span className="art-footer__top-button-icon">
@@ -134,36 +262,41 @@ export function ArtFooter() {
             </div>
 
             <div className="art-footer__big-name" aria-label="Artiom Yakushev">
-              <span className="art-footer__big-name-sans">
-                {splitChars("Artiom", 0)}
-              </span>
-              <span className="art-footer__big-name-serif">
-                {splitChars("Yakushev", 6)}
-              </span>
+              <span className="art-footer__big-name-sans">{splitChars("Artiom", 0, nameOrder)}</span>
+              <span className="art-footer__big-name-serif">{splitChars("Yakushev", 6, nameOrder)}</span>
             </div>
 
             <div className="art-footer__utility-row">
-              <div className="art-footer__time art-footer__reveal-item art-footer__reveal-item--1">
-                <span className="art-footer__time-city">Yerevan</span>
-                <span className="art-footer__time-separator"> </span>
-                <span className="art-footer__time-value">{time}</span>
+              <div
+                className={`art-footer__time art-footer__reveal-item${utilityStep >= 1 ? " art-footer__reveal-item--visible" : ""}`}
+              >
+                <ScrambleRevealText text={`Yerevan ${time}`} active={utilityStep >= 1} runId={revealRunId} />
               </div>
 
-              <div className="art-footer__role art-footer__reveal-item art-footer__reveal-item--2">
-                <span>Creative Digital Designer</span>
-                <span className="art-footer__role-slash">/</span>
-                <span>Working Worldwide</span>
+              <div
+                className={`art-footer__role art-footer__reveal-item${utilityStep >= 2 ? " art-footer__reveal-item--visible" : ""}`}
+              >
+                <ScrambleRevealText
+                  text="Creative Digital Designer / Working Worldwide"
+                  active={utilityStep >= 2}
+                  runId={revealRunId}
+                />
               </div>
 
               <button
                 type="button"
-                className="art-footer__top-button art-footer__top-button--desktop art-footer__reveal-item art-footer__reveal-item--3"
+                className={`art-footer__top-button art-footer__top-button--desktop art-footer__reveal-item${utilityStep >= 3 ? " art-footer__reveal-item--visible" : ""}`}
                 onClick={scrollTop}
               >
                 <span className="art-footer__top-button-icon">
                   <ArtFooterArrowUp />
                 </span>
-                <span className="art-footer__top-button-text">Back to top</span>
+                <ScrambleRevealText
+                  text="Back to top"
+                  className="art-footer__top-button-text"
+                  active={utilityStep >= 3}
+                  runId={revealRunId}
+                />
               </button>
             </div>
           </div>

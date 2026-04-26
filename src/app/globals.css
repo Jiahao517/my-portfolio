@@ -4454,6 +4454,12 @@ a.work-card {
   margin-bottom: clamp(16px, 2vw, 26px);
   white-space: nowrap;
   color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.18s linear;
+}
+
+.art-footer__text-layer--main .art-footer__big-name {
+  opacity: 1;
 }
 
 .art-footer__big-name-sans {
@@ -4485,14 +4491,18 @@ a.work-card {
 
 .art-footer__char-inner {
   display: inline-block;
-  transform: translateY(110%);
-  transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-  transition-delay: calc(var(--char-i, 0) * 38ms + 80ms);
+  transform: translateY(122%);
+  transition:
+    transform 1.15s cubic-bezier(0.19, 1, 0.22, 1),
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--char-order, 0) * 48ms);
+  opacity: 0;
   will-change: transform;
 }
 
-.art-footer__text-layer--active .art-footer__char-inner {
+.art-footer__text-layer--main .art-footer__char-inner {
   transform: translateY(0);
+  opacity: 1;
 }
 
 .art-footer__utility-row {
@@ -4510,19 +4520,7 @@ a.work-card {
     transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.art-footer__reveal-item--1 {
-  transition-delay: 0.16s;
-}
-
-.art-footer__reveal-item--2 {
-  transition-delay: 0.26s;
-}
-
-.art-footer__reveal-item--3 {
-  transition-delay: 0.36s;
-}
-
-.art-footer__text-layer--active .art-footer__reveal-item {
+.art-footer__reveal-item--visible {
   opacity: 1;
   transform: translateY(0);
 }
