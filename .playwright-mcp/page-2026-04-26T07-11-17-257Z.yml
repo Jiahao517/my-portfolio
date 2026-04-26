@@ -1,0 +1,241 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - button [ref=e4] [cursor=pointer]
+      - generic:
+        - link "Home":
+          - /url: /
+          - text: Home
+        - link "Work":
+          - /url: /work
+          - text: Work
+        - link "About":
+          - /url: /about
+          - text: About
+        - link "Chat":
+          - /url: /chat
+          - text: Chat
+        - link "Playground":
+          - /url: /playground
+          - text: Playground
+        - link "Clients":
+          - /url: /clients
+          - text: Clients
+        - link "People":
+          - /url: /people
+          - text: People
+  - heading "Gabriel Valdivia" [level=3] [ref=e9]:
+    - link "Gabriel Valdivia" [ref=e10] [cursor=pointer]:
+      - /url: /
+  - main [ref=e11]:
+    - generic [ref=e17]: Fractional Design Partner for Early-Stage Teams
+    - generic [ref=e23]:
+      - link "Dex cover image Dex Camera The language learning camera" [ref=e25] [cursor=pointer]:
+        - /url: /work/dex
+        - generic [ref=e26]:
+          - img "Dex cover image" [ref=e28]
+          - generic [ref=e29]:
+            - heading "Dex Camera" [level=4] [ref=e30]
+            - paragraph [ref=e31]: The language learning camera
+      - link "Daylight cover Daylight A more caring computer" [ref=e33] [cursor=pointer]:
+        - /url: /work/daylight
+        - generic [ref=e34]:
+          - img "Daylight cover" [ref=e36]
+          - generic [ref=e37]:
+            - heading "Daylight" [level=4] [ref=e38]
+            - paragraph [ref=e39]: A more caring computer
+      - link "Workmate cover Workmate Your AI Executive Assistant" [ref=e41] [cursor=pointer]:
+        - /url: /work/workmate
+        - generic [ref=e42]:
+          - img "Workmate cover" [ref=e44]
+          - generic [ref=e45]:
+            - heading "Workmate" [level=4] [ref=e46]
+            - paragraph [ref=e47]: Your AI Executive Assistant
+      - link "Slingshot AI cover Slingshot AI Personalized AI counselor" [ref=e49] [cursor=pointer]:
+        - /url: /work/slingshot
+        - generic [ref=e50]:
+          - img "Slingshot AI cover" [ref=e52]
+          - generic [ref=e53]:
+            - heading "Slingshot AI" [level=4] [ref=e54]
+            - paragraph [ref=e55]: Personalized AI counselor
+      - link "Patreon cover Patreon 2.0 Connecting creators with superfans" [ref=e57] [cursor=pointer]:
+        - /url: /work/patreon
+        - generic [ref=e58]:
+          - img "Patreon cover" [ref=e60]
+          - generic [ref=e61]:
+            - heading "Patreon 2.0" [level=4] [ref=e62]
+            - paragraph [ref=e63]: Connecting creators with superfans
+      - link "Index View all projects" [ref=e65] [cursor=pointer]:
+        - /url: /work
+        - generic [ref=e66]:
+          - img [ref=e69]
+          - generic [ref=e71]:
+            - heading "Index" [level=4] [ref=e72]
+            - paragraph [ref=e73]: View all projects
+    - generic [ref=e77]:
+      - img "Gabe (Light)" [ref=e80]
+      - generic [ref=e81]:
+        - heading "I help early-stage startups ship fast without compromising quality." [level=2] [ref=e82]
+        - generic [ref=e85]:
+          - paragraph [ref=e86]: "I’ve spent the last fifteen years building 0→1 products for the world’s top tech companies. Today, I partner with founders to bring their ideas to life. As your design partner, I will:"
+          - list [ref=e87]:
+            - listitem [ref=e88]: • Help you shape the product strategy without drowning in docs.
+            - listitem [ref=e89]: • Create high-fidelity interactive prototypes to validate ideas.
+            - listitem [ref=e90]: • Collaborate directly with engineering teams to iterate fast.
+            - listitem [ref=e91]: • Build and nurture a design team that’s set up for success.
+          - paragraph [ref=e92]
+        - link "Learn more" [ref=e93] [cursor=pointer]:
+          - /url: /about
+          - text: Learn more
+          - img [ref=e94]
+    - generic [ref=e99]:
+      - heading "Capabilities" [level=3] [ref=e101]
+      - generic [ref=e103]:
+        - generic [ref=e104]: Product Design
+        - generic [ref=e105]: Branding
+        - generic [ref=e106]: Web Design
+        - generic [ref=e107]: Strategy
+        - generic [ref=e108]: Pitch Decks
+        - generic [ref=e109]: Design Systems
+        - generic [ref=e110]: Team Building
+        - generic [ref=e111]: Coaching
+    - generic [ref=e114]:
+      - heading "Approach" [level=3] [ref=e115]
+      - generic [ref=e116]:
+        - generic [ref=e117]:
+          - generic [ref=e118]: "01"
+          - paragraph [ref=e122]:
+            - strong [ref=e123]: Shared ownership.
+            - text: Whether I work independently or integrate with your team, everyone comes along.
+        - generic [ref=e124]:
+          - generic [ref=e125]: "02"
+          - paragraph [ref=e129]:
+            - strong [ref=e130]: I work fast.
+            - text: Quick iteration allows us to zoom through explorations until something feels right.
+        - generic [ref=e131]:
+          - generic [ref=e132]: "03"
+          - paragraph [ref=e136]:
+            - strong [ref=e137]: Show and tell.
+            - text: I frequently share work in progress via screen recordings with voice over.
+        - generic [ref=e138]:
+          - generic [ref=e139]: "04"
+          - paragraph [ref=e143]:
+            - strong [ref=e144]: Bias for action.
+            - text: I prefer tangible artifacts over lengthy documents that go ignored.
+        - generic [ref=e145]:
+          - generic [ref=e146]: "05"
+          - paragraph [ref=e150]:
+            - strong [ref=e151]: I work in systems.
+            - text: I create reusable components whether it's a feature or a design system.
+        - generic [ref=e152]:
+          - generic [ref=e153]: "06"
+          - paragraph [ref=e157]:
+            - strong [ref=e158]: Design is thinking.
+            - text: I explore divergent solutions. The more the merrier!
+    - generic [ref=e161]:
+      - generic [ref=e163]:
+        - heading "Clients" [level=3] [ref=e164]
+        - link "View all" [ref=e165] [cursor=pointer]:
+          - /url: /clients
+          - text: View all
+          - img [ref=e166]
+      - generic [ref=e170]:
+        - img "National Design Studio logo"
+        - img "Facebook logo"
+        - img "Patreon logo"
+        - img "Daylight Computer logo" [ref=e171]
+        - img "Google Ventures logo" [ref=e172]
+        - img "Slingshot logo"
+        - img "SuperMe logo"
+        - img "World Playground logo"
+        - img "Workmate logo"
+        - img "National Design Studio logo"
+        - img "Facebook logo"
+        - img "Patreon logo"
+        - img "Daylight Computer logo" [ref=e173]
+        - img "Google Ventures logo" [ref=e174]
+        - img "Slingshot logo"
+        - img "SuperMe logo"
+        - img "World Playground logo"
+        - img "Workmate logo"
+    - generic [ref=e177]:
+      - heading "In their words" [level=3] [ref=e179]
+      - generic [ref=e182]:
+        - generic [ref=e184]:
+          - paragraph [ref=e185]: “Gabe is a master at taming the chaos of the 0 → 1 process. He has the rare ability to jump into the early stages of open-ended projects and rapidly develop structure and systems. He is proactive, works with little to no direction — and he is also very fast!”
+          - link "Daylight Computer logo Tanuj Lalwani Tanuj Lalwani" [ref=e186] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/tanujlalwani/
+            - generic [ref=e187]:
+              - img "Daylight Computer logo" [ref=e189]
+              - generic [ref=e190]:
+                - img "Tanuj Lalwani" [ref=e192]
+                - generic: Tanuj Lalwani
+        - generic [ref=e194]:
+          - paragraph [ref=e195]: “I cannot recommend Gabe enough. Truly world-class in every sense of the word. From helping to visualize an ambitious product story & vision, to playing an active role in bringing on senior full-time talent, and everything in between — Gabe can seemingly do it all. Our product, team, culture, and customers are in a stronger position thanks to our time together.”
+          - link "Gather logo Jinen Kamdar Jinen Kamdar" [ref=e196] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/jinenkamdar/
+            - generic [ref=e197]:
+              - img "Gather logo" [ref=e199]
+              - generic [ref=e200]:
+                - img "Jinen Kamdar" [ref=e202]
+                - generic: Jinen Kamdar
+        - generic [ref=e204]:
+          - paragraph [ref=e205]: “Gabe zipped in to our team seamlessly, brought well researched insights and strategic thinking to every concept, and polished the details to a high-shine. We are extremely pleased with the work — not only the output but the process to get there.”
+          - link "Bindery Books logo Meghan Harvey Meghan Harvey" [ref=e206] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/meghanharvey/
+            - generic [ref=e207]:
+              - img "Bindery Books logo" [ref=e209]
+              - generic [ref=e210]:
+                - img "Meghan Harvey" [ref=e212]
+                - generic: Meghan Harvey
+        - generic [ref=e214]:
+          - paragraph [ref=e215]: “Gabe is a superb designer. He grasps what we are seeking to build and is lightning fast at turning our thoughts into designs. This facilitates a quick feedback cycle leading to designs we are all happy with in an impressively short period of time.”
+          - link "Google Ventures logo Greg Dooley Greg Dooley" [ref=e216] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/gregdooley/
+            - generic [ref=e217]:
+              - img "Google Ventures logo" [ref=e219]
+              - generic [ref=e220]:
+                - img "Greg Dooley" [ref=e222]
+                - generic: Greg Dooley
+        - generic [ref=e224]:
+          - paragraph [ref=e225]: “Gabe is an exceptional 0 → 1 design thinker and partner to early-stage founders. He made major contributions to our brand identity and key features. Highly recommend!”
+          - link "Grandstand logo Sandeep Rajan Sandeep Rajan" [ref=e226] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/sandeepayyappan/
+            - generic [ref=e227]:
+              - img "Grandstand logo" [ref=e229]
+              - generic [ref=e230]:
+                - img "Sandeep Rajan" [ref=e232]
+                - generic: Sandeep Rajan
+        - generic [ref=e234]:
+          - paragraph [ref=e235]: “I was blown away by Gabe's ability to quickly synthesize complexity and simplify it for different audiences. Working with Gabe was both fun and productive. Delivery of high quality at high velocity is his superpower.”
+          - link "Ritual Dental logo Natasha Awasthi Natasha Awasthi" [ref=e236] [cursor=pointer]:
+            - /url: https://www.linkedin.com/in/natasha-awasthi-7070572
+            - generic [ref=e237]:
+              - img "Ritual Dental logo" [ref=e239]
+              - generic [ref=e240]:
+                - img "Natasha Awasthi" [ref=e242]
+                - generic: Natasha Awasthi
+    - generic [ref=e246]:
+      - heading "Contact" [level=3] [ref=e248]
+      - generic [ref=e250]:
+        - generic:
+          - generic:
+            - generic: Conversations
+            - generic:
+              - paragraph: No conversations yet
+        - generic [ref=e256]: Hi there! Ask me anything.
+        - generic [ref=e257]:
+          - generic [ref=e259]:
+            - button:
+              - img
+            - link [ref=e260] [cursor=pointer]:
+              - /url: https://x.com/gabrielvaldivia
+              - img [ref=e261]
+            - link [ref=e263] [cursor=pointer]:
+              - /url: mailto:gabe@valdivia.works
+              - img [ref=e264]
+            - link [ref=e267] [cursor=pointer]:
+              - /url: linkedin.com/in/gabrielvaldivia
+              - img [ref=e268]
+          - textbox "Message..." [ref=e271]
+  - alert [ref=e273]

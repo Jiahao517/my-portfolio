@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, GlobeIcon } from "@/components/icons";
 import { caseStudies } from "@/data/case-studies";
@@ -84,6 +87,64 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
 }
 
 export function CaseStudies() {
+  useEffect(() => {
+    const studies = Array.from(document.querySelectorAll<HTMLElement>(".case-study"));
+    if (studies.length < 2) return;
+
+    studies.forEach((card, i) => {
+      card.style.zIndex = String(i + 1);
+    });
+
+    function setStickyTops() {
+      const viewH = window.innerHeight;
+      for (const card of studies) {
+        const cardH = card.offsetHeight;
+        if (cardH <= viewH - 56 - 24) {
+          card.style.top = "56px";
+        } else {
+          card.style.top = `${viewH - cardH - 24}px`;
+        }
+      }
+    }
+
+    function onScroll() {
+      for (let i = 0; i < studies.length - 1; i++) {
+        const card = studies[i];
+        const next = studies[i + 1];
+        const cardRect = card.getBoundingClientRect();
+        const nextRect = next.getBoundingClientRect();
+
+        const overlap = cardRect.bottom - nextRect.top;
+        const cardH = cardRect.height;
+        const progress = Math.max(0, Math.min(1, overlap / cardH));
+
+        const opacity = Math.max(0, 1 - progress);
+        const blur = progress * 6;
+        const scale = 1 - progress * 0.07;
+
+        card.style.opacity = opacity.toFixed(3);
+        card.style.filter = blur > 0.2 ? `blur(${blur.toFixed(1)}px)` : "none";
+        card.style.transform = `scale(${scale.toFixed(4)})`;
+
+        const padTop = 72 - progress * 72;
+        next.style.paddingTop = `${Math.max(0, padTop).toFixed(1)}px`;
+      }
+    }
+
+    setStickyTops();
+    onScroll();
+
+    window.addEventListener("load", setStickyTops);
+    window.addEventListener("resize", setStickyTops);
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("load", setStickyTops);
+      window.removeEventListener("resize", setStickyTops);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
+
   return (
     <div className="case-studies section" id="work">
       {caseStudies.map((cs) => (

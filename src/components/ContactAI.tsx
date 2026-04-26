@@ -10,6 +10,29 @@ const SUGGESTED = [
   "你怎么处理产品转型期的设计决策？",
 ];
 
+function XIcon() {
+  return (
+    <svg width="18" height="16" viewBox="0 0 21.854 19.933" fill="currentColor" aria-hidden>
+      <path d="M 17.203 0 L 20.555 0 L 13.234 8.367 L 21.846 19.754 L 15.103 19.754 L 9.819 12.846 L 3.778 19.754 L 0.422 19.754 L 8.252 10.804 L 0 0 L 6.91 0 L 11.687 6.314 L 17.203 0 Z M 16.027 17.747 L 17.884 17.747 L 5.904 1.901 L 3.911 1.901 L 16.027 17.747 Z" />
+    </svg>
+  );
+}
+function MailIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 7l9 6 9-6" />
+    </svg>
+  );
+}
+function LinkedInIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+      <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.06h4.56V24H.22zM7.94 8.06h4.36v2.18h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 7v9.14h-4.56v-8.1c0-1.93-.04-4.42-2.7-4.42-2.7 0-3.12 2.11-3.12 4.28V24H7.94z" />
+    </svg>
+  );
+}
+
 export function ContactAI() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -70,46 +93,48 @@ export function ContactAI() {
     }
   };
 
+  const showGreeting = messages.length === 0;
+
   return (
     <section id="contact-ai" className="contact-ai">
       <div className="centered contact-ai__centered">
         <div className="contact-ai__col-left">
-          <h2 className="contact-ai__title shiny-hover">问问关于 Gregory 的任何事</h2>
-          <p className="contact-ai__subtitle">
-            这里接的是真实的 LLM。问背景、问案例、问合作方式都可以。回答受限于他公开过的资料，避免胡编。
-          </p>
+          <h2 className="contact-ai__title shiny-hover">Contact</h2>
         </div>
 
         <div className="contact-ai__panel">
-          <div className="contact-ai__panel-head">
-            <div className="contact-ai__avatar">
-              <span aria-hidden>G</span>
-            </div>
-            <div>
-              <div className="contact-ai__panel-name">Gregory · AI</div>
-              <div className="contact-ai__panel-role">代表本人回答访客问题</div>
-            </div>
-          </div>
-
           <div ref={listRef} className="contact-ai__list">
-            {messages.length === 0 ? (
-              <div className="contact-ai__bubble contact-ai__bubble--bot">
-                你好，我是代表 Gregory 的 AI 助理。下面有几个常见问题，你也可以直接打字提问。
+            {showGreeting ? (
+              <div className="contact-ai__row">
+                <div className="contact-ai__avatar" aria-hidden>
+                  <span>G</span>
+                </div>
+                <div className="contact-ai__bubble contact-ai__bubble--bot">
+                  你好，我是代表 Gregory 的 AI 助理。
+                </div>
               </div>
             ) : (
-              messages.map((m, i) => (
-                <div
-                  key={i}
-                  className={`contact-ai__bubble contact-ai__bubble--${m.role === "user" ? "me" : "bot"}`}
-                >
-                  {m.content || (streaming && i === messages.length - 1 ? "正在思考…" : "")}
-                </div>
-              ))
+              messages.map((m, i) =>
+                m.role === "assistant" ? (
+                  <div key={i} className="contact-ai__row">
+                    <div className="contact-ai__avatar" aria-hidden>
+                      <span>G</span>
+                    </div>
+                    <div className="contact-ai__bubble contact-ai__bubble--bot">
+                      {m.content || (streaming && i === messages.length - 1 ? "正在思考…" : "")}
+                    </div>
+                  </div>
+                ) : (
+                  <div key={i} className="contact-ai__row contact-ai__row--me">
+                    <div className="contact-ai__bubble contact-ai__bubble--me">{m.content}</div>
+                  </div>
+                ),
+              )
             )}
             {error ? <div className="contact-ai__error">{error}</div> : null}
           </div>
 
-          {messages.length === 0 ? (
+          {showGreeting ? (
             <div className="contact-ai__suggestions">
               {SUGGESTED.map((s) => (
                 <button
@@ -132,24 +157,41 @@ export function ContactAI() {
             }}
           >
             <div className="contact-ai__socials">
-              <a href="https://linkedin.com/in/murynmukha" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
-              <a href="https://github.com/gregorymm" target="_blank" rel="noopener" aria-label="GitHub">gh</a>
-              <a href="https://dribbble.com/murynmukha" target="_blank" rel="noopener" aria-label="Dribbble">db</a>
+              <a
+                href="https://x.com/murynmukha"
+                target="_blank"
+                rel="noopener"
+                aria-label="X"
+                className="contact-ai__social-btn"
+              >
+                <XIcon />
+              </a>
+              <a
+                href="mailto:gregory.murynmukha@gmail.com"
+                aria-label="Email"
+                className="contact-ai__social-btn"
+              >
+                <MailIcon />
+              </a>
+              <a
+                href="https://linkedin.com/in/murynmukha"
+                target="_blank"
+                rel="noopener"
+                aria-label="LinkedIn"
+                className="contact-ai__social-btn"
+              >
+                <LinkedInIcon />
+              </a>
             </div>
-            <input
-              className="contact-ai__input"
-              placeholder="输入你的问题，回车发送…"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              disabled={streaming}
-            />
-            <button
-              type="submit"
-              className="contact-ai__send"
-              disabled={!input.trim() || streaming}
-            >
-              发送
-            </button>
+            <div className="contact-ai__input-wrap">
+              <input
+                className="contact-ai__input"
+                placeholder="留言…"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                disabled={streaming}
+              />
+            </div>
           </form>
         </div>
       </div>
