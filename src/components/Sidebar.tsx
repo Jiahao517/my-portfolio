@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useNavTheme } from "@/lib/useNavTheme";
 
 const NAV = [
   { id: "services", label: "服务" },
@@ -14,6 +15,7 @@ export function Sidebar() {
   const [active, setActive] = useState<string>("services");
   const [copied, setCopied] = useState(false);
   const onceRef = useRef(false);
+  const isDarkTheme = useNavTheme();
 
   useEffect(() => {
     if (onceRef.current) return;
@@ -44,13 +46,8 @@ export function Sidebar() {
   };
 
   return (
-    <aside className="sidebar reveal-load reveal-load--active">
+    <aside className={`sidebar reveal-load reveal-load--active${isDarkTheme ? " sidebar--dark" : " sidebar--light"}`}>
       <div className="sidebar-top">
-        <a href="#about" className="sidebar-name reveal-load reveal-load--active" id="sidebarSig">
-          <div className="signature-wrap">
-            <div className="signature-placeholder" aria-hidden />
-          </div>
-        </a>
         <nav className="sidebar-nav">
           {NAV.map((item) => (
             <a

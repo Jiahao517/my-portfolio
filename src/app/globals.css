@@ -187,7 +187,7 @@ blockquote {
   align-items: center;
   justify-content: space-between;
   padding: 20px 24px;
-  background: var(--bg);
+  background: transparent;
   transition: transform 0.3s ease;
 }
 
@@ -221,6 +221,32 @@ blockquote {
 
 .mobile-header__link.active {
   color: var(--text);
+}
+
+.mobile-header--dark .mobile-header__link {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.mobile-header--dark .mobile-header__link:hover,
+.mobile-header--dark .mobile-header__link.active {
+  color: #FFFFFF;
+}
+
+.mobile-header--dark .menu-toggle .bar {
+  background: #FFFFFF;
+}
+
+.mobile-header--light .mobile-header__link {
+  color: var(--text-muted);
+}
+
+.mobile-header--light .mobile-header__link:hover,
+.mobile-header--light .mobile-header__link.active {
+  color: var(--text);
+}
+
+.mobile-header--light .menu-toggle .bar {
+  background: var(--text);
 }
 
 /* Show inline nav and hide hamburger at 800px+ (still mobile header) */
@@ -2899,8 +2925,8 @@ a.work-card {
     height: var(--topnav-height);
     padding: 0 40px;
     z-index: 50;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
+    background: transparent;
+    border-bottom: none;
   }
 
   .sidebar-top {
@@ -2951,6 +2977,15 @@ a.work-card {
     font-weight: 600;
   }
 
+  .sidebar--dark .nav-link {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  .sidebar--dark .nav-link:hover,
+  .sidebar--dark .nav-link.active {
+    color: #FFFFFF;
+  }
+
   .sidebar-bottom {
     display: flex;
     flex-direction: row;
@@ -2975,10 +3010,35 @@ a.work-card {
     color: var(--text);
   }
 
+  .sidebar--dark .sidebar-external {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .sidebar--dark .sidebar-external:hover {
+    color: #FFFFFF;
+  }
+
+  .sidebar--light .nav-link {
+    color: var(--text-muted);
+  }
+
+  .sidebar--light .nav-link:hover,
+  .sidebar--light .nav-link.active {
+    color: var(--text);
+  }
+
+  .sidebar--light .sidebar-external {
+    color: var(--text-muted);
+  }
+
+  .sidebar--light .sidebar-external:hover {
+    color: var(--text);
+  }
+
   /* Content offset — top instead of left */
   .content {
     margin-left: 0;
-    padding: var(--topnav-height) 40px 48px;
+    padding: 0 40px 48px;
   }
 
 
@@ -3019,7 +3079,7 @@ a.work-card {
 /* ---------- Content side padding on mid-range desktop ---------- */
 @media (min-width: 1000px) and (max-width: 1295px) {
   .content {
-    padding: var(--topnav-height) 24px 48px;
+    padding: 0 24px 48px;
   }
 }
 
@@ -3691,8 +3751,8 @@ a.work-card {
 
 @media (min-width: 1296px) {
   .hero-video {
-    height: calc(100vh - var(--topnav-height));
-    min-height: calc(640px - var(--topnav-height));
+    height: 100vh;
+    min-height: 640px;
     width: 100vw;
     margin-left: calc(50% - 50vw);
   }

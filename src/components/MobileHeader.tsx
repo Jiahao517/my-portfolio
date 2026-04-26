@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useNavTheme } from "@/lib/useNavTheme";
 
 const NAV = [
   { id: "services", label: "服务" },
@@ -16,6 +17,7 @@ export function MobileHeader() {
   const [active, setActive] = useState("services");
   const [emailLabel, setEmailLabel] = useState("邮箱");
   const lastY = useRef(0);
+  const isDarkTheme = useNavTheme();
 
   useEffect(() => {
     const onScroll = () => {
@@ -54,10 +56,10 @@ export function MobileHeader() {
 
   return (
     <>
-      <header className="mobile-header" style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}>
-        <a href="#services" className="mobile-logo">
-          <div className="mobile-logo__fill" aria-hidden />
-        </a>
+      <header
+        className={`mobile-header${isDarkTheme ? " mobile-header--dark" : " mobile-header--light"}`}
+        style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
+      >
         <nav className="mobile-header__nav">
           {NAV.map((n) => (
             <a
