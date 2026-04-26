@@ -23,11 +23,6 @@ const INFO_BLOCKS = [
   },
 ] as const;
 
-const SECONDARY_LINKS = [
-  { href: "/workflow", text: "Workflow" },
-  { href: "/faq", text: "FAQ" },
-] as const;
-
 function ArtFooterLogoMark() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34" fill="none" aria-hidden="true">
@@ -118,7 +113,7 @@ function formatYerevanTime() {
 }
 
 export function ArtFooter() {
-  const [time, setTime] = useState(() => formatYerevanTime());
+  const [time, setTime] = useState("");
   const [isVisualActive, setIsVisualActive] = useState(false);
   const visualRef = useRef<HTMLElement | null>(null);
   const maskBaseId = useId().replace(/:/g, "");
@@ -210,16 +205,6 @@ export function ArtFooter() {
               ))}
             </div>
 
-            <div className="art-footer__secondary-column">
-              <div className="art-footer__secondary-nav">
-                {SECONDARY_LINKS.map((link) => (
-                  <Link key={link.text} href={link.href} className="art-footer__normal-link">
-                    <span>{link.text}</span>
-                  </Link>
-                ))}
-              </div>
-              <div className="art-footer__copyright">©2026 All Rights Reserved</div>
-            </div>
           </div>
         </div>
 
