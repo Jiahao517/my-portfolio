@@ -8,7 +8,6 @@ import { HeroBio } from "@/components/HeroBio";
 import { HeroVideo } from "@/components/HeroVideo";
 import { LogosSection } from "@/components/LogosSection";
 import { MobileHeader } from "@/components/MobileHeader";
-import { Publications } from "@/components/Publications";
 import { RevealController } from "@/components/RevealController";
 import { Sidebar } from "@/components/Sidebar";
 import { SocialProof } from "@/components/SocialProof";
@@ -33,7 +32,6 @@ export default function Home() {
 
         <Experience />
         <CtaBlock />
-        <Publications />
         <About />
         <ContactAI />
 

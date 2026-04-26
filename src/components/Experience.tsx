@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { experience } from "@/data/experience";
 
 export function Experience() {
@@ -10,13 +9,9 @@ export function Experience() {
           {experience.map((row, i) => (
             <div key={i} className="experience__row reveal-scroll">
               <div className="experience__left">
-                <Image
-                  src={row.logo}
-                  alt={row.logoAlt}
+                <div
+                  aria-hidden
                   className="experience__logo"
-                  style={{ borderRadius: row.logoRadius ?? 14 }}
-                  width={56}
-                  height={56}
                 />
                 <div className="experience__details">
                   <div className="experience__title">{row.title}</div>

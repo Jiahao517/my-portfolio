@@ -48,6 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable}`}>
+      <head>
+        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
+      </head>
       <body className="fonts-ready">{children}</body>
     </html>
   );

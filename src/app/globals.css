@@ -1350,7 +1350,7 @@ video.case-study__image {
   width: 56px;
   height: 56px;
   border-radius: 0;
-  object-fit: cover;
+  background: #EBEBEB;
   flex-shrink: 0;
   transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   transform-origin: center center;
@@ -3050,17 +3050,34 @@ a.work-card {
   padding-bottom: 0;
 }
 
-/* About Body: text left, photos right on desktop */
-/* About Body: text + photos side by side on desktop */
-.about__body {
+.about__section-shell {
+  display: flex;
+  flex-direction: column;
+}
+
+.about__header {
+  padding-bottom: 43px;
+}
+
+.about__main {
   display: flex;
   gap: 48px;
+  align-items: stretch;
+}
+
+.about__body {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.about__media-column {
+  flex: 0 0 350px;
+  width: 350px;
 }
 
 /* About Hero Photo — single portrait, desktop only */
 .about__hero-photo {
-  flex-shrink: 0;
-  width: 350px;
+  width: 100%;
   border-radius: 28px;
   overflow: hidden;
   position: relative;
@@ -3092,6 +3109,17 @@ a.work-card {
   display: block;
 }
 
+.about__image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #EBEBEB;
+}
+
+.about__image-placeholder--hero {
+  min-height: 680px;
+}
+
 /* About Photos — mobile only strip */
 .about__photos {
   display: none;
@@ -3117,6 +3145,10 @@ a.work-card {
   display: block;
 }
 
+.about__image-placeholder--photo {
+  min-height: 100%;
+}
+
 .about__heading {
   font-size: 40px;
   font-weight: 600;
@@ -3124,7 +3156,6 @@ a.work-card {
   letter-spacing: -2px;
   color: #181212;
   margin: 0;
-  padding-bottom: 43px;
   text-align: left;
 }
 
@@ -3145,12 +3176,11 @@ a.work-card {
 }
 
 .about__footer {
-  display: flex;
   padding-top: 89px;
 }
 
 .about__cta-card {
-  flex: 0 0 586px;
+  width: 100%;
   background: rgba(239, 246, 255, 0.8);
   border-radius: 40px;
   padding: 33px 40px 40px;
@@ -3289,39 +3319,6 @@ a.work-card {
   flex-shrink: 0;
 }
 
-/* Ask AI block */
-.about__ask-ai {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 33px 0 40px;
-  gap: 18px;
-}
-
-.about__ask-ai-title {
-  font-size: 24px;
-  font-weight: 400;
-  line-height: 33.6px;
-  letter-spacing: -1px;
-  color: #352F2F;
-  text-align: center;
-}
-
-.about__ai-pill {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  background: rgba(232, 227, 227, 0.64);
-  border: none;
-  border-radius: 1000px;
-  padding: 4px;
-  box-shadow:
-    inset 0 1.5px 0 0 rgba(24, 18, 18, 0.04),
-    0 2px 0 0 rgba(255, 255, 255, 0.40);
-}
-
-
 /* ---------- Footer ---------- */
 .site-footer {
   padding: 99px 0 0;
@@ -3369,13 +3366,14 @@ a.work-card {
 
 /* ---------- About / Footer Responsive ---------- */
 @media (max-width: 1110px) {
-  .about__body {
+  .about__main {
     gap: 16px;
   }
 }
 
 @media (max-width: 1079px) {
-  .about__hero-photo {
+  .about__media-column {
+    flex-basis: 28vw;
     width: 28vw;
   }
 }
@@ -3385,9 +3383,18 @@ a.work-card {
     padding-top: 21px;
   }
 
-  .about__body {
+  .about__header {
+    padding-bottom: 32px;
+  }
+
+  .about__main {
     flex-direction: column;
     gap: 0;
+  }
+
+  .about__media-column {
+    width: 100%;
+    flex-basis: auto;
   }
 
   .about__hero-photo {
@@ -3436,7 +3443,6 @@ a.work-card {
     font-size: 32px;
     line-height: 36px;
     letter-spacing: -1.5px;
-    padding-bottom: 32px;
   }
 
   .about__content {
@@ -3450,8 +3456,6 @@ a.work-card {
   }
 
   .about__footer {
-    flex-direction: column;
-    align-items: center;
     padding-top: 71px;
   }
 
@@ -3459,14 +3463,6 @@ a.work-card {
     flex: none;
     border-radius: 32px;
     padding: 28px 28px 32px;
-  }
-
-  .about__ask-ai {
-    padding: 40px 0 32px;
-  }
-
-  .about__ask-ai-title {
-    font-size: 24px;
   }
 
   .site-footer {
@@ -3524,7 +3520,6 @@ a.work-card {
   .about__heading {
     font-size: 28px;
     line-height: 32px;
-    padding-bottom: 24px;
   }
 
   .about__content {
@@ -3539,14 +3534,6 @@ a.work-card {
 
   .about__footer {
     padding-top: 52px;
-  }
-
-  .about__ask-ai {
-    gap: 12px;
-  }
-
-  .about__ask-ai-title {
-    font-size: 20px;
   }
 
   .site-footer {
