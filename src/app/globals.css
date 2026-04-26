@@ -3800,7 +3800,7 @@ a.work-card {
   grid-template-columns: 2fr 4fr;
   gap: 40px;
   align-items: start;
-  padding: 0 24px;
+  padding: 0;
 }
 .contact-ai__col-left {
   padding-top: 4px;
