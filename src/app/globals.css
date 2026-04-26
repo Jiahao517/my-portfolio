@@ -257,16 +257,32 @@ blockquote {
   background: var(--text);
 }
 
-/* Show inline nav and hide hamburger at 800px+ (still mobile header) */
-@media (min-width: 800px) and (max-width: 1295px) {
+/* Show inline nav and hide hamburger at 768px+ (still mobile header) */
+@media (min-width: 768px) and (max-width: 1295px) {
+  .mobile-header {
+    justify-content: flex-end;
+  }
   .mobile-header__nav {
     display: flex;
-    gap: 28px;
+    gap: 12px;
     align-items: center;
-    margin-left: auto;
+    margin-left: 0;
+  }
+  .mobile-header__link {
+    font-size: 15px;
   }
   .menu-toggle {
     display: none !important;
+  }
+}
+
+/* 稍大的平板有足够空间用更大 gap */
+@media (min-width: 900px) and (max-width: 1295px) {
+  .mobile-header__nav {
+    gap: 20px;
+  }
+  .mobile-header__link {
+    font-size: 16px;
   }
 }
 
@@ -1730,9 +1746,28 @@ video.case-study__image {
   .publications-section {
     padding-top: 77px;
   }
+  /* Pad 端通用 section 间距收缩 */
+  .section {
+    padding-top: 88px;
+  }
+  .section-divider {
+    margin-top: 88px;
+  }
+  /* logos 间距收缩 */
+  .logos-section {
+    gap: 24px;
+    padding: 60px 0 64px;
+  }
 }
 
 @media (max-width: 600px) {
+  /* 移动端 section 标题缩小 */
+  .section-heading {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: -1.5px;
+    margin-bottom: 32px;
+  }
   .pub-article {
     flex-direction: column;
     border-radius: 26px;
@@ -3091,6 +3126,18 @@ a.work-card {
   }
 }
 
+/* ---------- Pad 端：work-grid / card-grid 双列 ---------- */
+@media (min-width: 768px) and (max-width: 1295px) {
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 16px;
+    row-gap: 48px;
+  }
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* ---------- Services widget tighter at <1130px ---------- */
 @media (max-width: 1127px) {
   .publications__tools {
@@ -4031,6 +4078,10 @@ a.work-card {
 }
 .contact-ai__input::placeholder { color: rgba(0, 0, 0, 0.6); }
 
+@media (min-width: 900px) and (max-width: 1200px) {
+  .contact-ai__centered { grid-template-columns: 1fr 2fr; gap: 28px; }
+}
+
 @media (max-width: 900px) {
   .contact-ai__centered { grid-template-columns: 1fr; gap: 20px; }
   .contact-ai__title {
@@ -4802,4 +4853,11 @@ body { background: #fff; color: var(--text-body); font-family: var(--font-inter)
   margin-left: 8px;
   font-size: 12px;
   color: var(--text-muted);
+}
+
+/* ---------- 极小屏幕（<390px）：内容内边距收缩 ---------- */
+@media (max-width: 390px) {
+  .content {
+    padding: 0 16px;
+  }
 }
