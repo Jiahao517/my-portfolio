@@ -1,0 +1,312 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e6] [cursor=pointer]:
+    - button "Open Next.js Dev Tools" [ref=e7]:
+      - img [ref=e8]
+    - generic [ref=e11]:
+      - button "Open issues overlay" [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e14]: "0"
+          - generic [ref=e15]: "1"
+        - generic [ref=e16]: Issue
+      - button "Collapse issues badge" [ref=e17]:
+        - img [ref=e18]
+  - banner [ref=e20]:
+    - link [ref=e21] [cursor=pointer]:
+      - /url: "#services"
+    - navigation [ref=e23]:
+      - link "服务" [ref=e24] [cursor=pointer]:
+        - /url: "#services"
+      - link "作品" [ref=e25] [cursor=pointer]:
+        - /url: "#work"
+      - link "经历" [ref=e26] [cursor=pointer]:
+        - /url: "#experience"
+      - link "发表" [ref=e27] [cursor=pointer]:
+        - /url: "#publications"
+      - link "关于" [ref=e28] [cursor=pointer]:
+        - /url: "#about"
+  - generic:
+    - link:
+      - /url: "#services"
+      - text: 服务
+    - link:
+      - /url: "#work"
+      - text: 作品
+    - link:
+      - /url: "#experience"
+      - text: 经历
+    - link:
+      - /url: "#publications"
+      - text: 发表
+    - link:
+      - /url: "#about"
+      - text: 关于
+    - generic:
+      - link:
+        - /url: https://linkedin.com/in/murynmukha
+        - text: LinkedIn
+      - link:
+        - /url: "#"
+        - text: 邮箱
+  - main [ref=e29]:
+    - generic [ref=e32]:
+      - heading "我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。" [level=1] [ref=e33]
+      - paragraph [ref=e34]: 很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。
+      - link "预约一次聊聊" [ref=e35] [cursor=pointer]:
+        - /url: https://calendar.app.google/e1nq9HDsCKAYrq6S7
+        - generic [ref=e36]: 预约一次聊聊
+        - img [ref=e37]
+      - generic "支持过的投资机构" [ref=e39]:
+        - generic [ref=e40]: 由一线机构支持的初创团队
+        - generic [ref=e41]: Sequoia
+        - generic [ref=e42]: Y Combinator
+        - generic [ref=e43]: Voiceflow
+        - generic [ref=e44]: Chattermill
+        - generic [ref=e45]: Twain
+    - generic [ref=e47]:
+      - heading "我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。" [level=1] [ref=e48]
+      - generic [ref=e49]:
+        - paragraph [ref=e50]: 我很早就加入初创团队，通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。没有交接、没有断档。15 年经验，其中 9 年在做 AI 产品。
+        - paragraph [ref=e51]:
+          - img [ref=e53]
+          - generic [ref=e57]: 柏林（Berlin）。可远程协作。
+      - generic [ref=e58]:
+        - generic [ref=e60]:
+          - generic [ref=e62]:
+            - generic [ref=e63]: 前端实现
+            - generic [ref=e64] [cursor=pointer]: 原型 / Demo
+            - generic [ref=e65] [cursor=pointer]: 产品策略
+            - generic [ref=e66] [cursor=pointer]: 用户研究
+            - generic [ref=e67] [cursor=pointer]: UX / UI 设计
+            - generic [ref=e68]: 前端实现
+            - generic [ref=e69] [cursor=pointer]: 原型 / Demo
+            - generic [ref=e70] [cursor=pointer]: 产品策略
+            - generic [ref=e71] [cursor=pointer]: 用户研究
+            - generic [ref=e72] [cursor=pointer]: UX / UI 设计
+            - generic [ref=e73]: 前端实现
+          - img [ref=e75]
+          - generic [ref=e77]:
+            - generic [ref=e80]: 用 React、Next.js 把设计落地为可交付产品。掌握组件化、动效与性能优化。
+            - generic [ref=e81]:
+              - generic [ref=e82]: 用 React、Next.js 把设计落地为可交付产品。掌握组件化、动效与性能优化。
+              - generic [ref=e83]: 用 React、Next.js 把设计落地为可交付产品。掌握组件化、动效与性能优化。
+        - generic [ref=e86]:
+          - generic [ref=e87]:
+            - generic [ref=e90]:
+              - generic [ref=e91]: Mikhail Dubov
+              - generic [ref=e92]: Founder @ Chattermill
+            - generic [ref=e93]:
+              - button "上一条推荐" [disabled] [ref=e94]:
+                - img [ref=e95]
+              - button "下一条推荐" [ref=e97] [cursor=pointer]:
+                - img [ref=e98]
+          - blockquote [ref=e100]:
+            - paragraph [ref=e101]: “Gregory 是理想的创始设计师，对细节极度执着，从想法生成、用户研究到落地实施再到品控，全程负责。
+            - paragraph [ref=e102]: 你很难再找到一个像他一样真心在乎产品的人。
+            - paragraph [ref=e103]: 更别提我见过最好的工作态度之一，以及打造 B2B 产品的丰富经验。”
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - heading "Twain" [level=2] [ref=e108]
+              - paragraph [ref=e109]: 为研究与对外触达打造的 GTM 智能体 ・ '22 − 至今
+            - link "查看线上" [ref=e111] [cursor=pointer]:
+              - /url: https://twain.ai
+              - generic [ref=e112]: 查看线上
+              - img [ref=e113]
+          - link [ref=e115] [cursor=pointer]:
+            - /url: https://twain.ai
+        - generic [ref=e119]:
+          - generic [ref=e120]:
+            - generic [ref=e121]:
+              - heading "Voiceflow" [level=2] [ref=e122]
+              - paragraph [ref=e123]: 构建对话式智能体体验 ・ '21 − 22
+            - generic [ref=e124]:
+              - link "访问站点" [ref=e125] [cursor=pointer]:
+                - /url: https://voiceflow.com
+                - img [ref=e126]
+              - link "查看案例" [ref=e130] [cursor=pointer]:
+                - /url: /voiceflow
+                - generic [ref=e131]: 查看案例
+                - img [ref=e132]
+          - link "Voiceflow case study" [ref=e134] [cursor=pointer]:
+            - /url: /voiceflow
+            - img "Voiceflow case study" [ref=e136]
+        - generic [ref=e137]:
+          - generic [ref=e138]:
+            - generic [ref=e139]:
+              - heading "Chattermill" [level=2] [ref=e140]
+              - paragraph [ref=e141]: 客户反馈分析平台中的 AI ・ '19 − 21
+            - generic [ref=e142]:
+              - link "访问站点" [ref=e143] [cursor=pointer]:
+                - /url: https://chattermill.com
+                - img [ref=e144]
+              - link "查看案例" [ref=e148] [cursor=pointer]:
+                - /url: /chattermill
+                - generic [ref=e149]: 查看案例
+                - img [ref=e150]
+          - link [ref=e152] [cursor=pointer]:
+            - /url: /chattermill
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - generic [ref=e158]:
+              - heading "Invocable" [level=2] [ref=e159]
+              - paragraph [ref=e160]: 对话式 UI 的无代码构建器 ・ '18 − 19
+            - link "查看案例" [ref=e162] [cursor=pointer]:
+              - /url: /invocable
+              - generic [ref=e163]: 查看案例
+              - img [ref=e164]
+          - link [ref=e166] [cursor=pointer]:
+            - /url: /invocable
+    - generic [ref=e171]:
+      - heading "经历" [level=2] [ref=e172]
+      - generic [ref=e173]:
+        - generic [ref=e174]:
+          - generic [ref=e177]:
+            - generic [ref=e178]: 创始产品设计师
+            - generic [ref=e179]: Twain ・ 2022 − 至今
+          - paragraph [ref=e180]: Sequoia Arc '22。Twain 在找到 PMF 之前转型了三次。每一版我都亲手设计，从最初原型到当前的 GTM agents 平台。
+        - generic [ref=e181]:
+          - generic [ref=e184]:
+            - generic [ref=e185]: 资深独立贡献者（IC）
+            - generic [ref=e186]: Voiceflow ・ 2021 − 2022
+          - paragraph [ref=e187]: 以 Senior IC 加入主导平台重设计。重做核心流程、重塑视觉语言，并交付了团队至今仍在使用的设计系统。
+        - generic [ref=e188]:
+          - generic [ref=e191]:
+            - generic [ref=e192]: 创始产品设计师
+            - generic [ref=e193]: Chattermill ・ 2019 − 2021
+          - paragraph [ref=e194]: 陪伴公司至 Series A 的创始设计师。重新设计核心产品，并把研究方法引入团队的产品流程中。
+        - generic [ref=e195]:
+          - generic [ref=e198]:
+            - generic [ref=e199]: 创始产品设计师
+            - generic [ref=e200]: Invocable（Storyline） ・ 2018 − 2019
+          - paragraph [ref=e201]: Y Combinator '18。打造对话编辑器 UX，参与客户开发与支持电话，主导核心功能：非线性对话流程画布。
+        - generic [ref=e202]:
+          - generic [ref=e205]:
+            - generic [ref=e206]: 高级 UX 设计师
+            - generic [ref=e207]: Adamantium ・ 2015 − 2018
+          - paragraph [ref=e208]: 在 DSP/DMP 平台上带领 4 名设计师团队。建立设计系统（交付速度提升 30%），用 6 个月完成核心产品重设计。
+        - generic [ref=e209]:
+          - generic [ref=e212]:
+            - generic [ref=e213]: 高级系统分析师
+            - generic [ref=e214]: Forex Club ・ 2014 − 2015
+          - paragraph [ref=e215]: Libertex 交易平台的业务分析与 UX 设计。重构 Web 终端 UX，搭建可适配各类客户分群的 UI 体系。
+        - generic [ref=e216]:
+          - generic [ref=e219]:
+            - generic [ref=e220]: 业务分析师
+            - generic [ref=e221]: IBA Group ・ 2013 − 2014
+          - paragraph [ref=e222]: 兼任 UX 与业务分析师。在内部团队与分布式团队协作下，为银行与电信客户交付 5 个 Web 门户。
+        - generic [ref=e223]:
+          - generic [ref=e226]:
+            - generic [ref=e227]: 业务分析师
+            - generic [ref=e228]: Telecontact ・ 2012 − 2013
+          - paragraph [ref=e229]: 直接对接企业客户，把他们的需求翻译成呼叫中心软件的规格说明与 UI 草图。
+    - generic [ref=e232]:
+      - generic [ref=e233]: 正在做点什么？聊聊吧
+      - link "预约一次聊聊" [ref=e234] [cursor=pointer]:
+        - /url: https://calendar.app.google/e1nq9HDsCKAYrq6S7
+        - generic [ref=e235]: 预约一次聊聊
+        - img [ref=e236]
+    - generic [ref=e239]:
+      - heading "关于我" [level=2] [ref=e241]
+      - generic [ref=e244]:
+        - paragraph [ref=e245]: 我学的是软件工程与业务分析。最早几年都在写规格说明、流程图，坐在业务方与工程师之间。业务与系统分析师、UX 设计师与研究员，每个角色都是软件如何被造出来的不同切面。
+        - paragraph [ref=e246]: 这条路把我推向了产品设计。我做过完整的链条：系统架构、产品策略、融资 Deck，到最后界面长什么样、为什么这样工作。
+        - paragraph [ref=e247]: 你只需要一个人来主理设计，从研究到上线。没有交接，没有翻译损耗。上线的就是设计的样子。难的部分我也会陪着走过：转型、融资、那次差点上不了的发版。
+        - paragraph [ref=e248]: 工作之外，我喜欢 Streamline Moderne 与构成主义建筑。这两种流派在结构与大胆之间的平衡，正是我做设计时的思考方式。
+        - paragraph [ref=e249]: 我选早期阶段，因为那是一个设计师能塑造整个产品的地方。小团队、完整 ownership，从首个原型到那份完成融资的 Deck。
+      - generic [ref=e254]:
+        - generic [ref=e255]: 告诉我你正在做什么。 看看是不是合适。
+        - generic [ref=e256]:
+          - generic [ref=e257]:
+            - generic [ref=e258]: gregory.murynmukha@gmail.com
+            - button "复制邮箱" [ref=e259] [cursor=pointer]
+          - link "预约一次聊聊" [ref=e260] [cursor=pointer]:
+            - /url: https://calendar.app.google/e1nq9HDsCKAYrq6S7
+            - generic [ref=e261]: 预约一次聊聊
+            - img [ref=e262]
+    - generic [ref=e265]:
+      - heading "Contact" [level=2] [ref=e267]
+      - generic [ref=e268]:
+        - generic [ref=e270]:
+          - generic [ref=e272]: G
+          - generic [ref=e273]: 你好，我是代表 Gregory 的 AI 助理。
+        - generic [ref=e274]:
+          - button "你的设计风格有哪些标签？" [ref=e275] [cursor=pointer]
+          - button "你最适合哪个阶段的初创团队？" [ref=e276] [cursor=pointer]
+          - button "Twain 这段经历你是怎么从 0 到 1 的？" [ref=e277] [cursor=pointer]
+          - button "你怎么处理产品转型期的设计决策？" [ref=e278] [cursor=pointer]
+        - generic [ref=e279]:
+          - generic [ref=e280]:
+            - link "X" [ref=e281] [cursor=pointer]:
+              - /url: https://x.com/murynmukha
+              - img [ref=e282]
+            - link "Email" [ref=e284] [cursor=pointer]:
+              - /url: mailto:gregory.murynmukha@gmail.com
+              - img [ref=e285]
+            - link "LinkedIn" [ref=e288] [cursor=pointer]:
+              - /url: https://linkedin.com/in/murynmukha
+              - img [ref=e289]
+          - textbox "留言…" [ref=e292]
+    - generic [ref=e293]:
+      - generic [ref=e294]:
+        - generic [ref=e299]:
+          - generic [ref=e300]:
+            - generic [ref=e301]: Email
+            - link "artiomyakushev@gmail.com" [ref=e303] [cursor=pointer]:
+              - /url: mailto:artiomyakushev@gmail.com
+              - generic [ref=e304]: artiomyakushev@gmail.com
+          - generic [ref=e305]:
+            - generic [ref=e306]: Tg
+            - link "@artiomyakushev" [ref=e308] [cursor=pointer]:
+              - /url: https://t.me/artiomyakushev
+              - generic [ref=e309]: "@artiomyakushev"
+          - generic [ref=e310]:
+            - generic [ref=e311]: Social
+            - generic [ref=e312]:
+              - link "Awwwards" [ref=e313] [cursor=pointer]:
+                - /url: https://www.awwwards.com/artiom-yakushev/
+                - generic [ref=e314]: Awwwards
+              - link "Behance" [ref=e315] [cursor=pointer]:
+                - /url: https://www.behance.net/artiomyakushev
+                - generic [ref=e316]: Behance
+              - link "Instagram" [ref=e317] [cursor=pointer]:
+                - /url: https://www.instagram.com/artiom.yakushev/
+                - generic [ref=e318]: Instagram
+              - link "Linkedin" [ref=e319] [cursor=pointer]:
+                - /url: https://www.linkedin.com/in/artiom-yakushev/
+                - generic [ref=e320]: Linkedin
+        - generic:
+          - img
+        - link "Back home" [ref=e321] [cursor=pointer]:
+          - /url: /
+          - img [ref=e322]
+      - generic [ref=e329]:
+        - generic "Artiom Yakushev" [ref=e330]:
+          - generic [ref=e331]:
+            - generic [ref=e333]: A
+            - generic [ref=e335]: r
+            - generic [ref=e337]: t
+            - generic [ref=e339]: i
+            - generic [ref=e341]: o
+            - generic [ref=e343]: m
+          - generic [ref=e344]:
+            - generic [ref=e346]: "Y"
+            - generic [ref=e348]: a
+            - generic [ref=e350]: k
+            - generic [ref=e352]: u
+            - generic [ref=e354]: s
+            - generic [ref=e356]: h
+            - generic [ref=e358]: e
+            - generic [ref=e360]: v
+        - generic [ref=e361]:
+          - generic [ref=e362]:
+            - generic [ref=e363]: Yerevan
+            - generic [ref=e364]: 12:48 PM
+          - generic [ref=e365]:
+            - generic [ref=e366]: Creative Digital Designer
+            - generic [ref=e367]: /
+            - generic [ref=e368]: Working Worldwide
+          - button "Back to top" [ref=e369] [cursor=pointer]:
+            - img [ref=e371]
+            - generic [ref=e374]: Back to top
+  - alert [ref=e375]

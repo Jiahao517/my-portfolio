@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { type CSSProperties, useEffect, useId, useMemo, useRef, useState } from "react";
 
 const INFO_BLOCKS = [
   {
@@ -52,7 +52,7 @@ function ArtFooterArrowUp() {
 
 function ArtFooterMaskDesktop({ maskId }: { maskId: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 816" fill="none" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 816" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="816">
           <rect width="1920" height="816" fill="white" />
@@ -69,7 +69,7 @@ function ArtFooterMaskDesktop({ maskId }: { maskId: string }) {
 
 function ArtFooterMaskTablet({ maskId }: { maskId: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 312" fill="none" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 312" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       <defs>
         <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="768" height="312">
           <rect width="768" height="312" fill="white" />
@@ -99,6 +99,21 @@ function ArtFooterMaskMobile({ maskId }: { maskId: string }) {
       <rect width="360" height="290" fill="currentColor" mask={`url(#${maskId})`} />
     </svg>
   );
+}
+
+function splitChars(text: string, startIndex: number) {
+  return Array.from(text).map((ch, i) => (
+    <span
+      key={`${ch}-${i}`}
+      className="art-footer__char"
+      style={{ "--char-i": startIndex + i } as CSSProperties}
+      aria-hidden="true"
+    >
+      <span className="art-footer__char-inner">
+        {ch === " " ? " " : ch}
+      </span>
+    </span>
+  ));
 }
 
 function formatYerevanTime() {
@@ -263,10 +278,11 @@ export function ArtFooter() {
 
             <div className="art-footer__big-name" aria-label="Artiom Yakushev">
               <span className="art-footer__big-name-sans">
-                <span className="art-footer__big-name-initial">A</span>
-                <span className="art-footer__big-name-rest">rtiom</span>
+                {splitChars("Artiom", 0)}
               </span>
-              <span className="art-footer__big-name-serif">Yakushev</span>
+              <span className="art-footer__big-name-serif">
+                {splitChars("Yakushev", 6)}
+              </span>
             </div>
 
             <div className="art-footer__utility-row">
