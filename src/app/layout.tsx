@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter, Manrope } from "next/font/google";
+import localFont from "next/font/local";
+import { Cormorant_Garamond, Inter, Manrope, Noto_Serif_SC } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -18,6 +19,18 @@ const cormorantGaramond = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+});
+
+const notoSerifSc = Noto_Serif_SC({
+  variable: "--font-noto-serif-sc",
+  subsets: ["latin"],
+  weight: ["900"],
+});
+
+const fzFont140 = localFont({
+  src: "./fonts/FZfont140.ttf",
+  variable: "--font-fzfont140",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -47,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable}`}>
+    <html lang="zh-CN" className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable} ${notoSerifSc.variable} ${fzFont140.variable}`}>
       <head>
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
       </head>

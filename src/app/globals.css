@@ -16,6 +16,14 @@
   html { font-family: var(--font-inter), "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 }
 
+@font-face {
+  font-family: "FZfont140";
+  src: url("/fonts/FZfont140.TTF") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ---------- Design Tokens ---------- */
 :root {
   /* Motion: spring-inspired easing curves
@@ -3785,6 +3793,7 @@ a.work-card {
   margin: 0 auto;
 }
 .hero-video__title {
+  font-family: var(--font-fzfont140), "FZfont140", var(--font), sans-serif;
   font-size: clamp(40px, 7vw, 88px);
   line-height: 1.05;
   letter-spacing: -0.04em;
@@ -4468,9 +4477,9 @@ a.work-card {
 }
 
 .art-footer__big-name-main {
-  font-family: var(--font);
+  font-family: var(--font-fzfont140), "FZfont140", serif;
   font-size: var(--art-footer-name-sans-size);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.02;
   letter-spacing: var(--art-footer-name-sans-tracking);
   text-align: center;
