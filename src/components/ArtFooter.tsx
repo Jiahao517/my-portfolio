@@ -197,45 +197,48 @@ export function ArtFooter() {
             <source src="/videos/art-footer-bg.webm" type="video/webm" />
           </video>
         </div>
-        <div className="art-footer__info-layer">
-          <div className="art-footer__info-grid">
-            <div className="art-footer__info-blocks">
-              {INFO_BLOCKS.map((block) => (
-                <div key={block.label} className="art-footer__info-block">
-                  <div className="art-footer__info-label">{block.label}</div>
-                  <div className="art-footer__info-links">
-                    {block.links.map((link) => (
-                      <a
-                        key={link.text}
-                        href={link.href}
-                        target={"external" in link ? "_blank" : undefined}
-                        rel={"external" in link ? "noopener" : undefined}
-                        className="art-footer__medium-link"
-                      >
-                        <span>{link.text}</span>
-                      </a>
-                    ))}
-                  </div>
+        <div className="art-footer__stage-overlay">
+          <div className="art-footer__stage-overlay-shell">
+            <div className="art-footer__info-layer">
+              <div className="art-footer__info-grid">
+                <div className="art-footer__info-blocks">
+                  {INFO_BLOCKS.map((block) => (
+                    <div key={block.label} className="art-footer__info-block">
+                      <div className="art-footer__info-label">{block.label}</div>
+                      <div className="art-footer__info-links">
+                        {block.links.map((link) => (
+                          <a
+                            key={link.text}
+                            href={link.href}
+                            target={"external" in link ? "_blank" : undefined}
+                            rel={"external" in link ? "noopener" : undefined}
+                            className="art-footer__medium-link"
+                          >
+                            <span>{link.text}</span>
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
+              </div>
             </div>
 
+            <div className="art-footer__mask-layer art-footer__mask-layer--desktop">
+              <ArtFooterMaskDesktop maskId={`${maskBaseId}-desktop`} />
+            </div>
+            <div className="art-footer__mask-layer art-footer__mask-layer--tablet">
+              <ArtFooterMaskTablet maskId={`${maskBaseId}-tablet`} />
+            </div>
+            <div className="art-footer__mask-layer art-footer__mask-layer--mobile">
+              <ArtFooterMaskMobile maskId={`${maskBaseId}-mobile`} />
+            </div>
+
+            <Link href="/" className="art-footer__corner-logo" aria-label="Back home">
+              <ArtFooterLogoMark />
+            </Link>
           </div>
         </div>
-
-        <div className="art-footer__mask-layer art-footer__mask-layer--desktop">
-          <ArtFooterMaskDesktop maskId={`${maskBaseId}-desktop`} />
-        </div>
-        <div className="art-footer__mask-layer art-footer__mask-layer--tablet">
-          <ArtFooterMaskTablet maskId={`${maskBaseId}-tablet`} />
-        </div>
-        <div className="art-footer__mask-layer art-footer__mask-layer--mobile">
-          <ArtFooterMaskMobile maskId={`${maskBaseId}-mobile`} />
-        </div>
-
-        <Link href="/" className="art-footer__corner-logo" aria-label="Back home">
-          <ArtFooterLogoMark />
-        </Link>
       </section>
 
       <section

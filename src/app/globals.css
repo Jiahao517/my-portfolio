@@ -4379,6 +4379,8 @@ a.work-card {
 }
 
 .art-footer__stage {
+  --art-footer-stage-left-reveal: clamp(84px, 8.5vw, 184px);
+  --art-footer-stage-bottom-reveal: clamp(90px, 7vw, 140px);
   position: relative;
   z-index: 3;
   overflow: hidden;
@@ -4394,6 +4396,30 @@ a.work-card {
   z-index: 1;
   overflow: hidden;
   background: #08131d;
+}
+
+.art-footer__stage-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  overflow: visible;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.art-footer__stage-overlay-shell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  max-width: none;
+  height: calc(100% - var(--art-footer-stage-bottom-reveal));
+  aspect-ratio: 1920 / 816;
+  overflow: hidden;
+  pointer-events: auto;
 }
 
 .art-footer__stage-video {
@@ -4563,10 +4589,15 @@ a.work-card {
   object-fit: cover;
 }
 
-.art-footer__mask-layer--tablet,
-.art-footer__mask-layer--mobile {
-  display: none;
+.art-footer__mask-layer--desktop svg {
+  transform: translate3d(0, -1.5%, 0);
+  transform-origin: top right;
 }
+
+  .art-footer__mask-layer--tablet,
+  .art-footer__mask-layer--mobile {
+    display: none;
+  }
 
 .art-footer__visual-layer {
   position: sticky;
@@ -4905,6 +4936,14 @@ a.work-card {
     justify-content: stretch;
   }
 
+  .art-footer__stage-overlay-shell {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    aspect-ratio: 768 / 312;
+  }
+
   .art-footer__stage {
     aspect-ratio: 768 / 312;
     min-height: 520px;
@@ -4967,6 +5006,16 @@ a.work-card {
 
   .art-footer__info-layer {
     padding: 22px 18px 18px;
+  }
+
+  .art-footer__stage-overlay-shell {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 360 / 290;
+  }
+
+  .art-footer__mask-layer--desktop svg {
+    transform: none;
   }
 
   .art-footer__stage {
