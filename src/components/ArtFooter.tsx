@@ -130,6 +130,7 @@ function ScrambleRevealText({
 }
 
 export function ArtFooter() {
+  const footerTitle = "AI时代的设计工作流";
   const [time, setTime] = useState(() => formatYerevanTime());
   const [isVisualActive, setIsVisualActive] = useState(false);
   const [isMainVisible, setIsMainVisible] = useState(false);
@@ -217,7 +218,7 @@ export function ArtFooter() {
     [],
   );
 
-  const nameOrder = useMemo(() => buildCenterOutOrder(Array.from("ArtiomYakushev").length), []);
+  const nameOrder = useMemo(() => buildCenterOutOrder(Array.from(footerTitle).length), [footerTitle]);
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -241,8 +242,7 @@ export function ArtFooter() {
               preload="auto"
               poster="/images/art-footer-poster.jpg"
             >
-              <source src="/videos/art-footer-bg.mp4" type="video/mp4" />
-              <source src="/videos/art-footer-bg.webm" type="video/webm" />
+              <source src="/videos/new_bg1.mp4" type="video/mp4" />
             </video>
           </div>
 
@@ -261,9 +261,8 @@ export function ArtFooter() {
               </div>
             </div>
 
-            <div className="art-footer__big-name" aria-label="Artiom Yakushev">
-              <span className="art-footer__big-name-sans">{splitChars("Artiom", 0, nameOrder)}</span>
-              <span className="art-footer__big-name-serif">{splitChars("Yakushev", 6, nameOrder)}</span>
+            <div className="art-footer__big-name" aria-label={footerTitle}>
+              <span className="art-footer__big-name-main">{splitChars(footerTitle, 0, nameOrder)}</span>
             </div>
 
             <div className="art-footer__utility-row">

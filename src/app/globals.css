@@ -4446,9 +4446,14 @@ a.work-card {
 }
 
 .art-footer__big-name {
+  --art-footer-name-sans-size: clamp(66.528px, 9.9792vw, 186.912px);
+  --art-footer-name-serif-size: clamp(103.4px, 15.18vw, 286px);
+  --art-footer-name-sans-tracking: 0em;
+  --art-footer-name-serif-tracking: 0em;
   width: 100%;
   display: flex;
   align-items: flex-end;
+  justify-content: center;
   flex-wrap: nowrap;
   gap: 0;
   margin-bottom: clamp(16px, 2vw, 26px);
@@ -4462,22 +4467,13 @@ a.work-card {
   opacity: 1;
 }
 
-.art-footer__big-name-sans {
-  font-family: var(--font-manrope), "Manrope", var(--font-inter), sans-serif;
-  font-size: clamp(90px, 13.5vw, 258px);
-  font-weight: 500;
-  line-height: 0.82;
-  letter-spacing: -0.08em;
-}
-
-.art-footer__big-name-serif {
-  font-family: var(--font-cormorant), "Cormorant Garamond", "Times New Roman", serif;
-  font-size: clamp(100px, 14.8vw, 280px);
-  font-weight: 400;
-  font-style: italic;
-  line-height: 0.74;
-  letter-spacing: -0.08em;
-  margin-left: -0.035em;
+.art-footer__big-name-main {
+  font-family: var(--font);
+  font-size: var(--art-footer-name-sans-size);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: var(--art-footer-name-sans-tracking);
+  text-align: center;
 }
 
 .art-footer__char {
@@ -4487,6 +4483,11 @@ a.work-card {
   line-height: inherit;
   padding: 0 0.02em 0.18em;
   margin: 0 -0.02em -0.18em;
+}
+
+.art-footer__big-name-main .art-footer__char {
+  padding: 0.06em 0.03em 0.2em;
+  margin: -0.06em -0.02em -0.2em;
 }
 
 .art-footer__char-inner {
@@ -4684,12 +4685,11 @@ a.work-card {
     min-height: 100svh;
   }
 
-  .art-footer__big-name-sans {
-    font-size: clamp(72px, 14vw, 188px);
-  }
-
-  .art-footer__big-name-serif {
-    font-size: clamp(84px, 15vw, 208px);
+  .art-footer__big-name {
+    --art-footer-name-sans-size: clamp(57.024px, 11.088vw, 148.896px);
+    --art-footer-name-serif-size: clamp(92.4px, 16.5vw, 228.8px);
+    --art-footer-name-sans-tracking: 0em;
+    --art-footer-name-serif-tracking: 0em;
   }
 
   .art-footer__utility-row {
@@ -4738,19 +4738,17 @@ a.work-card {
   }
 
   .art-footer__big-name {
+    --art-footer-name-sans-size: clamp(44.352px, 15.84vw, 88.704px);
+    --art-footer-name-serif-size: clamp(70.4px, 23.1vw, 136.4px);
+    --art-footer-name-sans-tracking: 0em;
+    --art-footer-name-serif-tracking: 0em;
     align-items: flex-end;
     margin-top: auto;
     margin-bottom: 22px;
   }
 
-  .art-footer__big-name-sans {
-    font-size: clamp(56px, 20vw, 112px);
+  .art-footer__big-name-main {
     line-height: 0.9;
-  }
-
-  .art-footer__big-name-serif {
-    font-size: clamp(64px, 21vw, 124px);
-    line-height: 0.84;
   }
 
   .art-footer__utility-row {
