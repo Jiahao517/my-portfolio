@@ -381,7 +381,7 @@ blockquote {
 }
 
 .section--hero {
-  padding-top: 154px;
+  padding-top: 50px;
 }
 
 .section--contact {
@@ -3875,10 +3875,10 @@ a.work-card {
   padding-top: 4px;
 }
 .contact-ai__title {
-  font-size: 28px;
+  font-size: 40px;
   font-weight: 600;
-  letter-spacing: -0.6px;
-  line-height: 1.2;
+  letter-spacing: -2px;
+  line-height: 41.6px;
   color: var(--text);
   margin: 0;
 }
@@ -4033,13 +4033,33 @@ a.work-card {
 
 @media (max-width: 900px) {
   .contact-ai__centered { grid-template-columns: 1fr; gap: 20px; }
-  .contact-ai__title { font-size: 24px; }
+  .contact-ai__title {
+    font-size: 32px;
+    line-height: 36px;
+    letter-spacing: -1.5px;
+  }
   .contact-ai__panel {
     height: auto;
     min-height: 480px;
     border-radius: 20px;
     padding: 20px;
   }
+}
+
+@media (max-width: 600px) {
+  .contact-ai__title {
+    font-size: 28px;
+    line-height: 32px;
+  }
+}
+
+/* ---------- FZfont140 targeted texts ---------- */
+.hero-name,
+.case-study__title,
+.experience__heading,
+.about__heading,
+.contact-ai__title {
+  font-family: var(--font-fzfont140), "FZfont140", var(--font), sans-serif;
 }
 
 /* ---------- Waveform footer (light) ---------- */

@@ -1,12 +1,14 @@
 import { experience } from "@/data/experience";
 
 export function Experience() {
+  const visibleExperience = experience.slice(0, 4);
+
   return (
     <section id="experience" className="section experience-section">
       <div className="centered">
         <h2 className="experience__heading shiny-hover reveal-scroll">经历</h2>
         <div className="experience__rows">
-          {experience.map((row, i) => (
+          {visibleExperience.map((row, i) => (
             <div key={i} className="experience__row reveal-scroll">
               <div className="experience__left">
                 <div
