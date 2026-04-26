@@ -483,6 +483,7 @@ blockquote {
   display: flex;
   gap: 12px;
   padding-top: 69px;
+  padding-bottom: 120px;
   align-items: stretch;
 }
 
@@ -503,9 +504,7 @@ blockquote {
   background: rgba(255, 230, 232, 0.48);
   height: 364px;
   position: relative;
-  padding: 12px 0 12px 12px;
-  display: flex;
-  align-items: center;
+  width: 100%;
 }
 
 .sp-card--services::before {
@@ -520,35 +519,15 @@ blockquote {
   pointer-events: none;
 }
 
-.sp-services__wheel {
+.sp-services__panel {
   position: absolute;
   left: 0;
   top: 0;
   width: 250px;
-  height: 100%;
-  overflow: hidden;
+  height: 364px;
 }
 
-.sp-wheel__track {
-  position: absolute;
-  inset: 0;
-}
-
-.sp-wheel__item {
-  position: absolute;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: 25.6px;
-  letter-spacing: -1px;
-  color: var(--neutral-500);
-  opacity: 0.4;
-  white-space: nowrap;
-  transform-origin: left center;
-  will-change: transform, filter, opacity;
-}
-
-
-.sp-services__pill-stack {
+.sp-services__list {
   position: absolute;
   left: 262px;
   top: 0;
@@ -563,23 +542,24 @@ blockquote {
   box-sizing: border-box;
 }
 
-.sp-stack__card {
+.sp-services__item {
   flex-shrink: 0;
   overflow: hidden;
+  color: var(--text-body);
 }
 
-.sp-stack__card--active {
+.sp-services__item--strong {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  letter-spacing: 0;
+}
+
+.sp-services__item--base {
   font-size: 20px;
   font-weight: 400;
-  line-height: 128%;
+  line-height: 25.6px;
   letter-spacing: -1px;
-  color: var(--text-body);
-  display: flex;
-  align-items: center;
-}
-
-.sp-stack__card--active span {
-  display: block;
 }
 
 .sp-services__arrow {
@@ -677,8 +657,8 @@ blockquote {
   width: 56px;
   height: 56px;
   border-radius: 36px;
-  background: #EBEBEB;
   display: block;
+  object-fit: cover;
 }
 
 .sp-testimonial__avatar::after {
@@ -1747,9 +1727,14 @@ video.case-study__image {
     height: 300px;
     min-height: 300px;
   }
-  .sp-services__pill-stack {
-    left: auto;
-    right: 12px;
+  .sp-services__panel {
+    width: 42%;
+    height: 100%;
+  }
+  .sp-services__list {
+    left: 42%;
+    width: 58%;
+    padding-right: 18px;
   }
   .sp-card--testimonial {
     width: 100%;
@@ -1766,9 +1751,6 @@ video.case-study__image {
   .sp-testimonial__dots {
     display: flex;
   }
-  .sp-stack__card--active {
-    padding: 22px 20px 23px;
-  }
 }
 
 /* Tablet: shift wheel right, center cards in remaining space */
@@ -1776,40 +1758,40 @@ video.case-study__image {
   .sp-services__arrow {
     left: 62px;
   }
-  .sp-services__wheel {
-    left: 48px;
-    overflow: visible;
-    width: 300px;
+  .sp-services__panel {
+    width: 280px;
   }
-  .sp-services__pill-stack {
-    left: 50%;
-    right: auto;
-    transform: translateX(-10%);
+  .sp-services__list {
+    left: 280px;
+    width: calc(100% - 280px);
   }
 }
 
 
 /* Very narrow mobile: hide cards, show only wheel */
 @media (max-width: 553px) {
-  .sp-services__pill-stack {
-    display: none;
-  }
   .sp-card--services {
     height: 240px;
     min-height: 240px;
   }
   .sp-services__arrow {
-    left: 54px;
+    left: 32px;
     top: 50%;
   }
-  .sp-services__wheel {
-    left: 36px;
-    width: 320px;
-    overflow: visible;
+  .sp-services__panel {
+    width: 120px;
   }
-  .sp-wheel__item {
-    font-size: 24px;
-    line-height: 30px;
+  .sp-services__list {
+    left: 120px;
+    width: calc(100% - 120px);
+    padding-right: 20px;
+  }
+  .sp-services__item--base {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  .sp-services__item--strong {
+    font-size: 15px;
   }
 }
 
@@ -3174,6 +3156,7 @@ a.work-card {
 
 .about__footer {
   padding-top: 89px;
+  padding-bottom: 89px;
 }
 
 .about__cta-card {
@@ -3792,8 +3775,6 @@ a.work-card {
 /* ---------- Contact AI block (Gabriel Valdivia-style) ---------- */
 .contact-ai {
   padding: 80px 0 96px;
-  background: #FAFAFA;
-  border-top: 1px solid var(--neutral-50);
 }
 .contact-ai__centered {
   display: grid;

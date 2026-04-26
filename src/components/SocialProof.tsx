@@ -1,32 +1,20 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { testimonials } from "@/data/testimonials";
 
-const PILL_LABELS = [
-  "产品策略",
-  "用户研究",
-  "UX / UI 设计",
-  "设计系统",
-  "对话式 UI",
-  "数据可视化",
-  "前端实现",
-  "原型 / Demo",
+const SERVICES = [
+  { label: "前端实现", tone: "strong" },
+  { label: "原型 / Demo", tone: "strong" },
+  { label: "产品策略", tone: "base" },
+  { label: "用户研究", tone: "strong" },
+  { label: "UX / UI 设计", tone: "strong" },
 ];
 
 export function SocialProof() {
-  const [pillIdx, setPillIdx] = useState(0);
   const [tIdx, setTIdx] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
-
-  // Rotating service pill stack (cosmetic-light replacement of the original gsap-driven version)
-  useEffect(() => {
-    const id = window.setInterval(() => {
-      setPillIdx((i) => (i + 1) % PILL_LABELS.length);
-    }, 1800);
-    return () => window.clearInterval(id);
-  }, []);
 
   const t = testimonials[tIdx];
 
@@ -43,11 +31,8 @@ export function SocialProof() {
   return (
     <div className="social-proof reveal-load reveal-load--active">
       <div className="social-proof__left">
-        {/* Services Card */}
         <div className="sp-card sp-card--services">
-          <div className="sp-services__wheel" aria-hidden>
-            <div className="sp-wheel__track" />
-          </div>
+          <div className="sp-services__panel" aria-hidden />
           <div className="sp-services__arrow" aria-hidden>
             <svg width="20" height="15" viewBox="0 0 20 15" fill="none">
               <path
@@ -59,31 +44,27 @@ export function SocialProof() {
               />
             </svg>
           </div>
-          <div className="sp-services__pill-stack" id="pillStack">
-            {[-2, -1, 0, 1, 2].map((offset) => {
-              const idx = (pillIdx + offset + PILL_LABELS.length) % PILL_LABELS.length;
-              const isActive = offset === 0;
-              return (
-                <div
-                  key={offset}
-                  className={`sp-stack__card${isActive ? " sp-stack__card--active" : ""}`}
-                >
-                  <span>{PILL_LABELS[idx]}</span>
-                </div>
-              );
-            })}
+          <div className="sp-services__list">
+            {SERVICES.map((service) => (
+              <div
+                key={service.label}
+                className={`sp-services__item sp-services__item--${service.tone}`}
+              >
+                <span>{service.label}</span>
+              </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Testimonial */}
       <div className="sp-card sp-card--testimonial" id="testimonialCard">
         <div className="sp-testimonial__header">
           <div className="sp-testimonial__author">
             <div className="sp-testimonial__avatar">
-              <div
+              <img
                 key={t.photo}
-                aria-hidden
+                alt=""
+                src={t.photo}
                 className="sp-testimonial__avatar-fill"
                 style={{ opacity: transitioning ? 0.4 : 1, transition: "opacity .22s ease" }}
               />
@@ -128,18 +109,8 @@ export function SocialProof() {
               key={i}
               type="button"
               aria-label={`切换到第 ${i + 1} 条推荐`}
-              className={i === tIdx ? "active" : undefined}
+              className={`sp-testimonial__dot${i === tIdx ? " sp-testimonial__dot--active" : ""}`}
               onClick={() => goto(i, i > tIdx ? 1 : -1)}
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                margin: "0 3px",
-                background: i === tIdx ? "#002E71" : "#C5D6E6",
-                border: 0,
-                padding: 0,
-                cursor: "pointer",
-              }}
             />
           ))}
         </div>
