@@ -357,7 +357,7 @@ blockquote {
 
 /* ---------- Main Content ---------- */
 .content {
-  padding: 0 24px 48px;
+  padding: 0 24px 0;
 }
 
 /* ---------- Centered Block ---------- */
@@ -1758,7 +1758,7 @@ video.case-study__image {
 @media (max-width: 1295px) {
   .content {
     margin-left: 0;
-    padding: 0 24px 48px;
+    padding: 0 24px 0;
   }
 }
 
@@ -3038,7 +3038,7 @@ a.work-card {
   /* Content offset — top instead of left */
   .content {
     margin-left: 0;
-    padding: 0 40px 48px;
+    padding: 0 40px 0;
   }
 
 
@@ -3072,14 +3072,14 @@ a.work-card {
 /* ---------- Sidebar: narrower padding at <1328px ---------- */
 @media (min-width: 1296px) and (max-width: 1327px) {
   .content {
-    padding: 0 24px 48px;
+    padding: 0 24px 0;
   }
 }
 
 /* ---------- Content side padding on mid-range desktop ---------- */
 @media (min-width: 1000px) and (max-width: 1295px) {
   .content {
-    padding: 0 24px 48px;
+    padding: 0 24px 0;
   }
 }
 
