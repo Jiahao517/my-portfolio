@@ -52,7 +52,7 @@ function ArtFooterArrowUp() {
 
 function ArtFooterMaskDesktop({ maskId }: { maskId: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 816" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 816" fill="none" aria-hidden="true">
       <defs>
         <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="816">
           <rect width="1920" height="816" fill="white" />
@@ -69,7 +69,7 @@ function ArtFooterMaskDesktop({ maskId }: { maskId: string }) {
 
 function ArtFooterMaskTablet({ maskId }: { maskId: string }) {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 312" fill="none" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 768 312" fill="none" aria-hidden="true">
       <defs>
         <mask id={maskId} maskUnits="userSpaceOnUse" x="0" y="0" width="768" height="312">
           <rect width="768" height="312" fill="white" />
@@ -130,7 +130,9 @@ function formatYerevanTime() {
 export function ArtFooter() {
   const [time, setTime] = useState("");
   const [isVisualActive, setIsVisualActive] = useState(false);
+  const [isVisualPinned, setIsVisualPinned] = useState(false);
   const visualRef = useRef<HTMLElement | null>(null);
+  const visualLayerRef = useRef<HTMLDivElement | null>(null);
   const maskBaseId = useId().replace(/:/g, "");
 
   useEffect(() => {
@@ -170,6 +172,35 @@ export function ArtFooter() {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const node = visualLayerRef.current;
+    if (!node) return;
+
+    let frameId: number | undefined;
+
+    const updatePinnedState = () => {
+      frameId = undefined;
+      const rect = node.getBoundingClientRect();
+
+      setIsVisualPinned(rect.top <= 1 && rect.bottom >= window.innerHeight - 1);
+    };
+
+    const scheduleUpdate = () => {
+      if (frameId !== undefined) return;
+      frameId = window.requestAnimationFrame(updatePinnedState);
+    };
+
+    scheduleUpdate();
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
+    window.addEventListener("resize", scheduleUpdate);
+
+    return () => {
+      window.removeEventListener("scroll", scheduleUpdate);
+      window.removeEventListener("resize", scheduleUpdate);
+      if (frameId !== undefined) window.cancelAnimationFrame(frameId);
+    };
+  }, []);
+
   const mobileSocialText = useMemo(
     () => ["Creative Digital Designer.", "Working Worldwide."],
     [],
@@ -197,57 +228,66 @@ export function ArtFooter() {
             <source src="/videos/art-footer-bg.webm" type="video/webm" />
           </video>
         </div>
-        <div className="art-footer__stage-overlay">
-          <div className="art-footer__stage-overlay-shell">
-            <div className="art-footer__info-layer">
-              <div className="art-footer__info-grid">
-                <div className="art-footer__info-blocks">
-                  {INFO_BLOCKS.map((block) => (
-                    <div key={block.label} className="art-footer__info-block">
-                      <div className="art-footer__info-label">{block.label}</div>
-                      <div className="art-footer__info-links">
-                        {block.links.map((link) => (
-                          <a
-                            key={link.text}
-                            href={link.href}
-                            target={"external" in link ? "_blank" : undefined}
-                            rel={"external" in link ? "noopener" : undefined}
-                            className="art-footer__medium-link"
-                          >
-                            <span>{link.text}</span>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
+        <div className="art-footer__info-layer">
+          <div className="art-footer__info-grid">
+            <div className="art-footer__info-blocks">
+              {INFO_BLOCKS.map((block) => (
+                <div key={block.label} className="art-footer__info-block">
+                  <div className="art-footer__info-label">{block.label}</div>
+                  <div className="art-footer__info-links">
+                    {block.links.map((link) => (
+                      <a
+                        key={link.text}
+                        href={link.href}
+                        target={"external" in link ? "_blank" : undefined}
+                        rel={"external" in link ? "noopener" : undefined}
+                        className="art-footer__medium-link"
+                      >
+                        <span>{link.text}</span>
+                      </a>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              ))}
             </div>
-
-            <div className="art-footer__mask-layer art-footer__mask-layer--desktop">
-              <ArtFooterMaskDesktop maskId={`${maskBaseId}-desktop`} />
-            </div>
-            <div className="art-footer__mask-layer art-footer__mask-layer--tablet">
-              <ArtFooterMaskTablet maskId={`${maskBaseId}-tablet`} />
-            </div>
-            <div className="art-footer__mask-layer art-footer__mask-layer--mobile">
-              <ArtFooterMaskMobile maskId={`${maskBaseId}-mobile`} />
-            </div>
-
-            <Link href="/" className="art-footer__corner-logo" aria-label="Back home">
-              <ArtFooterLogoMark />
-            </Link>
           </div>
         </div>
+
+        <nav className="art-footer__secondary-nav" aria-label="Footer pages">
+          <Link href="/workflow" className="art-footer__normal-link">
+            Workflow
+          </Link>
+          <Link href="/faq" className="art-footer__normal-link">
+            FAQ
+          </Link>
+        </nav>
+
+        <div className="art-footer__copyright">©2026 All Rights Reserved</div>
+
+        <div className="art-footer__mask-layer art-footer__mask-layer--desktop">
+          <ArtFooterMaskDesktop maskId={`${maskBaseId}-desktop`} />
+        </div>
+        <div className="art-footer__mask-layer art-footer__mask-layer--tablet">
+          <ArtFooterMaskTablet maskId={`${maskBaseId}-tablet`} />
+        </div>
+        <div className="art-footer__mask-layer art-footer__mask-layer--mobile">
+          <ArtFooterMaskMobile maskId={`${maskBaseId}-mobile`} />
+        </div>
+
+        <Link href="/" className="art-footer__corner-logo" aria-label="Back home">
+          <ArtFooterLogoMark />
+        </Link>
       </section>
 
       <section
         ref={visualRef}
-        className={`art-footer__visual-shell${isVisualActive ? " art-footer__visual-shell--active" : ""}`}
+        className={`art-footer__visual-shell${isVisualActive ? " art-footer__visual-shell--active" : ""}${
+          isVisualPinned ? " art-footer__visual-shell--pinned" : ""
+        }`}
       >
         <div className="art-footer__spacer-footer" aria-hidden />
 
-        <div className="art-footer__visual-layer">
+        <div ref={visualLayerRef} className="art-footer__visual-layer">
           <div className="art-footer__media-layer">
             <div className="art-footer__video-blur" aria-hidden />
             <video
