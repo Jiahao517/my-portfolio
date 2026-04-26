@@ -37,7 +37,7 @@ export function HeroVideo() {
       <video
         ref={videoRef}
         className="hero-video__media"
-        poster="/images/case-voiceflow.png"
+        poster="/images/hero-poster.jpg"
         muted
         loop
         playsInline
