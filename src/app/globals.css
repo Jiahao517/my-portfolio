@@ -1218,6 +1218,7 @@ blockquote {
   padding: 40px;
   position: relative;
   overflow: hidden;
+  perspective: 1100px;
 }
 
 .case-study__tilt {
@@ -1225,6 +1226,9 @@ blockquote {
   will-change: transform;
   border-radius: 14px;
   z-index: 2;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+  transition: transform 260ms var(--ease-out-quart);
 }
 
 .case-study__tilt .tilt-glare {
@@ -3195,9 +3199,13 @@ a.work-card {
   overflow: hidden;
   position: relative;
   will-change: transform, opacity;
+  perspective: 1000px;
   opacity: 0;
   translate: 0 20px;
-  transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1), translate 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+  transition:
+    opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+    translate 0.8s cubic-bezier(0.23, 1, 0.32, 1),
+    transform 260ms var(--ease-out-quart);
 }
 
 .about__hero-glare {

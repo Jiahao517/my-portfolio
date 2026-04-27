@@ -3,8 +3,17 @@
 import Image from "next/image";
 import { useState } from "react";
 import { ArrowRightIcon } from "@/components/icons";
+import { useMouseTilt } from "@/lib/useMouseTilt";
 
 export function About() {
+  useMouseTilt("#aboutHeroPhoto", {
+    glareSelector: ".about__hero-glare",
+    maxTiltX: 2.5,
+    maxTiltY: 3.25,
+    scale: 1.01,
+    perspective: 1000,
+  });
+
   const [copied, setCopied] = useState(false);
   const onCopy = async () => {
     try {

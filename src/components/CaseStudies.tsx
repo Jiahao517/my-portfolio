@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import { ArrowRightIcon, GlobeIcon } from "@/components/icons";
 import { caseStudies } from "@/data/case-studies";
+import { useMouseTilt } from "@/lib/useMouseTilt";
 import type { CaseStudy } from "@/types/portfolio";
 
 function CaseStudyCard({ cs }: { cs: CaseStudy }) {
@@ -87,6 +88,15 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
 }
 
 export function CaseStudies() {
+  useMouseTilt(".case-study__image-wrap", {
+    targetSelector: ".case-study__tilt",
+    glareSelector: ".tilt-glare",
+    maxTiltX: 1.375,
+    maxTiltY: 1.875,
+    scale: 1.012,
+    perspective: 1100,
+  });
+
   useEffect(() => {
     const studies = Array.from(document.querySelectorAll<HTMLElement>(".case-study"));
     if (studies.length < 2) return;
