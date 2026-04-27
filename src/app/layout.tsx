@@ -60,7 +60,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN" className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable} ${notoSerifSc.variable} ${fzFont140.variable}`}>
+    <html
+      lang="zh-CN"
+      suppressHydrationWarning
+      className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable} ${notoSerifSc.variable} ${fzFont140.variable}`}
+    >
       <head>
         <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
       </head>
