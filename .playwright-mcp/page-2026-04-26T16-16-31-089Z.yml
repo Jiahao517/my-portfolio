@@ -1,0 +1,190 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - button "菜单" [ref=e3] [cursor=pointer]
+  - generic:
+    - link:
+      - /url: "#services"
+      - text: 服务
+    - link:
+      - /url: "#work"
+      - text: 作品
+    - link:
+      - /url: "#experience"
+      - text: 经历
+    - link:
+      - /url: "#publications"
+      - text: 发表
+    - link:
+      - /url: "#about"
+      - text: 关于
+    - generic:
+      - link:
+        - /url: https://linkedin.com/in/murynmukha
+        - text: LinkedIn
+      - link:
+        - /url: "#"
+        - text: 邮箱
+  - main [ref=e7]:
+    - generic [ref=e10]:
+      - heading "我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。" [level=1] [ref=e11]
+      - paragraph [ref=e12]: 很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。
+      - generic "支持过的投资机构" [ref=e13]:
+        - generic [ref=e14]: 由一线机构支持的初创团队
+        - generic [ref=e15]: Sequoia
+        - generic [ref=e16]: Y Combinator
+        - generic [ref=e17]: Voiceflow
+        - generic [ref=e18]: Chattermill
+        - generic [ref=e19]: Twain
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - generic [ref=e24]:
+          - generic [ref=e26]:
+            - generic [ref=e27]: 前端实现
+            - generic [ref=e28] [cursor=pointer]: 原型 / Demo
+            - generic [ref=e29] [cursor=pointer]: 产品策略
+            - generic [ref=e30] [cursor=pointer]: 用户研究
+            - generic [ref=e31] [cursor=pointer]: UX / UI 设计
+            - generic [ref=e32]: 前端实现
+            - generic [ref=e33] [cursor=pointer]: 原型 / Demo
+            - generic [ref=e34] [cursor=pointer]: 产品策略
+            - generic [ref=e35] [cursor=pointer]: 用户研究
+            - generic [ref=e36] [cursor=pointer]: UX / UI 设计
+            - generic [ref=e37]: 前端实现
+          - img [ref=e39]
+          - generic [ref=e41]:
+            - generic [ref=e44]: 用 React、Next.js 把设计落地为可交付产品。掌握组件化、动效与性能优化。
+            - generic [ref=e46]: 用 React、Next.js 把设计落地为可交付产品。掌握组件化、动效与性能优化。
+        - generic [ref=e49]:
+          - generic [ref=e53]:
+            - generic [ref=e54]: Mikhail Dubov
+            - generic [ref=e55]: Founder @ Chattermill
+          - blockquote [ref=e56]:
+            - paragraph [ref=e57]: “Gregory 是理想的创始设计师，对细节极度执着，从想法生成、用户研究到落地实施再到品控，全程负责。
+            - paragraph [ref=e58]: 你很难再找到一个像他一样真心在乎产品的人。
+            - paragraph [ref=e59]: 更别提我见过最好的工作态度之一，以及打造 B2B 产品的丰富经验。”
+          - generic [ref=e60]:
+            - button "切换到第 1 条推荐" [ref=e61] [cursor=pointer]
+            - button "切换到第 2 条推荐" [ref=e62] [cursor=pointer]
+            - button "切换到第 3 条推荐" [ref=e63] [cursor=pointer]
+            - button "切换到第 4 条推荐" [ref=e64] [cursor=pointer]
+            - button "切换到第 5 条推荐" [ref=e65] [cursor=pointer]
+      - generic [ref=e66]:
+        - generic [ref=e67] [cursor=pointer]:
+          - generic [ref=e69]:
+            - heading "Twain" [level=2] [ref=e70]
+            - paragraph [ref=e71]: 为研究与对外触达打造的 GTM 智能体
+          - link [ref=e72]:
+            - /url: https://twain.ai
+        - generic [ref=e76] [cursor=pointer]:
+          - generic [ref=e78]:
+            - heading "Voiceflow" [level=2] [ref=e79]
+            - paragraph [ref=e80]: 构建对话式智能体体验
+          - link "Voiceflow case study" [ref=e81]:
+            - /url: /voiceflow
+            - img "Voiceflow case study" [ref=e83]
+        - generic [ref=e84] [cursor=pointer]:
+          - generic [ref=e86]:
+            - heading "Chattermill" [level=2] [ref=e87]
+            - paragraph [ref=e88]: 客户反馈分析平台中的 AI
+          - link [ref=e89]:
+            - /url: /chattermill
+        - generic [ref=e93] [cursor=pointer]:
+          - generic [ref=e95]:
+            - heading "Invocable" [level=2] [ref=e96]
+            - paragraph [ref=e97]: 对话式 UI 的无代码构建器
+          - link [ref=e98]:
+            - /url: /invocable
+    - generic [ref=e103]:
+      - heading "经历" [level=2] [ref=e104]
+      - generic [ref=e105]:
+        - generic [ref=e106]:
+          - generic [ref=e109]:
+            - generic [ref=e110]: 创始产品设计师
+            - generic [ref=e111]: Twain ・ 2022 − 至今
+          - paragraph [ref=e112]: Sequoia Arc '22。Twain 在找到 PMF 之前转型了三次。每一版我都亲手设计，从最初原型到当前的 GTM agents 平台。
+        - generic [ref=e113]:
+          - generic [ref=e116]:
+            - generic [ref=e117]: 资深独立贡献者（IC）
+            - generic [ref=e118]: Voiceflow ・ 2021 − 2022
+          - paragraph [ref=e119]: 以 Senior IC 加入主导平台重设计。重做核心流程、重塑视觉语言，并交付了团队至今仍在使用的设计系统。
+        - generic [ref=e120]:
+          - generic [ref=e123]:
+            - generic [ref=e124]: 创始产品设计师
+            - generic [ref=e125]: Chattermill ・ 2019 − 2021
+          - paragraph [ref=e126]: 陪伴公司至 Series A 的创始设计师。重新设计核心产品，并把研究方法引入团队的产品流程中。
+        - generic [ref=e127]:
+          - generic [ref=e130]:
+            - generic [ref=e131]: 创始产品设计师
+            - generic [ref=e132]: Invocable（Storyline） ・ 2018 − 2019
+          - paragraph [ref=e133]: Y Combinator '18。打造对话编辑器 UX，参与客户开发与支持电话，主导核心功能：非线性对话流程画布。
+    - generic [ref=e135]:
+      - heading "关于我" [level=2] [ref=e137]
+      - generic [ref=e140]:
+        - paragraph [ref=e141]: 我学的是软件工程与业务分析。最早几年都在写规格说明、流程图，坐在业务方与工程师之间。业务与系统分析师、UX 设计师与研究员，每个角色都是软件如何被造出来的不同切面。
+        - paragraph [ref=e142]: 这条路把我推向了产品设计。我做过完整的链条：系统架构、产品策略、融资 Deck，到最后界面长什么样、为什么这样工作。
+        - paragraph [ref=e143]: 你只需要一个人来主理设计，从研究到上线。没有交接，没有翻译损耗。上线的就是设计的样子。难的部分我也会陪着走过：转型、融资、那次差点上不了的发版。
+        - paragraph [ref=e144]: 工作之外，我喜欢 Streamline Moderne 与构成主义建筑。这两种流派在结构与大胆之间的平衡，正是我做设计时的思考方式。
+        - paragraph [ref=e145]: 我选早期阶段，因为那是一个设计师能塑造整个产品的地方。小团队、完整 ownership，从首个原型到那份完成融资的 Deck。
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - text: 告诉我你正在做什么。
+          - text: 看看是不是合适。
+        - generic [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]: gregory.murynmukha@gmail.com
+            - button "复制邮箱" [ref=e160] [cursor=pointer]
+          - link "预约一次聊聊" [ref=e161] [cursor=pointer]:
+            - /url: https://calendar.app.google/e1nq9HDsCKAYrq6S7
+            - generic [ref=e162]: 预约一次聊聊
+    - generic [ref=e164]:
+      - heading "Contact" [level=2] [ref=e166]
+      - generic [ref=e167]:
+        - generic [ref=e169]:
+          - generic [ref=e171]: G
+          - generic [ref=e172]: 你好，我是代表 Gregory 的 AI 助理。
+        - generic [ref=e173]:
+          - button "你的设计风格有哪些标签？" [ref=e174] [cursor=pointer]
+          - button "你最适合哪个阶段的初创团队？" [ref=e175] [cursor=pointer]
+          - button "Twain 这段经历你是怎么从 0 到 1 的？" [ref=e176] [cursor=pointer]
+          - button "你怎么处理产品转型期的设计决策？" [ref=e177] [cursor=pointer]
+        - generic [ref=e178]:
+          - generic [ref=e179]:
+            - link "X" [ref=e180] [cursor=pointer]:
+              - /url: https://x.com/murynmukha
+              - img [ref=e181]
+            - link "Email" [ref=e183] [cursor=pointer]:
+              - /url: mailto:gregory.murynmukha@gmail.com
+              - img [ref=e184]
+            - link "LinkedIn" [ref=e187] [cursor=pointer]:
+              - /url: https://linkedin.com/in/murynmukha
+              - img [ref=e188]
+          - textbox "留言…" [ref=e191]
+    - generic [ref=e197]:
+      - generic [ref=e198]:
+        - button "Back to top" [ref=e199] [cursor=pointer]:
+          - img [ref=e201]
+          - generic [ref=e204]: Back to top
+        - generic [ref=e205]:
+          - generic [ref=e206]: Creative Digital Designer.
+          - generic [ref=e207]: Working Worldwide.
+      - generic "AI时代的设计工作流" [ref=e208]:
+        - generic [ref=e209]:
+          - generic [ref=e211]: A
+          - generic [ref=e213]: I
+          - generic [ref=e215]: 时
+          - generic [ref=e217]: 代
+          - generic [ref=e219]: 的
+          - generic [ref=e221]: 设
+          - generic [ref=e223]: 计
+          - generic [ref=e225]: 工
+          - generic [ref=e227]: 作
+          - generic [ref=e229]: 流
+      - generic [ref=e230]:
+        - generic [ref=e232]: Yerevan 08:16 PM
+        - generic [ref=e234]: Creative Digital Designer / Working Worldwide
+        - button "Back to top" [ref=e235] [cursor=pointer]:
+          - img [ref=e237]
+          - generic [ref=e240]: Back to top
+  - button "Open Next.js Dev Tools" [ref=e246] [cursor=pointer]:
+    - img [ref=e247]
+  - alert [ref=e250]
