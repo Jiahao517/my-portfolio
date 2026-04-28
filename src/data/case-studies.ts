@@ -30,7 +30,7 @@ export const caseStudies: CaseStudy[] = [
     websiteHref: "https://chattermill.com",
     video: { src: "/images/case-chattermill.mp4" },
     cropVariant: "crop-1",
-    ctaLabel: "查看案例",
+    ctaLabel: "查看作品",
   },
   {
     slug: "invocable",
@@ -40,6 +40,6 @@ export const caseStudies: CaseStudy[] = [
     href: "/invocable",
     video: { src: "/images/case-invocable.mp4" },
     cropVariant: "crop-2",
-    ctaLabel: "查看案例",
+    ctaLabel: "查看作品",
   },
 ];

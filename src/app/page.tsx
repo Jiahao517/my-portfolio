@@ -4,16 +4,14 @@ import { CaseStudies } from "@/components/CaseStudies";
 import { ContactAI } from "@/components/ContactAI";
 import { Experience } from "@/components/Experience";
 import { HeroVideo } from "@/components/HeroVideo";
-import { MobileHeader } from "@/components/MobileHeader";
 import { RevealController } from "@/components/RevealController";
-import { Sidebar } from "@/components/Sidebar";
+import { SiteChrome } from "@/components/SiteChrome";
 import { SocialProof } from "@/components/SocialProof";
 
 export default function Home() {
   return (
     <>
-      <MobileHeader />
-      <Sidebar />
+      <SiteChrome thumbs={[]} variant="light" />
 
       <main className="content">
         <HeroVideo />

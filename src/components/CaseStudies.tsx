@@ -20,17 +20,6 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
           </p>
         </div>
         <div className="case-study__buttons">
-          {cs.websiteHref ? (
-            <a
-              href={cs.websiteHref}
-              target="_blank"
-              rel="noopener"
-              className="case-study__website-btn"
-              aria-label="访问站点"
-            >
-              <GlobeIcon stroke="currentColor" />
-            </a>
-          ) : null}
           <a
             href={cs.href}
             target={cs.externalHref ? "_blank" : undefined}
