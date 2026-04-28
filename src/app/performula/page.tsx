@@ -12,62 +12,30 @@ type MediaItem = { image: string; video?: string };
 type Block = { type: "fullColumn" | "twoColumn"; items: MediaItem[] };
 
 const BLOCKS: Block[] = [
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/13504aac49/studiogruhl_performula_01-logo.jpg" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2223/d66f26078c/studiogruhl_performula_02-socials.png" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/fac496fc53/studiogruhl_performula_03-stories_slide-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_03-Stories_Slide-1080p.mp4" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/85ce36f010/studiogruhl_performula_04-ingredient_360_01-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_04-Ingredient_360_01-1080p.mp4" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/702c38a420/studiogruhl_performula_05-billboard_01.png" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/91b6e7b55b/studiogruhl_performula_16-bag_placement.jpg" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/d4cc66d455/studiogruhl_performula_12-package_float.jpg" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/88d8b530fb/studiogruhl_performula_08-conference-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_08-Conference-1080p.mp4" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/b5fab7dcd5/studiogruhl_performula_09-stories_main-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_09-Stories_Main-1080p.mp4" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/b7771b3747/studiogruhl_performula_10-element.jpg" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/884b2d2c0b/studiogruhl_performula_11-statistic.jpg" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/ebaf0b4487/studiogruhl_performula_13-phone_mockup.jpg" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/ece0ac3efb/studiogruhl_performula_14-packaging_open.jpg" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/a5a0508086/studiogruhl_performula_15-ingredient_closeup_01.jpg" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/638abfb41a/studiogruhl_performula_17-website_desktop-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_17-Website_Desktop-1080p.mp4" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/35695d5210/studiogruhl_performula_18-digital.png" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/00cf01b6e5/studiogruhl_performula_19-colors.jpg" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/cca03fd435/studiogruhl_performula_20-ingredient_360_02-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_04-Ingredient_360_02-1080p.mp4" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/1bbbf89ed5/studiogruhl_performula_21-ingredient_slide-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_21-Ingredient_Slide-1080p.mp4" }] },
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/00bfe6019c/studiogruhl_performula_22-dooh_3up-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_22-DOOH_3Up-1080p.mp4" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/4958c0d56c/studiogruhl_performula_23-bag_360-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_23-Bag_360-1080p.mp4" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/56dc5fdb67/studiogruhl_performula_24-ui_element-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_24-UI_Element-1080p.mp4" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/5474e6c7c8/studiogruhl_performula_28-ingredients_collection.jpg" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/4be6f98ad6/studiogruhl_performula_26-categories-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_26-Categories-720p.mp4" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/9de8132ab9/studiogruhl_performula_27-dooh_1up_02.png" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/a2b46c184e/studiogruhl_performula_25-laptop_mockup.jpg" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/56fa4d67ed/studiogruhl_performula_29-type_system-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_29-Type_System-1080p.mp4" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/f2ca7321e6/studiogruhl_performula_30-bottle-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_30-Bottle-1080p.mp4" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/26e1b42836/studiogruhl_performula_40-packaging_grid.jpg" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/190621f072/studiogruhl_performula_31-card.jpg" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/83428e1d71/studiogruhl_performula_32-numbers-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_32-Numbers-1080p.mp4" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/4d037291f7/studiogruhl_performula_35-dooh_1_up_01.png" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/49faa28667/studiogruhl_performula_33-ingredient_closeup.jpg" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/c23a0b0bbb/studiogruhl_performula_34-art_direction_02.jpg" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/336e0c21b5/studiogruhl_performula_38-website_mobile-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_38-Website_Mobile-1080p.mp4" }] },
-  { type: "twoColumn", items: [
-    { image: "https://a.storyblok.com/f/268243/1920x2160/749d84fefc/studiogruhl_performula_36-ui_button-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_36-UI_Button-720p.mp4" },
-    { image: "https://a.storyblok.com/f/268243/1920x2160/2485fc6e50/studiogruhl_performula_37-icon-thumbnail.jpg", video: "https://pub-66de73ccfc0c40a498df7e4a14e4d263.r2.dev/STUDIOGRUHL_Performula_37-Icon-1080p.mp4" },
-  ]},
-  { type: "fullColumn", items: [{ image: "https://a.storyblok.com/f/268243/3840x2160/f72631c2af/studiogruhl_performula_39-packaging_stacked.jpg" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/04.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/05.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/06.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/07.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/08.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/09.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/10.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/11.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/12.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/13.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/14.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/15.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/16.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/17.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/18.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/19.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/20.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/21.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/21b.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/22.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/23.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/24.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/25.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/26.png" }] },
 ];
 
 const PROJECT_INFO = `Performula is a health start-up focused on creating highly customized nutrition supplements for their exclusive clientele. By analyzing their clients' blood, they generate a personalized nutrition mix, selecting from an ever-growing list of over 200 nutrients and supplement ingredients.
@@ -104,8 +72,8 @@ function Media({ item }: { item: MediaItem }) {
     <Image
       src={item.image}
       alt=""
-      width={3840}
-      height={2160}
+      width={1920}
+      height={1080}
       sizes="100vw"
       className="block h-auto w-full"
       priority={false}

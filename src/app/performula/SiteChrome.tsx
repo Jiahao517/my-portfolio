@@ -22,7 +22,7 @@ const ArrowIcon = () => (
 );
 
 const NAV_ITEMS = [
-  { label: "Index" },
+  { label: "Index", href: "/" },
   { label: "Projects", expandable: true },
   { label: "About" },
   { label: "News" },
@@ -145,7 +145,7 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
 
       {/* Menu overlay */}
       <div
-        className={`fixed inset-0 z-40 ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-40 flex justify-center ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
         aria-hidden={!menuOpen}
       >
         <button
@@ -160,7 +160,7 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
           }}
         />
         <div
-          className={`relative mx-auto mt-3 w-[min(94vw,390px)] overflow-hidden rounded-[14px] bg-neutral-800/95 shadow-2xl ring-1 ring-white/10 transition-all duration-500 ease-out ${
+          className={`relative mt-3 w-[min(94vw,390px)] self-start overflow-hidden rounded-[14px] bg-neutral-800/95 text-white shadow-2xl ring-1 ring-white/10 transition-all duration-500 ease-out ${
             menuOpen ? "translate-y-0 opacity-100" : "-translate-y-3 opacity-0"
           }`}
         >
@@ -171,8 +171,8 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
               {NAV_ITEMS.map((item) => (
                 <div key={item.label}>
                   <a
-                    href="#"
-                    className="flex items-center justify-between border-t border-white/15 py-5 text-lg font-medium uppercase tracking-wide first:border-t-0 hover:text-white/60"
+                    href={item.href ?? "#"}
+                    className="-mx-6 flex items-center justify-between border-t border-white/15 px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 first:border-t-0 hover:bg-white/10"
                   >
                     <span>{item.label}</span>
                     <ArrowIcon />
@@ -181,7 +181,7 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
                     <div className="-mx-6 border-t border-white/15">
                       <div className="flex gap-3 overflow-x-auto px-6 py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                         {PROJECT_THUMBS.map((p) => (
-                          <a key={p.name} href="#" className="shrink-0 text-center">
+                          <a key={p.name} href="#" className="shrink-0 text-center transition-opacity duration-150 hover:opacity-70">
                             <div className="grid h-20 w-20 place-items-center overflow-hidden rounded-2xl bg-neutral-800 text-xs uppercase">
                               {p.name.slice(0, 2)}
                             </div>
@@ -197,7 +197,7 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
                 href="https://manage.kmail-lists.com/subscriptions/subscribe?a=RLE9g5&g=Tp7ZaR"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center border-t border-white/15 py-6 text-lg font-medium uppercase tracking-wide hover:text-white/60"
+                className="-mx-6 flex items-center justify-center border-t border-white/15 px-6 py-6 text-lg font-medium uppercase tracking-wide transition-colors duration-150 hover:bg-white/10"
               >
                 Join Our Newsletter
               </a>
@@ -213,7 +213,7 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`grid place-items-center py-5 text-xs uppercase tracking-widest text-white/80 hover:text-white ${
+                  className={`grid place-items-center py-5 text-xs uppercase tracking-widest text-white/80 transition-colors duration-150 hover:bg-white/10 hover:text-white ${
                     i > 0 ? "border-l border-white/15" : ""
                   }`}
                 >
