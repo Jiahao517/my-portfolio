@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { caseStudies } from "@/data/case-studies";
 
 const STUDIO_LOGO = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 409 409" className="h-9 w-9">
@@ -23,18 +24,6 @@ const ArrowIcon = () => (
 
 const NAV_ITEMS = [
   { label: "Index", href: "/" },
-  { label: "Projects", expandable: true },
-  { label: "About" },
-  { label: "News" },
-  { label: "Contact" },
-];
-
-const PROJECT_THUMBS = [
-  { name: "Spellbound", src: "https://a.storyblok.com/f/268243/601x600/aa10b1d8a4/thumbnails-spellbound.jpg" },
-  { name: "Moss", src: "https://a.storyblok.com/f/268243/601x600/8e7c9b18a3/thumbnails-moss.jpg" },
-  { name: "Performula", src: "https://a.storyblok.com/f/268243/601x600/0a7fd3eecf/thumbnails-performula.jpg" },
-  { name: "Highsnobiety", src: "https://a.storyblok.com/f/268243/601x600/cb1c4e2de1/thumbnails-highsnobiety.jpg" },
-  { name: "ColorsXStudios", src: "https://a.storyblok.com/f/268243/601x600/282a9b76a2/thumbnails-colors.jpg" },
 ];
 
 type Thumb = { src: string; ar: number };
@@ -177,30 +166,19 @@ export function SiteChrome({ thumbs }: { thumbs: Thumb[] }) {
                     <span>{item.label}</span>
                     <ArrowIcon />
                   </a>
-                  {item.expandable && (
-                    <div className="-mx-6 border-t border-white/15">
-                      <div className="flex gap-3 overflow-x-auto px-6 py-5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                        {PROJECT_THUMBS.map((p) => (
-                          <a key={p.name} href="#" className="shrink-0 text-center transition-opacity duration-150 hover:opacity-70">
-                            <div className="grid h-20 w-20 place-items-center overflow-hidden rounded-2xl bg-neutral-800 text-xs uppercase">
-                              {p.name.slice(0, 2)}
-                            </div>
-                            <div className="mt-2 text-[11px] uppercase tracking-wider text-white/70">{p.name}</div>
-                          </a>
-                        ))}
-                      </div>
-                    </div>
-                  )}
                 </div>
               ))}
-              <a
-                href="https://manage.kmail-lists.com/subscriptions/subscribe?a=RLE9g5&g=Tp7ZaR"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="-mx-6 flex items-center justify-center border-t border-white/15 px-6 py-6 text-lg font-medium uppercase tracking-wide transition-colors duration-150 hover:bg-white/10"
-              >
-                Join Our Newsletter
-              </a>
+              {caseStudies.map((cs) => (
+                <a
+                  key={cs.slug}
+                  href={cs.href}
+                  className="-mx-6 flex items-center justify-between border-t border-white/15 px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 hover:bg-white/10"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <span>{cs.title}</span>
+                  <ArrowIcon />
+                </a>
+              ))}
             </div>
             <div className="grid grid-cols-3 border-t border-white/15">
               {[

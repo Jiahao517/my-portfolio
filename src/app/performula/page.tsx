@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import { SiteChrome } from "./SiteChrome";
+import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
   title: "Performula – Brand Identity & Design System by Studio Gruhl",

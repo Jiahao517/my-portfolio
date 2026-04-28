@@ -6,11 +6,10 @@ export const caseStudies: CaseStudy[] = [
     title: "Twain",
     caption: "为研究与对外触达打造的 GTM 智能体",
     year: "'22 − 至今",
-    href: "https://twain.ai",
-    externalHref: "https://twain.ai",
+    href: "/twain",
     video: { src: "/images/case-twain.mp4" },
     imageBg: "rgba(209, 227, 255, 0.88)",
-    ctaLabel: "查看线上",
+    ctaLabel: "查看作品",
   },
   {
     slug: "performula",
