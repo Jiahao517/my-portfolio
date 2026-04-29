@@ -288,6 +288,28 @@ blockquote {
   }
 }
 
+.mobile-header__contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.mobile-header--dark .mobile-header__contact-btn {
+  color: #fff;
+}
+
+.mobile-header--light .mobile-header__contact-btn {
+  color: var(--text);
+}
+
 .menu-toggle {
   display: flex;
   flex-direction: column;
@@ -3468,13 +3490,28 @@ a.work-card {
   pointer-events: none;
   transition: opacity 200ms ease,
     transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 50;
+  z-index: 200;
 }
 
 .contact-popover__panel.is-open {
   opacity: 1;
   pointer-events: auto;
   transform: translate(-50%, 0);
+}
+
+/* placement=below: panel opens downward */
+.contact-popover__panel--below {
+  bottom: auto;
+  top: calc(100% + 16px);
+  transform: translate(-50%, -8px);
+}
+.contact-popover__panel--below.is-open {
+  transform: translate(-50%, 0);
+}
+.contact-popover__panel--below .contact-popover__arrow {
+  bottom: auto;
+  top: -6px;
+  box-shadow: -1px -1px 0 0 rgba(22, 24, 29, 0.06);
 }
 
 .contact-popover__grid {

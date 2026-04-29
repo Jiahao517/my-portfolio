@@ -11,9 +11,10 @@ import {
 
 interface ContactPopoverProps {
   children: ReactNode;
+  placement?: "above" | "below";
 }
 
-export function ContactPopover({ children }: ContactPopoverProps) {
+export function ContactPopover({ children, placement = "above" }: ContactPopoverProps) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -31,9 +32,22 @@ export function ContactPopover({ children }: ContactPopoverProps) {
         setOpen(false);
       }
     };
+    const handleScroll = () => setOpen(false);
     document.addEventListener("mousedown", handleOutside);
-    return () => document.removeEventListener("mousedown", handleOutside);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [open]);
+
+  const panelClass = [
+    "contact-popover__panel",
+    placement === "below" ? "contact-popover__panel--below" : "",
+    open ? "is-open" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
     <div
@@ -42,7 +56,7 @@ export function ContactPopover({ children }: ContactPopoverProps) {
       onClick={() => setOpen((v) => !v)}
     >
       <div
-        className={`contact-popover__panel${open ? " is-open" : ""}`}
+        className={panelClass}
         role="dialog"
         aria-hidden={!open}
       >

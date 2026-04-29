@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useNavTheme } from "@/lib/useNavTheme";
+import { ContactPopover } from "@/components/ContactPopover";
 
 const NAV = [
   { id: "services", label: "服务" },
@@ -60,6 +61,16 @@ export function MobileHeader() {
         className={`mobile-header${isDarkTheme ? " mobile-header--dark" : " mobile-header--light"}`}
         style={{ transform: hidden ? "translateY(-100%)" : "translateY(0)" }}
       >
+        <button
+          className="menu-toggle"
+          aria-label="菜单"
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className="bar" />
+          <span className="bar" />
+          <span className="bar" />
+        </button>
         <nav className="mobile-header__nav">
           {NAV.map((n) => (
             <a
@@ -72,16 +83,14 @@ export function MobileHeader() {
             </a>
           ))}
         </nav>
-        <button
-          className="menu-toggle"
-          aria-label="菜单"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className="bar" />
-          <span className="bar" />
-          <span className="bar" />
-        </button>
+        <ContactPopover placement="below">
+          <button className="mobile-header__contact-btn" aria-label="联系我">
+            <svg width="22" height="22" viewBox="0 0 32 32" fill="none">
+              <rect x="8" y="9" width="16" height="13" rx="1.5" stroke="currentColor" strokeWidth="2" />
+              <path d="m9 11 6.6 5.3a1 1 0 0 0 1.2 0L23 11" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </button>
+        </ContactPopover>
       </header>
 
       <div className="mobile-menu" aria-hidden={!open}>

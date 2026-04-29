@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { caseStudies } from "@/data/case-studies";
+import { ContactPopover } from "@/components/ContactPopover";
 
 const DarkLogo = (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 409 409" className="h-9 w-9">
@@ -140,16 +141,17 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
           <Link href="/" aria-label="Studio Gruhl" className="grid h-10 w-10 place-items-center">
             {isLight ? LightLogo : DarkLogo}
           </Link>
-          <Link
-            href="/#contact-ai"
-            aria-label="Contact"
-            className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${hoverBtn}`}
-          >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-              <rect x="8" y="9" width="16" height="13" rx="1.5" stroke={iconColor} strokeWidth="2" />
-              <path d="m9 11 6.6 5.3a1 1 0 0 0 1.2 0L23 11" stroke={iconColor} strokeWidth="2" />
-            </svg>
-          </Link>
+          <ContactPopover placement="below">
+            <button
+              aria-label="Contact"
+              className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${hoverBtn}`}
+            >
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <rect x="8" y="9" width="16" height="13" rx="1.5" stroke={iconColor} strokeWidth="2" />
+                <path d="m9 11 6.6 5.3a1 1 0 0 0 1.2 0L23 11" stroke={iconColor} strokeWidth="2" />
+              </svg>
+            </button>
+          </ContactPopover>
         </div>
       </header>
 
