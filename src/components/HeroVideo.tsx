@@ -44,7 +44,7 @@ export function HeroVideo() {
         muted
         loop
         playsInline
-        preload={isMobile ? "metadata" : "auto"}
+        preload="metadata"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
         {/* Fallback to a case study video so the page shows real motion before the user supplies hero.mp4 */}

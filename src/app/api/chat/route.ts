@@ -7,6 +7,9 @@ export const runtime = "nodejs";
 const RATE = new Map<string, { count: number; reset: number }>();
 const WINDOW_MS = 5 * 60 * 1000;
 const MAX = 10;
+const MAX_MESSAGES = 24;
+const MAX_CONTENT_CHARS = 2000;
+const MAX_TOTAL_CHARS = 8000;
 
 function rateLimit(ip: string) {
   const now = Date.now();
@@ -20,10 +23,25 @@ function rateLimit(ip: string) {
   return true;
 }
 
+function getClientIp(req: NextRequest): string {
+  // Prefer trusted, single-value platform headers; fall back to first hop of XFF.
+  const candidates = [
+    req.headers.get("x-vercel-forwarded-for"),
+    req.headers.get("cf-connecting-ip"),
+    req.headers.get("x-real-ip"),
+    req.headers.get("x-forwarded-for")?.split(",")[0],
+  ];
+  for (const c of candidates) {
+    const v = c?.trim();
+    if (v) return v;
+  }
+  return "anon";
+}
+
 type ChatBody = { messages?: ChatMessage[] };
 
 export async function POST(req: NextRequest) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "anon";
+  const ip = getClientIp(req);
   if (!rateLimit(ip)) {
     return new Response("请求过于频繁，请 5 分钟后再试。", { status: 429 });
   }
@@ -36,6 +54,23 @@ export async function POST(req: NextRequest) {
   }
   const inMsgs = Array.isArray(body.messages) ? body.messages : [];
   if (inMsgs.length === 0) return new Response("缺少消息", { status: 400 });
+  if (inMsgs.length > MAX_MESSAGES) {
+    return new Response("会话过长，请重新开始", { status: 400 });
+  }
+
+  let totalChars = 0;
+  for (const m of inMsgs) {
+    if (!m || (m.role !== "user" && m.role !== "assistant") || typeof m.content !== "string") {
+      return new Response("消息格式错误", { status: 400 });
+    }
+    if (m.content.length > MAX_CONTENT_CHARS) {
+      return new Response("单条消息过长", { status: 413 });
+    }
+    totalChars += m.content.length;
+  }
+  if (totalChars > MAX_TOTAL_CHARS) {
+    return new Response("会话内容过长", { status: 413 });
+  }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {

@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState, ElementType } from "react";
 
 const CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
+const SKIP_CHARS = new Set([" ", "—", "，", "。", "、", "·"]);
+
+function scramble(ch: string) {
+  if (SKIP_CHARS.has(ch)) return ch;
+  return CHARS[Math.floor(Math.random() * CHARS.length)] ?? ch;
+}
 
 interface DecryptedTextProps {
   text: string;
@@ -31,62 +37,57 @@ export function DecryptedText({
   const [displayChars, setDisplayChars] = useState<{ char: string; revealed: boolean }[]>(
     () => Array.from(text).map((ch) => ({ char: ch, revealed: false }))
   );
-  const animRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const hasRun = useRef(false);
-
-  const scramble = (ch: string) =>
-    ch === " " || ch === "—" || ch === "，" || ch === "。" || ch === "、" || ch === "·"
-      ? ch
-      : CHARS[Math.floor(Math.random() * CHARS.length)] ?? ch;
-
-  const runAnimation = () => {
-    if (hasRun.current) return;
-    hasRun.current = true;
-
-    const chars = Array.from(text);
-    let revealedCount = 0;
-    let iteration = 0;
-
-    const tick = () => {
-      if (sequential) {
-        // reveal characters one by one
-        setDisplayChars(
-          chars.map((ch, i) => ({
-            char: i < revealedCount ? ch : scramble(ch),
-            revealed: i < revealedCount,
-          }))
-        );
-        iteration++;
-        if (iteration >= maxIterations) {
-          iteration = 0;
-          revealedCount++;
-        }
-        if (revealedCount <= chars.length) {
-          animRef.current = setTimeout(tick, speed);
-        } else {
-          setDisplayChars(chars.map((ch) => ({ char: ch, revealed: true })));
-        }
-      } else {
-        // all scramble then reveal together
-        setDisplayChars(
-          chars.map((ch) => ({
-            char: iteration >= maxIterations ? ch : scramble(ch),
-            revealed: iteration >= maxIterations,
-          }))
-        );
-        iteration++;
-        if (iteration <= maxIterations) {
-          animRef.current = setTimeout(tick, speed);
-        }
-      }
-    };
-
-    tick();
-  };
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+
+    let hasRun = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+
+    const runAnimation = () => {
+      if (hasRun) return;
+      hasRun = true;
+
+      const chars = Array.from(text);
+      let revealedCount = 0;
+      let iteration = 0;
+
+      const tick = () => {
+        if (sequential) {
+          setDisplayChars(
+            chars.map((ch, i) => ({
+              char: i < revealedCount ? ch : scramble(ch),
+              revealed: i < revealedCount,
+            }))
+          );
+          iteration++;
+          if (iteration >= maxIterations) {
+            iteration = 0;
+            revealedCount++;
+          }
+          if (revealedCount <= chars.length) {
+            timeoutId = setTimeout(tick, speed);
+          } else {
+            setDisplayChars(chars.map((ch) => ({ char: ch, revealed: true })));
+          }
+        } else {
+          setDisplayChars(
+            chars.map((ch) => ({
+              char: iteration >= maxIterations ? ch : scramble(ch),
+              revealed: iteration >= maxIterations,
+            }))
+          );
+          iteration++;
+          if (iteration <= maxIterations) {
+            timeoutId = setTimeout(tick, speed);
+          }
+        }
+      };
+
+      tick();
+    };
+
     const io = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -99,10 +100,9 @@ export function DecryptedText({
     io.observe(el);
     return () => {
       io.disconnect();
-      if (animRef.current) clearTimeout(animRef.current);
+      if (timeoutId) clearTimeout(timeoutId);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [text, sequential, maxIterations, speed, threshold, rootMargin]);
 
   return (
     <Tag ref={ref as React.RefObject<HTMLParagraphElement>} className={className} aria-label={text}>
