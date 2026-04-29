@@ -247,7 +247,7 @@ export function ArtFooter() {
         className={`art-footer__visual-shell${isVisualActive ? " art-footer__visual-shell--active" : ""}`}
         style={{ position: "relative" }}
       >
-        <ImageTrail images={TRAIL_IMAGES} containerRef={visualRef} threshold={80} lifetime={800} imageWidth={200} imageHeight={130} />
+        <ImageTrail items={TRAIL_IMAGES} containerRef={visualRef} threshold={80} />
         <div className="art-footer__visual-layer">
           <div className="art-footer__media-layer">
             <div className="art-footer__video-blur" aria-hidden />

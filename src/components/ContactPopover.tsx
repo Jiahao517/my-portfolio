@@ -3,6 +3,8 @@
 import Image from "next/image";
 import {
   useState,
+  useEffect,
+  useRef,
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from "react";
@@ -13,6 +15,7 @@ interface ContactPopoverProps {
 
 export function ContactPopover({ children }: ContactPopoverProps) {
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
 
   const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -21,17 +24,26 @@ export function ContactPopover({ children }: ContactPopoverProps) {
     card.style.setProperty("--my", `${e.clientY - rect.top}px`);
   };
 
+  useEffect(() => {
+    if (!open) return;
+    const handleOutside = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleOutside);
+    return () => document.removeEventListener("mousedown", handleOutside);
+  }, [open]);
+
   return (
     <div
+      ref={ref}
       className="contact-popover"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-      onBlur={() => setOpen(false)}
+      onClick={() => setOpen((v) => !v)}
     >
       <div
         className={`contact-popover__panel${open ? " is-open" : ""}`}
-        role="tooltip"
+        role="dialog"
         aria-hidden={!open}
       >
         <div className="contact-popover__grid">

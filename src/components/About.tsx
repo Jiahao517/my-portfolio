@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, type PointerEvent as ReactPointerEvent } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useMouseTilt } from "@/lib/useMouseTilt";
 
 const CONTACTS: {
@@ -37,7 +37,16 @@ export function About() {
     perspective: 1000,
   });
 
+  useMouseTilt(".contact-bento__card", {
+    maxTiltX: 3,
+    maxTiltY: 4,
+    scale: 1.015,
+    perspective: 1000,
+  });
+
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const onCopy = async (key: string, value: string) => {
     try {
       await navigator.clipboard.writeText(value);
@@ -48,12 +57,53 @@ export function About() {
     }
   };
 
-  const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    card.style.setProperty("--my", `${e.clientY - rect.top}px`);
-  };
+  // Cross-card glow: track mouse on grid, update --mx/--my/--glow-intensity on every card
+  useEffect(() => {
+    const grid = gridRef.current;
+    if (!grid) return;
+
+    const PROXIMITY = 80;   // px from edge — full glow
+    const FADE_DIST = 240;  // px from edge — glow fades to 0
+
+    const onMove = (e: MouseEvent) => {
+      const cards = grid.querySelectorAll<HTMLElement>(".contact-bento__card");
+      cards.forEach((card) => {
+        const rect = card.getBoundingClientRect();
+        const localX = e.clientX - rect.left;
+        const localY = e.clientY - rect.top;
+
+        // Distance from cursor to the nearest point on the card's rectangle
+        const dx = Math.max(0, Math.max(-localX, localX - rect.width));
+        const dy = Math.max(0, Math.max(-localY, localY - rect.height));
+        const dist = Math.hypot(dx, dy);
+
+        const intensity =
+          dist <= PROXIMITY
+            ? 1
+            : dist >= FADE_DIST
+            ? 0
+            : (FADE_DIST - dist) / (FADE_DIST - PROXIMITY);
+
+        card.style.setProperty("--mx", `${localX}px`);
+        card.style.setProperty("--my", `${localY}px`);
+        card.style.setProperty("--glow-intensity", intensity.toFixed(3));
+      });
+    };
+
+    const onLeave = () => {
+      grid.querySelectorAll<HTMLElement>(".contact-bento__card").forEach((card) => {
+        card.style.setProperty("--glow-intensity", "0");
+      });
+    };
+
+    grid.addEventListener("mousemove", onMove);
+    grid.addEventListener("mouseleave", onLeave);
+    return () => {
+      grid.removeEventListener("mousemove", onMove);
+      grid.removeEventListener("mouseleave", onLeave);
+    };
+  }, []);
+
 
   return (
     <section id="about" className="section about-section">
@@ -108,12 +158,11 @@ export function About() {
             <div className="about__cta-title shiny-hover shiny-hover--blue">
               联系我
             </div>
-            <div className="contact-bento__grid">
+            <div className="contact-bento__grid" ref={gridRef}>
               {CONTACTS.filter((c) => c.key !== "wechat").map((c) => (
                 <div
                   key={c.key}
                   className={`contact-bento__card contact-bento__card--${c.key}`}
-                  onPointerMove={onCardMove}
                 >
                   <span className="contact-bento__hint">{c.hint}</span>
                   <span className="contact-bento__label">{c.label}</span>
@@ -145,7 +194,6 @@ export function About() {
 
               <div
                 className="contact-bento__card contact-bento__card--wechat"
-                onPointerMove={onCardMove}
               >
                 <div className="contact-bento__wechat-head">
                   <span className="contact-bento__hint">WeChat</span>

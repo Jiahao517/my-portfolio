@@ -74,14 +74,14 @@ export function HeroVideo() {
           text="很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。"
           tag="p"
           className="hero-video__subtitle"
-          speed={40}
-          maxIterations={8}
+          speed={8}
+          maxIterations={2}
           sequential={true}
           threshold={0.05}
           rootMargin="0px"
         />
         <ContactPopover>
-          <Magnet padding={60} magnetStrength={2}>
+          <Magnet padding={60} magnetStrength={6}>
             <span className="case-study__btn hero-video__cta hero-video__cta--static">
               <span>与我联系</span>
             </span>
