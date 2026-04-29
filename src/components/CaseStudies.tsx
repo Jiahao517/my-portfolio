@@ -2,7 +2,8 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { ArrowRightIcon, GlobeIcon } from "@/components/icons";
+import Link from "next/link";
+import { ArrowRightIcon } from "@/components/icons";
 import { caseStudies } from "@/data/case-studies";
 import { useMouseTilt } from "@/lib/useMouseTilt";
 import type { CaseStudy } from "@/types/portfolio";
@@ -20,7 +21,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
           </p>
         </div>
         <div className="case-study__buttons">
-          <a
+          <Link
             href={cs.href}
             target={cs.externalHref ? "_blank" : undefined}
             rel={cs.externalHref ? "noopener" : undefined}
@@ -28,10 +29,10 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
           >
             <span>{cs.ctaLabel}</span>
             <ArrowRightIcon />
-          </a>
+          </Link>
         </div>
       </div>
-      <a
+      <Link
         href={cs.href}
         target={cs.externalHref ? "_blank" : undefined}
         rel={cs.externalHref ? "noopener" : undefined}
@@ -71,7 +72,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
             />
           ) : null}
         </div>
-      </a>
+      </Link>
     </div>
   );
 }

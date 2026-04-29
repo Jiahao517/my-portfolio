@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -33,7 +34,7 @@ export default function InvocablePage() {
           <h1 className="text-[10vw] font-bold uppercase leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
             Invocable
           </h1>
-          <p className="mt-4 text-lg text-white/60">对话式 UI 的无代码构建器 · '18 – 19</p>
+          <p className="mt-4 text-lg text-white/60">对话式 UI 的无代码构建器 · ’18 – 19</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">
@@ -57,14 +58,14 @@ export default function InvocablePage() {
             { label: "返回首页", href: "/" },
             { label: "Projects", href: "/#case-studies" },
           ].map((it) => (
-            <a
+            <Link
               key={it.label}
               href={it.href}
               className="flex items-center justify-between border-t border-white/15 py-5 text-2xl uppercase tracking-tight transition-colors hover:text-white/60 md:text-3xl"
             >
               <span>{it.label}</span>
               <span className="text-white">→</span>
-            </a>
+            </Link>
           ))}
         </nav>
       </main>

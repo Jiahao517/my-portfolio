@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { caseStudies } from "@/data/case-studies";
@@ -136,11 +137,11 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
               </svg>
             )}
           </button>
-          <a href="/" aria-label="Studio Gruhl" className="grid h-10 w-10 place-items-center">
+          <Link href="/" aria-label="Studio Gruhl" className="grid h-10 w-10 place-items-center">
             {isLight ? LightLogo : DarkLogo}
-          </a>
-          <a
-            href="#contact"
+          </Link>
+          <Link
+            href="/#contact-ai"
             aria-label="Contact"
             className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${hoverBtn}`}
           >
@@ -148,7 +149,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
               <rect x="8" y="9" width="16" height="13" rx="1.5" stroke={iconColor} strokeWidth="2" />
               <path d="m9 11 6.6 5.3a1 1 0 0 0 1.2 0L23 11" stroke={iconColor} strokeWidth="2" />
             </svg>
-          </a>
+          </Link>
         </div>
       </header>
 
@@ -181,21 +182,22 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                 const isActive = item.href === "/" ? pathname === "/" : pathname === item.href;
                 return (
                   <div key={item.label}>
-                    <a
+                    <Link
                       href={item.href ?? "#"}
                       className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 first:border-t-0 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
                       style={{ color: isActive ? (isLight ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)") : (isLight ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.4)") }}
+                      onClick={() => setMenuOpen(false)}
                     >
                       <span>{item.label}</span>
                       <ArrowIcon dark={isLight} />
-                    </a>
+                    </Link>
                   </div>
                 );
               })}
               {caseStudies.map((cs) => {
                 const isActive = pathname === cs.href;
                 return (
-                  <a
+                  <Link
                     key={cs.slug}
                     href={cs.href}
                     className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
@@ -204,7 +206,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                   >
                     <span>{cs.title}</span>
                     <ArrowIcon dark={isLight} />
-                  </a>
+                  </Link>
                 );
               })}
             </div>

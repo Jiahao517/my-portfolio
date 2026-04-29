@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeftIcon, ArrowRightIcon } from "@/components/icons";
 import { testimonials } from "@/data/testimonials";
@@ -674,10 +675,12 @@ export function SocialProof() {
         <div className="sp-testimonial__header">
           <div className="sp-testimonial__author">
             <div className="sp-testimonial__avatar">
-              <img
+              <Image
                 key={t.photo}
                 alt=""
                 src={t.photo}
+                width={56}
+                height={56}
                 className="sp-testimonial__avatar-fill"
                 style={{ opacity: transitioning ? 0.4 : 1, transition: "opacity .22s ease" }}
               />

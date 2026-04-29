@@ -66,7 +66,9 @@ export default function RootLayout({
       className={`${inter.variable} ${manrope.variable} ${cormorantGaramond.variable} ${notoSerifSc.variable} ${fzFont140.variable}`}
     >
       <head>
-        <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
+        {process.env.NODE_ENV === "development" ? (
+          <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
+        ) : null}
       </head>
       <body className="fonts-ready">{children}</body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect, ReactNode } from "react";
+import { useRef, useEffect, ReactNode } from "react";
 
 interface MagnetProps {
   children: ReactNode;
@@ -20,7 +20,6 @@ export function Magnet({
   className = "",
 }: MagnetProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -40,11 +39,9 @@ export function Magnet({
         e.clientY <= rect.bottom + padding;
 
       if (inZone) {
-        setActive(true);
         el.style.transition = activeTransition;
         el.style.transform = `translate(${dx / magnetStrength}px, ${dy / magnetStrength}px)`;
       } else {
-        setActive(false);
         el.style.transition = inactiveTransition;
         el.style.transform = "translate(0px, 0px)";
       }
