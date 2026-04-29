@@ -3443,6 +3443,439 @@ a.work-card {
   flex-shrink: 0;
 }
 
+.contact-popover {
+  position: relative;
+  display: inline-block;
+}
+
+.contact-popover__panel {
+  position: absolute;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  transform: translate(-50%, 8px);
+  width: 460px;
+  padding: 16px;
+  background: rgba(239, 246, 255, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 24px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(22, 24, 29, 0.06),
+    0 16px 40px -16px rgba(0, 46, 113, 0.22),
+    0 32px 64px -20px rgba(0, 46, 113, 0.26);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease,
+    transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 50;
+}
+
+.contact-popover__panel.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.contact-popover__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.contact-popover__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.contact-popover__card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(22, 24, 29, 0.04),
+    0 4px 12px -8px rgba(0, 46, 113, 0.1);
+  overflow: hidden;
+  --mx: -200px;
+  --my: -200px;
+  flex: 1;
+  min-width: 0;
+}
+
+.contact-popover__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    180px circle at var(--mx) var(--my),
+    rgba(132, 130, 255, 0.18),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.contact-popover__card:hover::before {
+  opacity: 1;
+}
+
+.contact-popover__hint {
+  position: relative;
+  z-index: 1;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  color: rgba(33, 27, 28, 0.45);
+}
+
+.contact-popover__label {
+  position: relative;
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 600;
+  color: #211B1C;
+  letter-spacing: -0.3px;
+}
+
+.contact-popover__value {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: #2B2525;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.contact-popover__card--wechat {
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 14px 12px;
+  text-align: center;
+  gap: 10px;
+}
+
+.contact-popover__wechat-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.contact-popover__qr {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  padding: 8px;
+  border-radius: 12px;
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    0 0 0 1px rgba(22, 24, 29, 0.06),
+    0 6px 16px -10px rgba(0, 46, 113, 0.16);
+}
+
+.contact-popover__qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.contact-popover__wechat-id {
+  position: relative;
+  z-index: 1;
+  font-size: 13px;
+  font-weight: 500;
+  color: #211B1C;
+  letter-spacing: -0.2px;
+}
+
+.contact-popover__arrow {
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 12px;
+  height: 12px;
+  background: rgba(239, 246, 255, 0.96);
+  box-shadow: 1px 1px 0 0 rgba(22, 24, 29, 0.06);
+}
+
+@media (max-width: 600px) {
+  .contact-popover__panel {
+    width: min(360px, calc(100vw - 32px));
+  }
+  .contact-popover__qr {
+    width: 130px;
+    height: 130px;
+  }
+}
+
+.contact-bento {
+  position: relative;
+}
+
+.contact-bento__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 16px;
+  margin-top: 4px;
+}
+
+.contact-bento__card--email {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.contact-bento__card--phone {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.contact-bento__card--wechat {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-items: center;
+  justify-content: center;
+  padding: 26px 22px;
+  text-align: center;
+}
+
+.contact-bento__wechat-head {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.contact-bento__qr {
+  position: relative;
+  z-index: 2;
+  margin: 14px 0 12px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 14px;
+  box-shadow:
+    0 0 0 1px rgba(22, 24, 29, 0.06),
+    0 8px 24px -12px rgba(0, 46, 113, 0.18);
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-bento__qr-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.contact-bento__value-row--wechat {
+  margin-top: 4px;
+  width: 100%;
+  justify-content: center;
+}
+
+.contact-bento__value-row--wechat .contact-bento__value {
+  flex: 0 0 auto;
+}
+
+.contact-bento__card {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 22px 20px;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
+    0 0 0 1px rgba(22, 24, 29, 0.04),
+    0 8px 24px -16px rgba(0, 46, 113, 0.12);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms ease;
+  overflow: hidden;
+  --mx: -200px;
+  --my: -200px;
+}
+
+/* spotlight follows the cursor */
+.contact-bento__card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx) var(--my),
+    rgba(132, 130, 255, 0.22),
+    rgba(132, 130, 255, 0.08) 35%,
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* border glow ring */
+.contact-bento__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: radial-gradient(
+    220px circle at var(--mx) var(--my),
+    rgba(99, 102, 241, 0.55),
+    rgba(192, 132, 252, 0.2) 40%,
+    transparent 70%
+  );
+  -webkit-mask: linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 240ms ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contact-bento__card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(99, 102, 241, 0.12),
+    0 16px 36px -18px rgba(0, 46, 113, 0.22);
+}
+
+.contact-bento__card:hover::before,
+.contact-bento__card:hover::after {
+  opacity: 1;
+}
+
+.contact-bento__hint {
+  position: relative;
+  z-index: 2;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(33, 27, 28, 0.45);
+}
+
+.contact-bento__label {
+  position: relative;
+  z-index: 2;
+  font-size: 18px;
+  font-weight: 600;
+  color: #211B1C;
+  letter-spacing: -0.5px;
+}
+
+.contact-bento__value-row {
+  position: relative;
+  z-index: 2;
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-bento__value {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 500;
+  color: #2B2525;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-decoration: none;
+}
+
+.contact-bento__value--link:hover {
+  color: #4f46e5;
+}
+
+.contact-bento__copy {
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.contact-bento__copy img {
+  width: 18px;
+  height: 18px;
+}
+
+.contact-bento__copied {
+  position: absolute;
+  bottom: 12px;
+  right: 16px;
+  z-index: 3;
+  font-size: 12px;
+  font-weight: 500;
+  color: #4f46e5;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 4px 10px;
+  border-radius: 999px;
+  box-shadow: 0 4px 12px -4px rgba(0, 46, 113, 0.2);
+  animation: bento-fade 200ms ease-out;
+}
+
+@keyframes bento-fade {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 880px) {
+  .contact-bento__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .contact-bento__card--email,
+  .contact-bento__card--phone {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .contact-bento__card--wechat {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .contact-bento__qr {
+    width: 180px;
+    height: 180px;
+  }
+}
+
 /* ---------- Footer ---------- */
 .site-footer {
   padding: 99px 0 0;

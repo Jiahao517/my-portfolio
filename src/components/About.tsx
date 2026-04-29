@@ -1,9 +1,32 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
-import { ArrowRightIcon } from "@/components/icons";
+import { useState, type PointerEvent as ReactPointerEvent } from "react";
 import { useMouseTilt } from "@/lib/useMouseTilt";
+
+const CONTACTS: {
+  key: string;
+  label: string;
+  value: string;
+  hint: string;
+  href?: string;
+}[] = [
+  {
+    key: "email",
+    label: "邮箱",
+    value: "zjh532169990@163.com",
+    hint: "Email",
+    href: "mailto:zjh532169990@163.com",
+  },
+  {
+    key: "phone",
+    label: "手机号",
+    value: "17681828517",
+    hint: "Phone",
+    href: "tel:17681828517",
+  },
+  { key: "wechat", label: "微信", value: "Jiahao0517", hint: "WeChat" },
+];
 
 export function About() {
   useMouseTilt("#aboutHeroPhoto", {
@@ -14,15 +37,22 @@ export function About() {
     perspective: 1000,
   });
 
-  const [copied, setCopied] = useState(false);
-  const onCopy = async () => {
+  const [copiedKey, setCopiedKey] = useState<string | null>(null);
+  const onCopy = async (key: string, value: string) => {
     try {
-      await navigator.clipboard.writeText("gregory.murynmukha@gmail.com");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1800);
+      await navigator.clipboard.writeText(value);
+      setCopiedKey(key);
+      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1800);
     } catch {
       /* ignore */
     }
+  };
+
+  const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    card.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    card.style.setProperty("--my", `${e.clientY - rect.top}px`);
   };
 
   return (
@@ -74,28 +104,77 @@ export function About() {
         </div>
 
         <div className="about__footer reveal-scroll">
-          <div className="about__cta-card">
+          <div className="about__cta-card contact-bento">
             <div className="about__cta-title shiny-hover shiny-hover--blue">
-              告诉我你正在做什么。<br className="about__cta-br" />
-              看看是不是合适。
+              联系我
             </div>
-            <div className="about__cta-controls">
-              <div className="about__email-pill">
-                <span className="about__email-text">gregory.murynmukha@gmail.com</span>
-                <button className="about__icon-btn" onClick={onCopy} aria-label="复制邮箱">
-                  <Image src="/images/icon-copy.svg" alt="" width={24} height={24} />
-                </button>
-                {copied ? <span className="about__email-copied">已复制</span> : null}
-              </div>
-              <a
-                href="https://calendar.app.google/e1nq9HDsCKAYrq6S7"
-                target="_blank"
-                rel="noopener"
-                className="case-study__btn about__book-btn"
+            <div className="contact-bento__grid">
+              {CONTACTS.filter((c) => c.key !== "wechat").map((c) => (
+                <div
+                  key={c.key}
+                  className={`contact-bento__card contact-bento__card--${c.key}`}
+                  onPointerMove={onCardMove}
+                >
+                  <span className="contact-bento__hint">{c.hint}</span>
+                  <span className="contact-bento__label">{c.label}</span>
+                  <div className="contact-bento__value-row">
+                    {c.href ? (
+                      <a
+                        href={c.href}
+                        className="contact-bento__value contact-bento__value--link"
+                      >
+                        {c.value}
+                      </a>
+                    ) : (
+                      <span className="contact-bento__value">{c.value}</span>
+                    )}
+                    <button
+                      type="button"
+                      className="about__icon-btn contact-bento__copy"
+                      onClick={() => onCopy(c.key, c.value)}
+                      aria-label={`复制${c.label}`}
+                    >
+                      <Image src="/images/icon-copy.svg" alt="" width={20} height={20} />
+                    </button>
+                  </div>
+                  {copiedKey === c.key ? (
+                    <span className="contact-bento__copied">已复制</span>
+                  ) : null}
+                </div>
+              ))}
+
+              <div
+                className="contact-bento__card contact-bento__card--wechat"
+                onPointerMove={onCardMove}
               >
-                <span>预约一次聊聊</span>
-                <ArrowRightIcon />
-              </a>
+                <div className="contact-bento__wechat-head">
+                  <span className="contact-bento__hint">WeChat</span>
+                  <span className="contact-bento__label">微信</span>
+                </div>
+                <div className="contact-bento__qr">
+                  <Image
+                    src="/images/wechat-qr.png"
+                    alt="微信二维码"
+                    width={220}
+                    height={220}
+                    className="contact-bento__qr-img"
+                  />
+                </div>
+                <div className="contact-bento__value-row contact-bento__value-row--wechat">
+                  <span className="contact-bento__value">Jiahao0517</span>
+                  <button
+                    type="button"
+                    className="about__icon-btn contact-bento__copy"
+                    onClick={() => onCopy("wechat", "Jiahao0517")}
+                    aria-label="复制微信"
+                  >
+                    <Image src="/images/icon-copy.svg" alt="" width={20} height={20} />
+                  </button>
+                </div>
+                {copiedKey === "wechat" ? (
+                  <span className="contact-bento__copied">已复制</span>
+                ) : null}
+              </div>
             </div>
           </div>
         </div>

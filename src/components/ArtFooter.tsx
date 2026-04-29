@@ -1,6 +1,22 @@
 "use client";
 
 import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react";
+import { ImageTrail } from "@/components/ImageTrail";
+
+const TRAIL_IMAGES = [
+  "/images/dingtalk/1.png",
+  "/images/dingtalk/2.png",
+  "/images/dingtalk/3.png",
+  "/images/dingtalk/4.png",
+  "/images/wencai/06.png",
+  "/images/wencai/07.png",
+  "/images/wencai/08.png",
+  "/images/wencai/09.png",
+  "/images/chuangxin/1.专利.png",
+  "/images/chuangxin/2.专利.png",
+  "/images/guifan/28.规范.png",
+  "/images/guifan/29.规范.png",
+];
 
 function ArtFooterArrowUp() {
   return (
@@ -229,7 +245,9 @@ export function ArtFooter() {
       <section
         ref={visualRef}
         className={`art-footer__visual-shell${isVisualActive ? " art-footer__visual-shell--active" : ""}`}
+        style={{ position: "relative" }}
       >
+        <ImageTrail images={TRAIL_IMAGES} containerRef={visualRef} threshold={80} lifetime={800} imageWidth={200} imageHeight={130} />
         <div className="art-footer__visual-layer">
           <div className="art-footer__media-layer">
             <div className="art-footer__video-blur" aria-hidden />

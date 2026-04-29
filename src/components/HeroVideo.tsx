@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowRightIcon } from "@/components/icons";
+import { Magnet } from "@/components/Magnet";
+import { SplitText } from "@/components/SplitText";
+import { DecryptedText } from "@/components/DecryptedText";
+import { ContactPopover } from "@/components/ContactPopover";
 
 /**
  * HappyRobot-style full-screen background video hero.
@@ -58,21 +61,32 @@ export function HeroVideo() {
       ) : null}
 
       <div className="hero-video__inner">
-        <h1 className="hero-video__title">
-          我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。
-        </h1>
-        <p className="hero-video__subtitle">
-          很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。
-        </p>
-        <a
-          href="https://calendar.app.google/e1nq9HDsCKAYrq6S7"
-          target="_blank"
-          rel="noopener"
-          className="case-study__btn hero-video__cta"
-        >
-          <span>预约一次聊聊</span>
-          <ArrowRightIcon />
-        </a>
+        <SplitText
+          text="我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。"
+          tag="h1"
+          className="hero-video__title"
+          delay={35}
+          duration={1.1}
+          threshold={0.05}
+          rootMargin="0px"
+        />
+        <DecryptedText
+          text="很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。"
+          tag="p"
+          className="hero-video__subtitle"
+          speed={40}
+          maxIterations={8}
+          sequential={true}
+          threshold={0.05}
+          rootMargin="0px"
+        />
+        <ContactPopover>
+          <Magnet padding={60} magnetStrength={2}>
+            <span className="case-study__btn hero-video__cta hero-video__cta--static">
+              <span>与我联系</span>
+            </span>
+          </Magnet>
+        </ContactPopover>
         <div className="hero-video__logos" aria-label="支持过的投资机构">
           <span className="hero-video__logos-label">由一线机构支持的初创团队</span>
           <span className="hero-video__logos-item">Sequoia</span>

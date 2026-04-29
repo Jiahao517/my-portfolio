@@ -1,4 +1,7 @@
-import { ArrowRightIcon } from "@/components/icons";
+"use client";
+
+import { Magnet } from "@/components/Magnet";
+import { ContactPopover } from "@/components/ContactPopover";
 
 export function CtaBlock() {
   return (
@@ -11,15 +14,13 @@ export function CtaBlock() {
           <span className="cta-block__label cta-block__label--mobile shiny-hover shiny-hover--blue">
             正在做点什么？聊聊吧
           </span>
-          <a
-            href="https://calendar.app.google/e1nq9HDsCKAYrq6S7"
-            target="_blank"
-            rel="noopener"
-            className="case-study__btn cta-block__btn"
-          >
-            <span>预约一次聊聊</span>
-            <ArrowRightIcon />
-          </a>
+          <ContactPopover>
+            <Magnet padding={60} magnetStrength={2}>
+              <span className="case-study__btn cta-block__btn">
+                <span>与我联系</span>
+              </span>
+            </Magnet>
+          </ContactPopover>
         </div>
       </div>
     </section>

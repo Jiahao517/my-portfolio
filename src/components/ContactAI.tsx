@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "@/types/portfolio";
+import { BorderGlow } from "@/components/BorderGlow";
 
 const SUGGESTED = [
   "你的设计风格有哪些标签？",
@@ -183,15 +184,25 @@ export function ContactAI() {
                 <LinkedInIcon />
               </a>
             </div>
-            <div className="contact-ai__input-wrap">
-              <input
-                className="contact-ai__input"
-                placeholder="留言…"
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                disabled={streaming}
-              />
-            </div>
+            <BorderGlow
+              colors={["#c084fc", "#f472b6", "#38bdf8"]}
+              borderRadius={999}
+              borderWidth={1.5}
+              edgeSensitivity={40}
+              glowRadius={50}
+              coneSpread={30}
+              style={{ flex: 1 }}
+            >
+              <div className="contact-ai__input-wrap">
+                <input
+                  className="contact-ai__input"
+                  placeholder="留言…"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  disabled={streaming}
+                />
+              </div>
+            </BorderGlow>
           </form>
         </div>
       </div>

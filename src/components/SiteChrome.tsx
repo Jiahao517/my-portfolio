@@ -102,7 +102,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
   }, [progress, showProgress, thumbs.length]);
 
   // 颜色 tokens
-  const pillBg = isLight ? "bg-white/80" : "bg-neutral-800/90";
+  const pillBg = isLight ? "bg-white/60" : "bg-neutral-800/90";
   const pillRing = isLight ? "ring-black/8" : "ring-white/10";
   const iconColor = isLight ? "#111" : "#fff";
   const hoverBtn = isLight ? "hover:bg-black/6" : "hover:bg-white/10";
