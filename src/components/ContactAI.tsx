@@ -100,7 +100,7 @@ export function ContactAI() {
     <section id="contact-ai" className="contact-ai">
       <div className="centered contact-ai__centered">
         <div className="contact-ai__col-left">
-          <h2 className="contact-ai__title shiny-hover">Contact</h2>
+          <h2 className="contact-ai__title shiny-hover">与我的数字分身聊聊</h2>
         </div>
 
         <div className="contact-ai__panel">
@@ -157,36 +157,9 @@ export function ContactAI() {
               send(input);
             }}
           >
-            <div className="contact-ai__socials">
-              <a
-                href="https://x.com/murynmukha"
-                target="_blank"
-                rel="noopener"
-                aria-label="X"
-                className="contact-ai__social-btn"
-              >
-                <XIcon />
-              </a>
-              <a
-                href="mailto:gregory.murynmukha@gmail.com"
-                aria-label="Email"
-                className="contact-ai__social-btn"
-              >
-                <MailIcon />
-              </a>
-              <a
-                href="https://linkedin.com/in/murynmukha"
-                target="_blank"
-                rel="noopener"
-                aria-label="LinkedIn"
-                className="contact-ai__social-btn"
-              >
-                <LinkedInIcon />
-              </a>
-            </div>
             <BorderGlow
               colors={["#c084fc", "#f472b6", "#38bdf8"]}
-              borderRadius={999}
+              borderRadius={16}
               borderWidth={1.5}
               edgeSensitivity={40}
               glowRadius={50}
@@ -194,12 +167,19 @@ export function ContactAI() {
               style={{ flex: 1 }}
             >
               <div className="contact-ai__input-wrap">
-                <input
+                <textarea
                   className="contact-ai__input"
                   placeholder="留言…"
+                  rows={2}
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   disabled={streaming}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" && !e.shiftKey) {
+                      e.preventDefault();
+                      send(input);
+                    }
+                  }}
                 />
               </div>
             </BorderGlow>

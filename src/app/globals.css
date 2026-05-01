@@ -152,7 +152,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -665,6 +664,7 @@ blockquote {
 
 .sp-stack__card--active span {
   display: block;
+  width: 100%;
 }
 
 .sp-services__arrow {
@@ -4450,7 +4450,7 @@ a.work-card {
 
 /* ---------- Contact AI block (Gabriel Valdivia-style) ---------- */
 .contact-ai {
-  padding: 80px 0 96px;
+  padding: 160px 0 96px;
 }
 .contact-ai__centered {
   display: grid;
@@ -4570,7 +4570,7 @@ a.work-card {
 }
 .contact-ai__form {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
   padding-top: 8px;
 }
@@ -4598,10 +4598,10 @@ a.work-card {
   flex: 1;
   min-width: 0;
   background: rgba(0, 0, 0, 0.02);
-  border-radius: var(--radius-2xl);
-  padding: 10px 44px 10px 16px;
+  border-radius: 16px;
+  padding: 10px 16px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 .contact-ai__input {
   flex: 1;
@@ -4616,6 +4616,7 @@ a.work-card {
   color: #000;
   padding: 0;
   font-family: inherit;
+  resize: none;
 }
 .contact-ai__input::placeholder { color: rgba(0, 0, 0, 0.6); }
 

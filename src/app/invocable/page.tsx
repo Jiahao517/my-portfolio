@@ -31,7 +31,7 @@ export default function InvocablePage() {
       <SiteChrome thumbs={thumbs} />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
-          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
+          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             设计创新
           </h1>
           <p className="mt-4 text-lg text-white/60">围绕业务问题做创新，并落到专利与设计成果中 · &apos;21 − &apos;25</p>

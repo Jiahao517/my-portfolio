@@ -94,7 +94,7 @@ export default function PerformulaPage() {
       <SiteChrome thumbs={thumbs} />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
-          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
+          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             问财智能投顾
           </h1>
           <p className="mt-4 text-lg text-white/60">AI+金融，交互范式升级，让答案可理解、可验证 · &apos;23 − &apos;25</p>

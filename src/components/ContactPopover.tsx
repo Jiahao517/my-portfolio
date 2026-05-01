@@ -11,11 +11,14 @@ import {
 
 interface ContactPopoverProps {
   children: ReactNode;
-  placement?: "above" | "below";
+  placement?: "above" | "below" | "auto";
 }
 
-export function ContactPopover({ children, placement = "above" }: ContactPopoverProps) {
+const POPOVER_HEIGHT = 220;
+
+export function ContactPopover({ children, placement = "auto" }: ContactPopoverProps) {
   const [open, setOpen] = useState(false);
+  const [resolvedPlacement, setResolvedPlacement] = useState<"above" | "below">("above");
   const ref = useRef<HTMLDivElement>(null);
 
   const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -41,19 +44,29 @@ export function ContactPopover({ children, placement = "above" }: ContactPopover
     };
   }, [open]);
 
+  const effectivePlacement = placement === "auto" ? resolvedPlacement : placement;
+
   const panelClass = [
     "contact-popover__panel",
-    placement === "below" ? "contact-popover__panel--below" : "",
+    effectivePlacement === "below" ? "contact-popover__panel--below" : "",
     open ? "is-open" : "",
   ]
     .filter(Boolean)
     .join(" ");
 
+  const handleToggle = () => {
+    if (!open && placement === "auto" && ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      setResolvedPlacement(rect.top >= POPOVER_HEIGHT ? "above" : "below");
+    }
+    setOpen((v) => !v);
+  };
+
   return (
     <div
       ref={ref}
       className="contact-popover"
-      onClick={() => setOpen((v) => !v)}
+      onClick={handleToggle}
     >
       <div
         className={panelClass}
