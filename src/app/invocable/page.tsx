@@ -4,8 +4,8 @@ import Link from "next/link";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "Invocable – 对话式 UI 的无代码构建器",
-  description: "对话式 UI 的无代码构建器",
+  title: "设计创新",
+  description: "围绕业务问题做创新，并落到专利与设计成果中",
 };
 
 const IMAGES = [
@@ -31,10 +31,10 @@ export default function InvocablePage() {
       <SiteChrome thumbs={thumbs} />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
-          <h1 className="text-[10vw] font-bold uppercase leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
-            Invocable
+          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
+            设计创新
           </h1>
-          <p className="mt-4 text-lg text-white/60">对话式 UI 的无代码构建器 · ’18 – 19</p>
+          <p className="mt-4 text-lg text-white/60">围绕业务问题做创新，并落到专利与设计成果中 · &apos;21 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

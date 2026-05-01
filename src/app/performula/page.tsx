@@ -3,9 +3,8 @@ import Image from "next/image";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "Performula – Brand Identity & Design System by Studio Gruhl",
-  description:
-    "Studio Gruhl built a science-driven brand identity, AI-generated and 3D-rendered visuals, and a modular design system for health-tech start-up Performula.",
+  title: "问财智能投顾",
+  description: "AI+金融，交互范式升级，让答案可理解、可验证",
 };
 
 type MediaItem = { image: string; video?: string };
@@ -95,12 +94,10 @@ export default function PerformulaPage() {
       <SiteChrome thumbs={thumbs} />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
-          <h1 className="text-[10vw] font-bold uppercase leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
-            Performula
+          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
+            问财智能投顾
           </h1>
-          <p className="mt-8 max-w-[22ch] text-[10vw] font-bold uppercase leading-[0.95] tracking-[-0.03em] md:mt-12 md:max-w-[28ch] md:text-[6vw]">
-            A new brand design system for the health &amp; nutrition start-up, Performula.
-          </p>
+          <p className="mt-4 text-lg text-white/60">AI+金融，交互范式升级，让答案可理解、可验证 · &apos;23 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

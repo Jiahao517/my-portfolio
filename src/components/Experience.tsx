@@ -1,4 +1,5 @@
 import { experience } from "@/data/experience";
+import { ExperienceRowExpand } from "./ExperienceRowExpand";
 
 export function Experience() {
   const visibleExperience = experience.slice(0, 4);
@@ -11,10 +12,7 @@ export function Experience() {
           {visibleExperience.map((row, i) => (
             <div key={i} className="experience__row reveal-scroll">
               <div className="experience__left">
-                <div
-                  aria-hidden
-                  className="experience__logo"
-                />
+                <div aria-hidden className="experience__logo" />
                 <div className="experience__details">
                   <div className="experience__title">{row.title}</div>
                   <div className="experience__caption">
@@ -24,7 +22,7 @@ export function Experience() {
                   </div>
                 </div>
               </div>
-              <p className="experience__desc">{row.description}</p>
+              <ExperienceRowExpand description={row.description} />
             </div>
           ))}
         </div>

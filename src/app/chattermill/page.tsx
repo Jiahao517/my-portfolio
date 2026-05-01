@@ -4,8 +4,8 @@ import Link from "next/link";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
-  title: "Chattermill – 客户反馈分析平台中的 AI",
-  description: "客户反馈分析平台中的 AI",
+  title: "智能对话设计规范",
+  description: "统一对话组件与规则，让设计直接进入开发与使用",
 };
 
 const IMAGES = [
@@ -28,10 +28,10 @@ export default function ChattermillPage() {
       <SiteChrome thumbs={thumbs} />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
-          <h1 className="text-[10vw] font-bold uppercase leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
-            Chattermill
+          <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw]">
+            智能对话设计规范
           </h1>
-          <p className="mt-4 text-lg text-white/60">客户反馈分析平台中的 AI · ’19 – 21</p>
+          <p className="mt-4 text-lg text-white/60">统一对话组件与规则，让设计直接进入开发与使用 · &apos;23 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

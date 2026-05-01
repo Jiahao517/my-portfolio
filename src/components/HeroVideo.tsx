@@ -62,7 +62,7 @@ export function HeroVideo() {
 
       <div className="hero-video__inner">
         <SplitText
-          text="我是 Gregory，把那些晦涩的技术，做成一眼就看懂的产品。"
+          text="我是钟家豪，把复杂的 AI 能力，设计成用户看得懂的产品"
           tag="h1"
           className="hero-video__title"
           delay={35}
@@ -71,7 +71,7 @@ export function HeroVideo() {
           rootMargin="0px"
         />
         <DecryptedText
-          text="很早就加入初创团队 —— 通常在产品还没诞生之前。我把它定义出来、设计出来，再和工程师一起交付。15 年经验，其中 9 年在做 AI 产品。"
+          text="主要做 AI 产品的设计，参与结构判断、规则定义与实现推进，关注完整交付。从智能投顾到 ChatUI 规范，到 AI 改变设计工作流，我持续关注 AI 产品里的信任、效率、表达与落地。"
           tag="p"
           className="hero-video__subtitle"
           speed={8}
@@ -83,17 +83,22 @@ export function HeroVideo() {
         <ContactPopover>
           <Magnet padding={60} magnetStrength={6}>
             <span className="case-study__btn hero-video__cta hero-video__cta--static">
-              <span>与我联系</span>
+              <span>联系方式</span>
             </span>
           </Magnet>
         </ContactPopover>
-        <div className="hero-video__logos" aria-label="支持过的投资机构">
-          <span className="hero-video__logos-label">由一线机构支持的初创团队</span>
-          <span className="hero-video__logos-item">Sequoia</span>
-          <span className="hero-video__logos-item">Y Combinator</span>
-          <span className="hero-video__logos-item">Voiceflow</span>
-          <span className="hero-video__logos-item">Chattermill</span>
-          <span className="hero-video__logos-item">Twain</span>
+        <div className="hero-video__logos" aria-label="专业标签">
+          <span className="hero-video__logos-item">AI 产品</span>
+          <span className="hero-video__logos-sep">｜</span>
+          <span className="hero-video__logos-item">对话体验</span>
+          <span className="hero-video__logos-sep">｜</span>
+          <span className="hero-video__logos-item">设计系统</span>
+          <span className="hero-video__logos-sep">｜</span>
+          <span className="hero-video__logos-item">落地交付</span>
+          <span className="hero-video__logos-sep">｜</span>
+          <span className="hero-video__logos-item">设计奖</span>
+          <span className="hero-video__logos-sep">｜</span>
+          <span className="hero-video__logos-item">专利</span>
         </div>
       </div>
     </section>
