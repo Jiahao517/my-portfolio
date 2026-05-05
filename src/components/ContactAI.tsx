@@ -137,7 +137,7 @@ export function ContactAI() {
                 }}
               >
                 <BorderGlow
-                  colors={["#c084fc", "#f472b6", "#38bdf8"]}
+                  colors={["#208CFF", "#00B4CB", "#00D0AD"]}
                   borderRadius={16}
                   borderWidth={1.5}
                   edgeSensitivity={40}

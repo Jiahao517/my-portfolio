@@ -4601,7 +4601,6 @@ a.work-card {
 }
 .contact-ai__chip:hover {
   color: #000;
-  border-color: rgba(0, 0, 0, 0.3);
 }
 .contact-ai__form {
   display: flex;

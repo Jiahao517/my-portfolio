@@ -67,9 +67,9 @@ function splitChars(text: string, startIndex: number, order: number[]) {
   ));
 }
 
-function formatYerevanTime() {
+function formatHangzhouTime() {
   const formatter = new Intl.DateTimeFormat("en-US", {
-    timeZone: "Asia/Yerevan",
+    timeZone: "Asia/Shanghai",
     hour: "2-digit",
     minute: "2-digit",
     hour12: true,
@@ -147,7 +147,7 @@ function ScrambleRevealText({
 
 export function ArtFooter() {
   const footerTitle = "AI时代的设计工作流";
-  const [time, setTime] = useState(() => formatYerevanTime());
+  const [time, setTime] = useState(() => formatHangzhouTime());
   const [isVisualActive, setIsVisualActive] = useState(false);
   const [isMainVisible, setIsMainVisible] = useState(false);
   const [utilityStep, setUtilityStep] = useState(0);
@@ -156,7 +156,7 @@ export function ArtFooter() {
   const sequenceTimersRef = useRef<number[]>([]);
 
   useEffect(() => {
-    const update = () => setTime(formatYerevanTime());
+    const update = () => setTime(formatHangzhouTime());
     update();
 
     const now = new Date();
@@ -230,7 +230,7 @@ export function ArtFooter() {
   }, [isVisualActive]);
 
   const mobileSocialText = useMemo(
-    () => ["Creative Digital Designer.", "Working Worldwide."],
+    () => ["AI 产品设计师。", "为真实交付而设计。"],
     [],
   );
 
@@ -270,7 +270,7 @@ export function ArtFooter() {
                 <span className="art-footer__top-button-icon">
                   <ArtFooterArrowUp />
                 </span>
-                <span className="art-footer__top-button-text">Back to top</span>
+                <span className="art-footer__top-button-text">回到顶部</span>
               </button>
               <div className="art-footer__mobile-social">
                 {mobileSocialText.map((line) => (
@@ -287,14 +287,14 @@ export function ArtFooter() {
               <div
                 className={`art-footer__time art-footer__reveal-item${utilityStep >= 1 ? " art-footer__reveal-item--visible" : ""}`}
               >
-                <ScrambleRevealText text={`Yerevan ${time}`} active={utilityStep >= 1} runId={revealRunId} />
+                <ScrambleRevealText text={`杭州 ${time}`} active={utilityStep >= 1} runId={revealRunId} />
               </div>
 
               <div
                 className={`art-footer__role art-footer__reveal-item${utilityStep >= 2 ? " art-footer__reveal-item--visible" : ""}`}
               >
                 <ScrambleRevealText
-                  text="Creative Digital Designer / Working Worldwide"
+                  text="AI 产品设计师 / 为真实交付而设计"
                   active={utilityStep >= 2}
                   runId={revealRunId}
                 />
@@ -309,7 +309,7 @@ export function ArtFooter() {
                   <ArtFooterArrowUp />
                 </span>
                 <ScrambleRevealText
-                  text="Back to top"
+                  text="回到顶部"
                   className="art-footer__top-button-text"
                   active={utilityStep >= 3}
                   runId={revealRunId}
