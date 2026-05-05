@@ -129,7 +129,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
               </svg>
             )}
           </button>
-          <Link href="/" aria-label="Studio Gruhl" className="flex items-center justify-center">
+          <Link href="/" aria-label="钟家豪作品集" className="flex items-center justify-center">
             {SiteLogo}
           </Link>
           <ContactPopover placement="below">
@@ -205,15 +205,15 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
             </div>
             <div className={`grid grid-cols-3 border-t ${dividerColor}`}>
               {[
-                { label: "Instagram", href: "https://www.instagram.com/studiogruhl/" },
-                { label: "Are.na", href: "https://www.are.na/studio-gruhl/channels" },
-                { label: "LinkedIn", href: "https://www.linkedin.com/company/studiogruhl/" },
+                { label: "Email", href: "mailto:zjh532169990@163.com" },
+                { label: "Phone", href: "tel:17681828517" },
+                { label: "WeChat", href: "/#about" },
               ].map((s, i) => (
                 <a
                   key={s.label}
                   href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  target={s.href.startsWith("/") ? undefined : "_blank"}
+                  rel={s.href.startsWith("/") ? undefined : "noopener noreferrer"}
                   className={`grid place-items-center py-5 text-xs uppercase tracking-widest transition-colors duration-150 ${socialText} ${i > 0 ? `border-l ${dividerColor}` : ""}`}
                 >
                   {s.label}

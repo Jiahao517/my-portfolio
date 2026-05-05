@@ -6,11 +6,6 @@ import { SplitText } from "@/components/SplitText";
 import { DecryptedText } from "@/components/DecryptedText";
 import { ContactPopover } from "@/components/ContactPopover";
 
-/**
- * HappyRobot-style full-screen background video hero.
- * Desktop: autoplay video. Mobile: poster only, tap-to-play (saves data + complies with iOS autoplay).
- * Keeps the original murynmukha hero copy as overlay text.
- */
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -47,8 +42,6 @@ export function HeroVideo() {
         preload="metadata"
       >
         <source src="/videos/hero.mp4" type="video/mp4" />
-        {/* Fallback to a case study video so the page shows real motion before the user supplies hero.mp4 */}
-        <source src="/images/case-twain.mp4" type="video/mp4" />
       </video>
       <div className="hero-video__scrim" aria-hidden />
 

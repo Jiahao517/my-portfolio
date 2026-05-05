@@ -34,14 +34,14 @@ const fzFont140 = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gregory Muryn-Mukha — 创始产品设计师",
-  description: "创始产品设计师，专注于帮助早期初创公司定义、设计并交付高影响力产品。15 年经验，其中 9 年专注于 NLP 与生成式 AI。",
-  metadataBase: new URL("https://murynmukha.com"),
+  title: "钟家豪 — AI 产品体验设计师",
+  description: "AI 产品体验设计师，关注复杂业务场景、对话体验、设计系统与产品落地交付。",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://zhongjiahao.com"),
   openGraph: {
-    title: "Gregory Muryn-Mukha — 创始产品设计师",
-    description: "创始产品设计师，专注于帮助早期初创公司定义、设计并交付高影响力产品。",
+    title: "钟家豪 — AI 产品体验设计师",
+    description: "AI 产品体验设计师，关注复杂业务场景、对话体验、设计系统与产品落地交付。",
     type: "website",
-    url: "https://murynmukha.com",
+    url: "/",
     images: [{ url: "/images/og-image.png", width: 1200, height: 630 }],
   },
   icons: {

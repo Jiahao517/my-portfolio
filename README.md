@@ -1,6 +1,6 @@
-# Murynmukha Portfolio
+# Zhong Jiahao Portfolio
 
-Standalone Next.js project for the cloned `murynmukha.com` portfolio site.
+Standalone Next.js project for Zhong Jiahao's portfolio site.
 
 ## Stack
 

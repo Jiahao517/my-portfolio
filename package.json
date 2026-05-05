@@ -1,8 +1,8 @@
 {
-  "name": "murynmukha-portfolio",
+  "name": "zhongjiahao-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "Standalone Next.js portfolio site for Gregory Muryn-Mukha",
+  "description": "Standalone Next.js portfolio site for Zhong Jiahao",
   "keywords": [
     "portfolio",
     "nextjs",
