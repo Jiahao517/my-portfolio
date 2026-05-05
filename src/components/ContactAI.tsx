@@ -80,7 +80,7 @@ export function ContactAI() {
           <h2 className="contact-ai__title shiny-hover">与我的 AI 作品集助理聊聊</h2>
         </div>
 
-        <div className="contact-ai__panel">
+        <div className={`contact-ai__panel${showGreeting ? "" : " contact-ai__panel--chat"}`}>
           <div ref={listRef} className="contact-ai__list">
             {showGreeting ? (
               <div className="contact-ai__row">
@@ -128,44 +128,46 @@ export function ContactAI() {
               </div>
             ) : null}
 
-            <form
-              className="contact-ai__form"
-              onSubmit={(e) => {
-                e.preventDefault();
-                send(input);
-              }}
-            >
-              <BorderGlow
-                colors={["#c084fc", "#f472b6", "#38bdf8"]}
-                borderRadius={16}
-                borderWidth={1.5}
-                edgeSensitivity={40}
-                glowRadius={50}
-                coneSpread={30}
-                style={{ flex: 1 }}
+            <div className="contact-ai__bottom">
+              <form
+                className="contact-ai__form"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  send(input);
+                }}
               >
-                <div className="contact-ai__input-wrap">
-                  <textarea
-                    className="contact-ai__input"
-                    placeholder="留言…"
-                    rows={2}
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    disabled={streaming}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter" && !e.shiftKey) {
-                        e.preventDefault();
-                        send(input);
-                      }
-                    }}
-                  />
-                </div>
-              </BorderGlow>
-            </form>
+                <BorderGlow
+                  colors={["#c084fc", "#f472b6", "#38bdf8"]}
+                  borderRadius={16}
+                  borderWidth={1.5}
+                  edgeSensitivity={40}
+                  glowRadius={50}
+                  coneSpread={30}
+                  style={{ flex: 1 }}
+                >
+                  <div className="contact-ai__input-wrap">
+                    <textarea
+                      className="contact-ai__input"
+                      placeholder="有问题就问我..."
+                      rows={2}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      disabled={streaming}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          send(input);
+                        }
+                      }}
+                    />
+                  </div>
+                </BorderGlow>
+              </form>
 
-            <p className="contact-ai__disclaimer">
-              基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
-            </p>
+              <p className="contact-ai__disclaimer">
+                基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
+              </p>
+            </div>
           </div>
         </div>
       </div>
