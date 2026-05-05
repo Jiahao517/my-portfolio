@@ -1,0 +1,615 @@
+- generic [ref=e542]:
+  - generic [ref=e544]:
+    - generic [ref=e545]:
+      - link "ChatAnywhere API 帮助文档" [ref=e546] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e548]: ChatAnywhere API 帮助文档
+      - button "Toggle theme" [ref=e550] [cursor=pointer]:
+        - img [ref=e551]
+    - generic [ref=e555]:
+      - generic [ref=e559] [cursor=pointer]:
+        - img [ref=e560]:
+          - img [ref=e561]
+        - textbox "搜索" [ref=e563]
+        - generic [ref=e564]: ⌘K
+      - list [ref=e568]:
+        - listitem [ref=e569]:
+          - generic "帮助中心" [ref=e570] [cursor=pointer]:
+            - generic [ref=e571]: 帮助中心
+            - img [ref=e573]:
+              - img [ref=e574]
+          - list [ref=e576]:
+            - listitem [ref=e577]:
+              - link "常用软件使用教程" [ref=e578] [cursor=pointer]:
+                - /url: /doc-5547696
+                - generic [ref=e579]: 常用软件使用教程
+            - listitem [ref=e580]:
+              - link "费用标准及模型列表" [ref=e581] [cursor=pointer]:
+                - /url: /doc-2694962
+                - generic [ref=e582]: 费用标准及模型列表
+            - listitem [ref=e583]:
+              - link "常见问题及解决办法" [ref=e584] [cursor=pointer]:
+                - /url: /doc-2664690
+                - generic [ref=e585]: 常见问题及解决办法
+            - listitem [ref=e586]:
+              - 'link "模型更新日志: 2026-04-28" [ref=e587] [cursor=pointer]':
+                - /url: /doc-6479345
+                - generic [ref=e588]: "模型更新日志: 2026-04-28"
+        - listitem [ref=e589]:
+          - generic "模型接口" [ref=e590] [cursor=pointer]:
+            - generic [ref=e591]: 模型接口
+            - img [ref=e593]:
+              - img [ref=e594]
+          - list [ref=e596]:
+            - listitem [ref=e597]:
+              - link "发出请求" [ref=e598] [cursor=pointer]:
+                - /url: /doc-2664688
+                - generic [ref=e599]: 发出请求
+            - listitem [ref=e600]:
+              - generic "模型（Models）" [ref=e601] [cursor=pointer]:
+                - generic [ref=e602]: 模型（Models）
+                - img [ref=e604]:
+                  - img [ref=e605]
+            - listitem [ref=e607]:
+              - generic "聊天接口（Chat）" [ref=e608] [cursor=pointer]:
+                - generic [ref=e609]: 聊天接口（Chat）
+                - img [ref=e1098]:
+                  - img [ref=e1099]
+              - list [ref=e1101]:
+                - listitem [ref=e1102]:
+                  - link "聊天接口 POST" [ref=e1103] [cursor=pointer]:
+                    - /url: /api-92222076
+                    - generic [ref=e1104]: 聊天接口
+                    - generic [ref=e1107]: POST
+                - listitem [ref=e1108]:
+                  - link "响应responses接口 POST" [ref=e1109] [cursor=pointer]:
+                    - /url: /api-385209336
+                    - generic [ref=e1110]: 响应responses接口
+                    - generic [ref=e1113]: POST
+            - listitem [ref=e614]:
+              - generic "自动补全接口（Completions）" [ref=e615] [cursor=pointer]:
+                - generic [ref=e616]: 自动补全接口（Completions）
+                - img [ref=e618]:
+                  - img [ref=e619]
+            - listitem [ref=e621]:
+              - generic "图像接口（Images）" [ref=e622] [cursor=pointer]:
+                - generic [ref=e623]: 图像接口（Images）
+                - img [ref=e625]:
+                  - img [ref=e626]
+            - listitem [ref=e628]:
+              - generic "向量生成接口（Embeddings）" [ref=e629] [cursor=pointer]:
+                - generic [ref=e630]: 向量生成接口（Embeddings）
+                - img [ref=e632]:
+                  - img [ref=e633]
+            - listitem [ref=e635]:
+              - generic "音频接口（Audio）" [ref=e636] [cursor=pointer]:
+                - generic [ref=e637]: 音频接口（Audio）
+                - img [ref=e639]:
+                  - img [ref=e640]
+            - listitem [ref=e642]:
+              - generic "查询接口" [ref=e643] [cursor=pointer]:
+                - generic [ref=e644]: 查询接口
+                - img [ref=e646]:
+                  - img [ref=e647]
+  - generic [ref=e656]:
+    - generic [ref=e657]:
+      - navigation [ref=e658]:
+        - list [ref=e659]:
+          - listitem [ref=e660]:
+            - generic [ref=e661]: 帮助中心
+      - generic [ref=e663]:
+        - button "复制页面" [ref=e664] [cursor=pointer]:
+          - generic [ref=e665]:
+            - img [ref=e666]:
+              - img [ref=e667]
+            - text: 复制页面
+        - button [ref=e670] [cursor=pointer]:
+          - img [ref=e671]:
+            - img [ref=e672]
+    - heading "常用软件使用教程" [level=1] [ref=e676]
+    - generic [ref=e678]:
+      - generic [ref=e680]:
+        - generic [ref=e681]: 📌
+        - generic [ref=e682]:
+          - generic [ref=e683]: 支持Gpt, Claude, Gemini, Grok, Deepseek, qwen, kimi, MiniMax
+          - generic [ref=e684]: APIKey需要搭配第三方软件或者插件使用，如浏览器插件ChatGPTSidebar, ChatBox, Cherry Studio等。
+          - generic [ref=e685]: 支持国内使用，无需梯子！
+          - generic [ref=e686]: 绝不乱计Token乱扣费
+      - heading "费用" [level=1] [ref=e687]:
+        - text: 费用
+        - link [ref=e688] [cursor=pointer]:
+          - /url: "#费用"
+      - generic [ref=e690]:
+        - generic [ref=e691]: 👍
+        - generic [ref=e693]:
+          - text: 标准模型价格折算后比OpenAi官方稍低
+          - text: CA系列模型折算后相当于OpenAI官方的五六折
+          - text: Claude系列模型价格为官方的六八折左右
+          - text: Deepseek,GLM, MiniMax系列模型价格为官方的六折
+          - text: Qwen, Kimi, 价格为官方的七折
+      - generic [ref=e695]:
+        - generic [ref=e696]: 💡
+        - generic [ref=e697]:
+          - generic [ref=e698]: 关于标准模型和结尾带-ca模型区别
+          - generic [ref=e699]:
+            - text: 标准模型提供
+            - generic [ref=e703]: 99%
+            - text: 以上可用性保障，CA模型提供
+            - generic [ref=e707]: 90%
+            - text: 以上可用性保障：
+          - generic [ref=e708]:
+            - text: 标准模型来源OpenAI官方和Azure OpenAI(微软), 我们自持有账户保证稳定性；
+            - text: CA模型来源第三方优质提供商；
+          - generic [ref=e709]: 标准模型响应速度相对更快，CA模型可能相对慢一些；
+          - generic [ref=e710]: "OpenAI和Azure返回的结果是否有区别: 没有区别, 返回的结果和模型性能都是一样的. 只不过这两个部署的地方不是同一个地方."
+      - generic [ref=e711]: 模型价格如表格：
+      - generic [ref=e712]: 所有模型均无速率限制
+      - generic [ref=e713]:
+        - text: 以下为比较常用的模型价格[单位(CA币)：元]，
+        - link "如需查看所有支持的模型和价格请点击此处获取价格详情。" [ref=e714] [cursor=pointer]:
+          - /url: https://chatanywhere.apifox.cn/doc-2694962
+      - table [ref=e715]:
+        - rowgroup [ref=e716]:
+          - row "模型（Model） 请求（Input） 回答（Output） 是否支持 特点" [ref=e717]:
+            - columnheader "模型（Model）" [ref=e718]:
+              - strong [ref=e719]: 模型（Model）
+            - columnheader "请求（Input）" [ref=e720]:
+              - strong [ref=e721]: 请求（Input）
+            - columnheader "回答（Output）" [ref=e722]:
+              - strong [ref=e723]: 回答（Output）
+            - columnheader "是否支持" [ref=e724]:
+              - strong [ref=e725]: 是否支持
+            - columnheader "特点" [ref=e726]:
+              - strong [ref=e727]: 特点
+        - rowgroup [ref=e728]:
+          - row "gpt-5.2 0.01225 / 1K Tokens 0.098 / 1K Tokens 支持 面向各行各业的编码和智能体任务的旗舰模型" [ref=e729]:
+            - cell "gpt-5.2" [ref=e730]
+            - cell "0.01225 / 1K Tokens" [ref=e731]
+            - cell "0.098 / 1K Tokens" [ref=e732]
+            - cell "支持" [ref=e733]
+            - cell "面向各行各业的编码和智能体任务的旗舰模型" [ref=e734]
+          - row "gpt-5.1 0.00875 / 1K Tokens 0.07 / 1K Tokens 支持 用于编码和智能体任务的旗舰模型，它具备可配置的推理和非推理能力" [ref=e735]:
+            - cell "gpt-5.1" [ref=e736]
+            - cell "0.00875 / 1K Tokens" [ref=e737]
+            - cell "0.07 / 1K Tokens" [ref=e738]
+            - cell "支持" [ref=e739]
+            - cell "用于编码和智能体任务的旗舰模型，它具备可配置的推理和非推理能力" [ref=e740]
+          - row "gpt-5 0.00875 / 1K Tokens 0.07 / 1K Tokens 支持 GPT-5 是用于跨领域编码、推理和代理任务的旗舰模型" [ref=e741]:
+            - cell "gpt-5" [ref=e742]
+            - cell "0.00875 / 1K Tokens" [ref=e743]
+            - cell "0.07 / 1K Tokens" [ref=e744]
+            - cell "支持" [ref=e745]
+            - cell "GPT-5 是用于跨领域编码、推理和代理任务的旗舰模型" [ref=e746]
+          - row "gpt-5-chat-latest 0.00875 / 1K Tokens 0.07 / 1K Tokens 支持 GPT-5 Chat 指的是 ChatGPT 当前使用的 GPT-5 快照" [ref=e747]:
+            - cell "gpt-5-chat-latest" [ref=e748]
+            - cell "0.00875 / 1K Tokens" [ref=e749]
+            - cell "0.07 / 1K Tokens" [ref=e750]
+            - cell "支持" [ref=e751]
+            - cell "GPT-5 Chat 指的是 ChatGPT 当前使用的 GPT-5 快照" [ref=e752]
+          - row "gpt-4o 0.0175/1K Tokens + 图片费用[2] 0.07/1K Tokens 支持 Openai 价格更低, 速度更快更聪明,指向最新版的4o版本" [ref=e753]:
+            - cell "gpt-4o" [ref=e754]
+            - cell "0.0175/1K Tokens + 图片费用[2]" [ref=e755]
+            - cell "0.07/1K Tokens" [ref=e756]
+            - cell "支持" [ref=e757]
+            - cell "Openai 价格更低, 速度更快更聪明,指向最新版的4o版本" [ref=e758]
+          - row "gpt-5.1-ca 0.005 / 1K Tokens 0.04 / 1K Tokens 支持 第三方优质提供商提供的服务,优点价格便宜,但是稳定性没有非-ca的好, 模型返回和能力都是一样的" [ref=e759]:
+            - cell "gpt-5.1-ca" [ref=e760]
+            - cell "0.005 / 1K Tokens" [ref=e761]
+            - cell "0.04 / 1K Tokens" [ref=e762]
+            - cell "支持" [ref=e763]
+            - cell "第三方优质提供商提供的服务,优点价格便宜,但是稳定性没有非-ca的好, 模型返回和能力都是一样的" [ref=e764]
+          - row "gpt-5-ca 0.005 / 1K Tokens 0.04 / 1K Tokens 支持 第三方优质提供商提供的服务,优点价格便宜,但是稳定性没有非-ca的好, 模型返回和能力都是一样的" [ref=e765]:
+            - cell "gpt-5-ca" [ref=e766]
+            - cell "0.005 / 1K Tokens" [ref=e767]
+            - cell "0.04 / 1K Tokens" [ref=e768]
+            - cell "支持" [ref=e769]
+            - cell "第三方优质提供商提供的服务,优点价格便宜,但是稳定性没有非-ca的好, 模型返回和能力都是一样的" [ref=e770]
+          - row "deepseek-v3-2 0.0012 / 1K Tokens 0.0018 / 1K Tokens 支持 deepseek的聊天模型, 此模型由第三方供应商提供，有小概率可能会出现响应速度较慢或报错的情况。" [ref=e771]:
+            - cell "deepseek-v3-2" [ref=e772]
+            - cell "0.0012 / 1K Tokens" [ref=e773]
+            - cell "0.0018 / 1K Tokens" [ref=e774]
+            - cell "支持" [ref=e775]
+            - cell "deepseek的聊天模型, 此模型由第三方供应商提供，有小概率可能会出现响应速度较慢或报错的情况。" [ref=e776]
+          - row "claude-sonnet-4-6 0.015 / 1K Tokens 0.075 / 1K Tokens 支持 claude的模型, 此模型由第三方供应商提供，现在使用的为Claude code的逆向或官方逆向的渠道。" [ref=e777]:
+            - cell "claude-sonnet-4-6" [ref=e778]
+            - cell "0.015 / 1K Tokens" [ref=e779]
+            - cell "0.075 / 1K Tokens" [ref=e780]
+            - cell "支持" [ref=e781]
+            - cell "claude的模型, 此模型由第三方供应商提供，现在使用的为Claude code的逆向或官方逆向的渠道。" [ref=e782]
+          - row "gemini-3.1-pro-preview 0.008 / 1K Tokens 0.048 / 1K Tokens 支持 Google Gemini 的模型, 此模型由第三方供应商提供，有小概率可能会出现响应速度较慢或报错的情况。" [ref=e783]:
+            - cell "gemini-3.1-pro-preview" [ref=e784]
+            - cell "0.008 / 1K Tokens" [ref=e785]
+            - cell "0.048 / 1K Tokens" [ref=e786]
+            - cell "支持" [ref=e787]
+            - cell "Google Gemini 的模型, 此模型由第三方供应商提供，有小概率可能会出现响应速度较慢或报错的情况。" [ref=e788]
+      - generic [ref=e790]:
+        - generic [ref=e791]: 💡
+        - generic [ref=e792]:
+          - heading "使用注意事项：" [level=1] [ref=e793]:
+            - text: 使用注意事项：
+            - link [ref=e794] [cursor=pointer]:
+              - /url: "#使用注意事项"
+          - generic [ref=e795]:
+            - text: 转发APl无法直接向官方接口api.openai.com发起请求，需要将请求地址改为api.chatanywhere.tech才可以使用，大部分插件和软件都可以修改。一般来说不支持各种网页应用，因为没法改API请求地址。现在已经支持Gpt，Claude，Gemini等和图像生成模型。Token计算示例：
+            - link "https://tiktokenizer.vercel.app" [ref=e796] [cursor=pointer]:
+              - /url: https://tiktokenizer.vercel.app
+          - generic [ref=e797]:
+            - text: 余额和使用记录查询（通知公告也会发在这里）：
+            - link "https://api.chatanywhere.org" [ref=e798] [cursor=pointer]:
+              - /url: https://api.chatanywhere.org
+          - generic [ref=e799]: 接口Host（接入点）：
+          - generic [ref=e800]:
+            - text: 1.api.chatanywhere.tech（国内使用，延时更低）
+            - text: 2.api.chatanywhere.org（国外使用）
+      - heading "API文档" [level=1] [ref=e801]:
+        - text: API文档
+        - link [ref=e802] [cursor=pointer]:
+          - /url: "#api文档"
+      - generic [ref=e804]:
+        - generic [ref=e805]: 💡
+        - link "https://chatanywhere.apifox.cn/" [ref=e808] [cursor=pointer]:
+          - /url: https://chatanywhere.apifox.cn/
+      - heading "常见软件/插件使用方法：" [level=1] [ref=e809]:
+        - text: 常见软件/插件使用方法：
+        - link [ref=e810] [cursor=pointer]:
+          - /url: "#常见软件插件使用方法"
+      - generic [ref=e811]: 以下所有插件均为我们实际体验后感觉不错的软件/插件，但不是我们的产品，我们不对以下产品的行为负责
+      - heading "Python Open Al Host(AutoGPT)" [level=1] [ref=e812]:
+        - text: Python Open Al Host(AutoGPT)
+        - link [ref=e813] [cursor=pointer]:
+          - /url: "#python-open-al-hostautogpt"
+      - generic [ref=e814]: 方法一：
+      - code [ref=e818]: "from openai import OpenAI client = OpenAI( # defaults to os.environ.get(\"OPENAI_API_KEY\") api_key=\"YOUR API KEY\", base_url=\"https://api.chatanywhere.tech/v1\" # base_url=\"https://api.chatanywhere.org/v1\" )"
+      - generic [ref=e819]: 方法二：
+      - generic [ref=e820]: 修改环境变量，各个系统怎么改环境变量请自行百度，修改环境变量后不起作用请重启系统。
+      - code [ref=e824]: OPENAI_API_BASE = https://api.chatanywhere.tech/v1
+      - heading "开源 gpt academic" [level=1] [ref=e825]:
+        - text: 开源 gpt academic
+        - link [ref=e826] [cursor=pointer]:
+          - /url: "#开源-gpt-academic"
+      - generic [ref=e827]: 找到config.py文件中的API_URL_REDIRECT配置并修改为以下内容：
+      - code [ref=e831]: "API_URL_REDIRECT = {\"https://api.openai.com/v1/chat/completions\":\"https://api.chatanywhere.tech/v1/chat/completions\"}"
+      - heading "Gomoon" [level=1] [ref=e832]:
+        - text: Gomoon
+        - link [ref=e833] [cursor=pointer]:
+          - /url: "#gomoon"
+      - generic [ref=e834]: Gomoon是一款开源的桌面大模型应用，支持mac和Windows平台。额外支持了解析文件、图片，本地知识库等能力。
+      - generic [ref=e835]:
+        - text: 官网地址：
+        - link "https://gomoon.top" [ref=e836] [cursor=pointer]:
+          - /url: https://gomoon.top
+      - generic [ref=e837]:
+        - text: 使用方法，进入Gomoon设置页面(页面右上角)，如图在设置中填入密钥，并将代理设置为
+        - link "https://api.chatanywhere.tech/v1" [ref=e838] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1
+      - img "1.png" [ref=e840]
+      - heading "ChatBox" [level=1] [ref=e841]:
+        - text: ChatBox
+        - link [ref=e842] [cursor=pointer]:
+          - /url: "#chatbox"
+      - generic [ref=e843]: ChatGPT开源桌面应用，支持全部桌面平台。
+      - generic [ref=e844]:
+        - text: 下载链接：
+        - link "https://github.com/Bin-Huang/chatbox/releases" [ref=e845] [cursor=pointer]:
+          - /url: https://github.com/Bin-Huang/chatbox/releases
+      - generic [ref=e846]:
+        - text: "网页版地址:"
+        - link "https://web.chatboxai.app" [ref=e847] [cursor=pointer]:
+          - /url: https://web.chatboxai.app
+        - text: API主机的地方填写
+        - link "https://api.chatanywhere.tech" [ref=e848] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech
+      - img "image.png" [ref=e850]
+      - heading "Cherry Studio (支持Gpt和Gemini的Image,支持知识库)" [level=1] [ref=e851]:
+        - text: Cherry Studio (支持Gpt和Gemini的Image,支持知识库)
+        - link [ref=e852] [cursor=pointer]:
+          - /url: "#cherry-studio-支持gpt和gemini的image支持知识库"
+      - generic [ref=e853]:
+        - text: "官网:"
+        - link "https://www.cherry-ai.com/" [ref=e854] [cursor=pointer]:
+          - /url: https://www.cherry-ai.com/
+        - text: 使用方法如图所示
+      - img "image.png" [ref=e856]
+      - heading "Cherry Studio中使用GPT-Image系列生图使用方法" [level=3] [ref=e857]:
+        - text: Cherry Studio中使用GPT-Image系列生图使用方法
+        - link [ref=e858] [cursor=pointer]:
+          - /url: "#cherry-studio中使用gpt-image系列生图使用方法"
+      - img "image.png" [ref=e860]
+      - heading "Trea和Trea Solo" [level=1] [ref=e861]:
+        - text: Trea和Trea Solo
+        - link [ref=e862] [cursor=pointer]:
+          - /url: "#trea和trea-solo"
+      - heading "1) 首先先安装好Trea,如何安装请参考官方文档" [level=3] [ref=e863]:
+        - text: 1) 首先先安装好Trea,如何安装请参考官方文档
+        - link [ref=e864] [cursor=pointer]:
+          - /url: "#1-首先先安装好trea如何安装请参考官方文档"
+      - heading "2) 打开设置找到模型然后添加模型" [level=3] [ref=e865]:
+        - text: 2) 打开设置找到模型然后添加模型
+        - link [ref=e866] [cursor=pointer]:
+          - /url: "#2-打开设置找到模型然后添加模型"
+      - code [ref=e870]: Claude系列模型请求地址 https://api.chatanywhere.tech/v1/messages Openai,Gemini,Deepseek等模型请求地址 https://api.chatanywhere.tech/v1/chat/completions
+      - img "Xnip2026-04-28_14-29-08.png" [ref=e872]
+      - heading "Claude code" [level=1] [ref=e873]:
+        - text: Claude code
+        - link [ref=e874] [cursor=pointer]:
+          - /url: "#claude-code"
+      - heading "1) 首先先安装好Claude code,如何安装请参考官方文档" [level=3] [ref=e875]:
+        - text: 1) 首先先安装好Claude code,如何安装请参考官方文档
+        - link [ref=e876] [cursor=pointer]:
+          - /url: "#1-首先先安装好claude-code如何安装请参考官方文档"
+      - heading "2) 找到配置文件" [level=3] [ref=e877]:
+        - text: 2) 找到配置文件
+        - link [ref=e878] [cursor=pointer]:
+          - /url: "#2-找到配置文件"
+      - generic [ref=e879]:
+        - generic [ref=e884]: "Windows: %USERPROFILE%.claude\\settings.json"
+        - generic [ref=e889]: "macOS/Linux: ~/.claude/settings.json"
+      - heading "3) 修改该配置文件,并保存即可使用" [level=3] [ref=e890]:
+        - text: 3) 修改该配置文件,并保存即可使用
+        - link [ref=e891] [cursor=pointer]:
+          - /url: "#3-修改该配置文件并保存即可使用"
+      - code [ref=e895]: "{ \"env\": { \"ANTHROPIC_BASE_URL\": \"https://api.chatanywhere.tech\", \"ANTHROPIC_AUTH_TOKEN\": \"sk-xxxxxxxxxxxxxxxxx\", \"CLAUDE_CODE_ATTRIBUTION_HEADER\": \"0\", \"CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC\": \"1\", \"CLAUDE_CODE_DISABLE_TERMINAL_TITLE\": \"1\" } }"
+      - heading "Openclaw" [level=1] [ref=e896]:
+        - text: Openclaw
+        - link [ref=e897] [cursor=pointer]:
+          - /url: "#openclaw"
+      - generic [ref=e898]: 此教程只是最简单的使用方法,需要有一定的代码能力才可以使用, 具体详细的使用方法请查看官方教程
+      - heading "核心配置（3 步）" [level=3] [ref=e899]:
+        - text: 核心配置（3 步）
+        - link [ref=e900] [cursor=pointer]:
+          - /url: "#核心配置3-步"
+      - heading "1) 找到配置文件" [level=4] [ref=e901]:
+        - text: 1) 找到配置文件
+        - link [ref=e902] [cursor=pointer]:
+          - /url: "#1-找到配置文件"
+      - generic [ref=e903]:
+        - generic [ref=e908]:
+          - text: Windows：
+          - code [ref=e909]: C:\Users\你的用户名\.openclaw\openclaw.json
+        - generic [ref=e914]:
+          - text: macOS/Linux：
+          - code [ref=e915]: ~/.openclaw/openclaw.json
+      - heading "2) 添加 Provider（关键： api 必须是 openai-completions ）如未有provider需要手动添加" [level=4] [ref=e916]:
+        - text: 2) 添加 Provider（关键：
+        - code [ref=e917]: api
+        - text: 必须是
+        - code [ref=e918]: openai-completions
+        - text: ）如未有provider需要手动添加
+        - link [ref=e919] [cursor=pointer]:
+          - /url: "#2-添加-provider关键-必须是-如未有provider需要手动添加"
+      - code [ref=e923]: "{ \"models\": { \"mode\": \"merge\", \"providers\": { \"chatanywhere\": { \"baseUrl\": \"https://api.chatanywhere.tech/v1\", \"apiKey\": \"sk-xxxxx\", \"api\": \"openai-completions\", \"models\": [ { \"id\": \"gpt-4.1\", \"name\": \"gpt-4.1\" }, { \"id\": \"gpt-5.1\", \"name\": \"gpt-5.1\" } ] } } } }"
+      - heading "3) 设置默认模型（格式： Provider/模型ID ）" [level=4] [ref=e924]:
+        - text: 3) 设置默认模型（格式：
+        - code [ref=e925]: Provider/模型ID
+        - text: ）
+        - link [ref=e926] [cursor=pointer]:
+          - /url: "#3-设置默认模型格式"
+      - code [ref=e930]: "{ \"agents\": { \"defaults\": { \"model\": { \"primary\": \"chatanywhere/gpt-4.1\" } } } }"
+      - blockquote [ref=e931]:
+        - generic [ref=e932]:
+          - text: 常见问题 404：
+          - code [ref=e933]: primary
+          - text: 漏写
+          - code [ref=e934]: chatanywhere/
+          - text: 前缀。
+      - heading "RikkaHub" [level=1] [ref=e935]:
+        - text: RikkaHub
+        - link [ref=e936] [cursor=pointer]:
+          - /url: "#rikkahub"
+      - generic [ref=e937]:
+        - text: 一款Android 应用程序
+        - text: 官网和下载地址
+        - link "https://github.com/rikkahub/rikkahub" [ref=e938] [cursor=pointer]:
+          - /url: https://github.com/rikkahub/rikkahub
+      - img "image.png" [ref=e940]
+      - img "Xnip2025-06-25_15-27-49.png" [ref=e942]
+      - heading "BotGem" [level=1] [ref=e943]:
+        - text: BotGem
+        - link [ref=e944] [cursor=pointer]:
+          - /url: "#botgem"
+      - generic [ref=e945]:
+        - text: "官网:"
+        - link "https://bytemyth.com/ama" [ref=e946] [cursor=pointer]:
+          - /url: https://bytemyth.com/ama
+      - img "4.png" [ref=e948]
+      - heading "沉浸式翻译" [level=1] [ref=e949]:
+        - text: 沉浸式翻译
+        - link [ref=e950] [cursor=pointer]:
+          - /url: "#沉浸式翻译"
+      - generic [ref=e951]:
+        - text: 官网链接
+        - link "https://immersivetranslate.com/" [ref=e952] [cursor=pointer]:
+          - /url: https://immersivetranslate.com/
+      - generic [ref=e953]:
+        - text: 一款免费的，好用的，没有废话的，革命性的，饱受赞誉的，AI驱动的双语网页翻译扩展，帮助你有效地打破信息差，在手机上也可以用
+        - text: 自定义API接口处填写下面这个
+        - link "https://api.chatanywhere.tech/v1/chat/completions" [ref=e954] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1/chat/completions
+      - img "5.png" [ref=e956]
+      - heading "ChatGPT Siderbar" [level=1] [ref=e957]:
+        - text: ChatGPT Siderbar
+        - link [ref=e958] [cursor=pointer]:
+          - /url: "#chatgpt-siderbar"
+      - generic [ref=e959]:
+        - text: 官网链接：
+        - link "https://chatgpt-sidebar.com/" [ref=e960] [cursor=pointer]:
+          - /url: https://chatgpt-sidebar.com/
+      - generic [ref=e961]:
+        - text: 安装好插件后进入设置页面，如图所示修改设置，并将url设置为
+        - link "https://api.chatanywhere.tech/v1" [ref=e962] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1
+        - text: 即可。
+        - img "image.png" [ref=e963]
+      - img "image.png" [ref=e965]
+      - heading "Zotero" [level=1] [ref=e966]:
+        - text: Zotero
+        - link [ref=e967] [cursor=pointer]:
+          - /url: "#zotero"
+      - generic [ref=e968]:
+        - text: "软件地址:"
+        - link "https://www.zotero.org/" [ref=e969] [cursor=pointer]:
+          - /url: https://www.zotero.org/
+      - generic [ref=e970]: 以下只是介绍了一下常用的，具体详细的使用方法请查看Zotro官方文档
+      - generic [ref=e971]:
+        - img "image.png" [ref=e972]
+        - text: context length exceeded
+      - generic [ref=e973]:
+        - text: 意味着您当前的模型处理的输入文本长度超过了模型的最大token限制。每个模型都有一个最大token限制，例如，gpt-3.5-turbo模型的最大token限制为
+        - generic [ref=e977]:
+          - text: "409"
+          - generic [ref=e978]:
+            - text: "6"
+            - generic [ref=e985]: ∘
+      - generic [ref=e986]: 您可以使用以下命令/model gpt-4o 更换模型
+      - heading "Zoter中的翻译" [level=3] [ref=e987]:
+        - text: Zoter中的翻译
+        - link [ref=e988] [cursor=pointer]:
+          - /url: "#zoter中的翻译"
+      - generic [ref=e989]:
+        - text: "接口地址填写:"
+        - link "https://api.chatanywhere.tech/v1/chat/completions" [ref=e990] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1/chat/completions
+        - text: 不用管状态是否显示可用填上之后就可以了
+        - img "9.png" [ref=e991]
+      - heading "MuseBot 基于 Golang 构建的 智能机器人" [level=1] [ref=e992]:
+        - text: MuseBot 基于 Golang 构建的 智能机器人
+        - link [ref=e993] [cursor=pointer]:
+          - /url: "#musebot-基于-golang-构建的-智能机器人"
+      - generic [ref=e994]:
+        - text: 基于 Golang 构建的 智能机器人，集成了 LLM API，实现 AI 驱动的自然对话与智能回复
+        - text: "官网:"
+        - link "https://github.com/yincongcyincong/MuseBot/blob/main/README_ZH.md" [ref=e995] [cursor=pointer]:
+          - /url: https://github.com/yincongcyincong/MuseBot/blob/main/README_ZH.md
+        - text: 配置
+      - code [ref=e999]: ./MuseBot -telegram_bot_token=xxx -chat_any_where_token=xxx -type=chatanywhere -media_type=chatanywhere
+      - generic [ref=e1000]:
+        - text: 如使用后台管理按照下图配置
+        - img "1405fd09affa77055eb892a9021268b2.png" [ref=e1001]
+      - heading "微×助手聊天机器人" [level=1] [ref=e1002]:
+        - text: 微×助手聊天机器人
+        - link [ref=e1003] [cursor=pointer]:
+          - /url: "#微助手聊天机器人"
+      - generic [ref=e1004]: 下载地址和官网未知
+      - generic [ref=e1005]:
+        - text: 非官方接口处填写下面这个
+        - link "https://api.chatanywhere.tech/v1/chat/completions" [ref=e1006] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1/chat/completions
+      - img "10.png" [ref=e1008]
+      - heading "Dify" [level=1] [ref=e1009]:
+        - text: Dify
+        - link [ref=e1010] [cursor=pointer]:
+          - /url: "#dify"
+      - generic [ref=e1011]: Dify是一个LLM应用开发平台开源。其绘图的界面结合了AI工作流程、RAG管道、代理、模型管理、可安装性功能等，让您可以快速从原型到生产。以下是其核心功能列表：
+      - generic [ref=e1012]:
+        - text: 官网地址：
+        - link "https://github.com/langgenius/dify" [ref=e1013] [cursor=pointer]:
+          - /url: https://github.com/langgenius/dify
+      - generic [ref=e1014]:
+        - text: "使用方法如下图, Api Base 输入:"
+        - link "https://api.chatanywhere.tech" [ref=e1015] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech
+      - img "12.png" [ref=e1017]
+      - img "13.png" [ref=e1019]
+      - heading "Anything LL M" [level=1] [ref=e1020]:
+        - text: Anything LL M
+        - link [ref=e1021] [cursor=pointer]:
+          - /url: "#anything-ll-m"
+      - generic [ref=e1022]:
+        - text: AI的一切都在一个桌面应用程序中。与文档聊天，使用AI代理，以及更全面的本地和离线。
+        - text: 官网地址：
+        - link "https://anythingllm.com/" [ref=e1023] [cursor=pointer]:
+          - /url: https://anythingllm.com/
+      - generic [ref=e1024]: 使用方法如下图
+      - generic [ref=e1025]:
+        - text: "Base URL 输入:"
+        - link "https://api.chatanywhere.tech/v1" [ref=e1026] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1
+        - img "image.png" [ref=e1027]
+      - heading "ChatGPT-Next-Web" [level=1] [ref=e1028]:
+        - text: ChatGPT-Next-Web
+        - link [ref=e1029] [cursor=pointer]:
+          - /url: "#chatgpt-next-web"
+      - generic [ref=e1030]:
+        - text: 官网地址：
+        - link "https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web" [ref=e1031] [cursor=pointer]:
+          - /url: https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web
+      - generic [ref=e1032]:
+        - text: "使用方法如下图:"
+        - text: "Base URL输入:"
+        - link "https://api.chatanywhere.tech" [ref=e1033] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech
+      - img "a0290204-3511-46cb-8b12-b75b9eb4af1f.png" [ref=e1035]
+      - heading "欧路词典、欧路翻译插件" [level=1] [ref=e1036]:
+        - text: 欧路词典、欧路翻译插件
+        - link [ref=e1037] [cursor=pointer]:
+          - /url: "#欧路词典欧路翻译插件"
+      - generic [ref=e1038]:
+        - text: 一款好用的离线查词翻译工具，支持配置多种大模型翻译引擎。
+        - text: 官网地址：
+        - link "https://www.eudic.net" [ref=e1039] [cursor=pointer]:
+          - /url: https://www.eudic.net
+      - generic [ref=e1040]:
+        - text: 使用方法：在翻译引擎-自定义引擎设置中填入购买的密钥，并在自定义API接口里填写
+        - link "https://api.chatanywhere.tech/v1/chat/completions" [ref=e1041] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1/chat/completions
+        - text: 即可。
+      - img "image.png" [ref=e1043]
+      - heading "Cline" [level=1] [ref=e1044]:
+        - text: Cline
+        - link [ref=e1045] [cursor=pointer]:
+          - /url: "#cline"
+      - generic [ref=e1046]: IDE中的自主编码代理，能够创建/编辑文件、运行命令、使用浏览器等。
+      - generic [ref=e1047]:
+        - text: 官网地址：
+        - link "https://cline.bot" [ref=e1048] [cursor=pointer]:
+          - /url: https://cline.bot
+      - generic [ref=e1049]:
+        - text: "使用方法如下图:"
+        - text: "Base URL输入:"
+        - link "https://api.chatanywhere.tech/v1" [ref=e1050] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1
+      - img "724ab9b5a2159eaa455ab356c74810e6.png" [ref=e1052]
+      - heading "ARGO" [level=1] [ref=e1053]:
+        - text: ARGO
+        - link [ref=e1054] [cursor=pointer]:
+          - /url: "#argo"
+      - generic [ref=e1055]:
+        - text: 一个本地化大模型Agent开发工具, 支持Mac silicon和Windows平台。支持了解析文件、本地知识库等能力.
+        - text: 官网地址：
+        - link "https://www.xark-argo.com" [ref=e1056] [cursor=pointer]:
+          - /url: https://www.xark-argo.com
+      - generic [ref=e1057]:
+        - text: "使用方法如下图:"
+        - text: "Base URL输入:"
+        - link "https://api.chatanywhere.tech/v1" [ref=e1058] [cursor=pointer]:
+          - /url: https://api.chatanywhere.tech/v1
+        - img "Xnip2024-12-20_22-12-55_副本.png" [ref=e1059]
+      - heading "用户协议" [level=1] [ref=e1060]:
+        - text: 用户协议
+        - link [ref=e1061] [cursor=pointer]:
+          - /url: "#用户协议"
+      - generic [ref=e1062]: 使用即视为同意本协议！否则请勿使用！
+      - generic [ref=e1063]: 1.本服务不会以任何形式持久化存储任何用户的任何聊天信息；
+      - generic [ref=e1064]: 2.本服务不知晓也无从知晓用户在本服务上传输的任何文本内容，用户使用本服务引发的任何违法犯罪后果，由使用者承担，本服务将全力配合由此可能引|起的相关调查；
+      - generic [ref=e1065]: 3.本服务视为ChatAnywhereAPi项目以及相关项目的辅助调试工具，请勿用于其他用途；
+      - generic [ref=e1066]: 4.我们有权在市场价格剧烈波动时对价格进行合理调整：
+    - generic [ref=e1067]:
+      - generic [ref=e1068]: 修改于
+      - text: 7 天前
+    - link "下一页 费用标准及模型列表" [ref=e1070] [cursor=pointer]:
+      - /url: /doc-2694962
+      - generic [ref=e1071]:
+        - generic [ref=e1072]: 下一页
+        - generic [ref=e1073]: 费用标准及模型列表
+      - img [ref=e1074]:
+        - img [ref=e1075]
+    - contentinfo [ref=e1078]:
+      - link "LLMs.txt" [ref=e1080] [cursor=pointer]:
+        - /url: /llms.txt
+        - button "LLMs.txt" [ref=e1081]:
+          - generic [ref=e1082]: LLMs.txt
+      - link "homepage link" [ref=e1085] [cursor=pointer]:
+        - /url: https://apifox.com
+        - generic [ref=e1086]:
+          - generic [ref=e1087]: Built with
+          - img [ref=e1088]

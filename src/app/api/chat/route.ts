@@ -99,14 +99,15 @@ export async function POST(req: NextRequest) {
     });
   }
 
-  const upstream = await fetch("https://api.openai.com/v1/chat/completions", {
+  const baseUrl = (process.env.OPENAI_BASE_URL ?? "https://api.openai.com").replace(/\/$/, "");
+  const upstream = await fetch(`${baseUrl}/v1/chat/completions`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
       authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "gpt-4.1",
+      model: "gpt-4.1-mini",
       stream: true,
       temperature: 0.5,
       messages: [

@@ -1,0 +1,307 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - generic [ref=e2]:
+      - button "Open menu" [ref=e3]:
+        - img [ref=e4]
+      - link "Studio Gruhl" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logo" [ref=e7]
+      - generic [ref=e8]:
+        - dialog:
+          - generic:
+            - generic:
+              - generic:
+                - generic: EMAIL
+                - generic: 邮箱
+                - generic: zjh532169990@163.com
+              - generic:
+                - generic: PHONE
+                - generic: 手机号
+                - generic: "17681828517"
+            - generic:
+              - generic:
+                - generic: WECHAT
+                - generic: 微信
+              - generic:
+                - img
+              - generic: Jiahao0517
+        - button "Contact" [ref=e9]:
+          - img [ref=e10]
+  - generic:
+    - button
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: /
+              - generic: Index
+              - img
+          - link:
+            - /url: /twain
+            - generic: 钉钉 AI 产品实践
+            - img
+          - link:
+            - /url: /performula
+            - generic: 问财智能投顾
+            - img
+          - link:
+            - /url: /chattermill
+            - generic: 智能对话设计规范
+            - img
+          - link:
+            - /url: /invocable
+            - generic: 设计创新
+            - img
+        - generic:
+          - link:
+            - /url: https://www.instagram.com/studiogruhl/
+            - text: Instagram
+          - link:
+            - /url: https://www.are.na/studio-gruhl/channels
+            - text: Are.na
+          - link:
+            - /url: https://www.linkedin.com/company/studiogruhl/
+            - text: LinkedIn
+  - main [ref=e15]:
+    - generic [ref=e18]:
+      - heading "我是钟家豪，把复杂的 AI 能力，设计成用户看得懂的产品" [level=1] [ref=e19]:
+        - generic [ref=e20]: 我
+        - generic [ref=e21]: 是
+        - generic [ref=e22]: 钟
+        - generic [ref=e23]: 家
+        - generic [ref=e24]: 豪
+        - generic [ref=e25]: ，
+        - generic [ref=e26]: 把
+        - generic [ref=e27]: 复
+        - generic [ref=e28]: 杂
+        - generic [ref=e29]: 的
+        - generic [ref=e31]: A
+        - generic [ref=e32]: I
+        - generic [ref=e34]: 能
+        - generic [ref=e35]: 力
+        - generic [ref=e36]: ，
+        - generic [ref=e37]: 设
+        - generic [ref=e38]: 计
+        - generic [ref=e39]: 成
+        - generic [ref=e40]: 用
+        - generic [ref=e41]: 户
+        - generic [ref=e42]: 看
+        - generic [ref=e43]: 得
+        - generic [ref=e44]: 懂
+        - generic [ref=e45]: 的
+        - generic [ref=e46]: 产
+        - generic [ref=e47]: 品
+      - paragraph [ref=e48]: 主要做 AI 产品的设计，参与结构判断、规则定义与实现推进，关注完整交付。从智能投顾到 ChatUI 规范，到 AI 改变设计工作流，我持续关注 AI 产品里的信任、效率、表达与落地。
+      - generic [ref=e49]:
+        - dialog:
+          - generic:
+            - generic:
+              - generic:
+                - generic: EMAIL
+                - generic: 邮箱
+                - generic: zjh532169990@163.com
+              - generic:
+                - generic: PHONE
+                - generic: 手机号
+                - generic: "17681828517"
+            - generic:
+              - generic:
+                - generic: WECHAT
+                - generic: 微信
+              - generic:
+                - img
+              - generic: Jiahao0517
+        - generic [ref=e52] [cursor=pointer]: 联系方式
+      - generic "专业标签" [ref=e53]:
+        - generic [ref=e54]: AI 产品
+        - generic [ref=e55]: ｜
+        - generic [ref=e56]: 对话体验
+        - generic [ref=e57]: ｜
+        - generic [ref=e58]: 设计系统
+        - generic [ref=e59]: ｜
+        - generic [ref=e60]: 落地交付
+        - generic [ref=e61]: ｜
+        - generic [ref=e62]: 设计奖
+        - generic [ref=e63]: ｜
+        - generic [ref=e64]: 专利
+    - generic [ref=e66]:
+      - generic [ref=e67]:
+        - generic [ref=e69]:
+          - generic [ref=e71]:
+            - generic [ref=e72]: 规则设计
+            - generic [ref=e73] [cursor=pointer]: 对话体验
+            - generic [ref=e74] [cursor=pointer]: 信息表达
+            - generic [ref=e75] [cursor=pointer]: 专利设计
+            - generic [ref=e76] [cursor=pointer]: 设计奖项
+            - generic [ref=e77]: 结构判断
+            - generic [ref=e78] [cursor=pointer]: 规则设计
+            - generic [ref=e79] [cursor=pointer]: 对话体验
+            - generic [ref=e80] [cursor=pointer]: 信息表达
+            - generic [ref=e81] [cursor=pointer]: 专利设计
+            - generic [ref=e82]: 设计奖项
+          - img [ref=e84]
+          - generic [ref=e90]: 从业务目标、用户任务和产品形态出发，先判断产品应该如何组织，而不是直接进入界面绘制。
+        - generic [ref=e93]:
+          - generic [ref=e94]:
+            - generic [ref=e95]: 问题洞察
+            - generic [ref=e96]:
+              - button "上一条" [disabled] [ref=e97]:
+                - img [ref=e98]
+              - button "下一条" [ref=e100] [cursor=pointer]:
+                - img [ref=e101]
+          - paragraph [ref=e103]: 我习惯主动从真实产品中发现体验问题，而不是只等待需求输入。面对用户反馈、线上数据或产品走查中的模糊问题，我会先拆解它背后的具体原因，判断它影响的是用户理解、操作效率、结果可信度还是业务转化，再结合影响范围和实现成本推动评审、排期与上线。过去我累计发现 300+ 个产品体验问题，其中 72% 已完成改进，这也让我形成了从问题识别、优先级判断到持续跟进落地的完整能力。
+      - generic [ref=e104]:
+        - generic [ref=e105]:
+          - generic [ref=e106]:
+            - generic [ref=e107]:
+              - heading "钉钉 AI 产品实践" [level=2] [ref=e108]
+              - paragraph [ref=e109]: 设计即交付：把设计推进到结果 ・ '26
+            - link "查看作品" [ref=e111] [cursor=pointer]:
+              - /url: /twain
+              - generic [ref=e112]: 查看作品
+              - img [ref=e113]
+          - link "钉钉 AI 产品实践" [ref=e115] [cursor=pointer]:
+            - /url: /twain
+            - img "钉钉 AI 产品实践" [ref=e117]
+        - generic [ref=e118]:
+          - generic [ref=e119]:
+            - generic [ref=e120]:
+              - heading "问财智能投顾" [level=2] [ref=e121]
+              - paragraph [ref=e122]: AI+金融，交互范式升级，让答案可理解、可验证 ・ '23 − '25
+            - link "查看作品" [ref=e124] [cursor=pointer]:
+              - /url: /performula
+              - generic [ref=e125]: 查看作品
+              - img [ref=e126]
+          - link "问财智能投顾" [ref=e128] [cursor=pointer]:
+            - /url: /performula
+            - img "问财智能投顾" [ref=e130]
+        - generic [ref=e131]:
+          - generic [ref=e132]:
+            - generic [ref=e133]:
+              - heading "智能对话设计规范" [level=2] [ref=e134]
+              - paragraph [ref=e135]: 统一对话组件与规则，让设计直接进入开发与使用 ・ '23 − '25
+            - link "查看作品" [ref=e137] [cursor=pointer]:
+              - /url: /chattermill
+              - generic [ref=e138]: 查看作品
+              - img [ref=e139]
+          - link "智能对话设计规范" [ref=e141] [cursor=pointer]:
+            - /url: /chattermill
+            - img "智能对话设计规范" [ref=e143]
+        - generic [ref=e144]:
+          - generic [ref=e145]:
+            - generic [ref=e146]:
+              - heading "设计创新" [level=2] [ref=e147]
+              - paragraph [ref=e148]: 围绕业务问题做创新，并落到专利与设计成果中 ・ '21 − '25
+            - link "查看作品" [ref=e150] [cursor=pointer]:
+              - /url: /invocable
+              - generic [ref=e151]: 查看作品
+              - img [ref=e152]
+          - link "设计创新" [ref=e154] [cursor=pointer]:
+            - /url: /invocable
+            - img "设计创新" [ref=e156]
+    - generic [ref=e158]:
+      - heading "经历" [level=2] [ref=e159]
+      - generic [ref=e160]:
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - img "钉钉" [ref=e164]
+            - generic [ref=e165]:
+              - generic [ref=e166]: 体验设计师
+              - generic [ref=e167]: 钉钉 ・ 2026.1 − 2026.4
+          - button "参与 AIX 与悟空两个 AI 产品项目，在真实业务中把 AI Coding 纳入设计工作流。通过 AI 辅助竞品调研、规则梳理、源码分析、样式走查和页面实现，让设计从交付设计稿延伸到结构判断、协作规则、代码对齐与上线推进。" [ref=e168] [cursor=pointer]:
+            - paragraph [ref=e169]: 参与 AIX 与悟空两个 AI 产品项目，在真实业务中把 AI Coding 纳入设计工作流。通过 AI 辅助竞品调研、规则梳理、源码分析、样式走查和页面实现，让设计从交付设计稿延伸到结构判断、协作规则、代码对齐与上线推进。
+            - img [ref=e171]
+        - generic [ref=e173]:
+          - generic [ref=e174]:
+            - img "同花顺" [ref=e176]
+            - generic [ref=e177]:
+              - generic [ref=e178]: 产品设计师
+              - generic [ref=e179]: 浙江核新同花顺网络信息股份有限公司 ・ 2023 − 2026.4
+          - button "在同花顺人工智能集群 UED 团队，负责问财智能投顾机器人、ChatUI 设计规范、智能短视频等 AI 相关产品设计。持续从用户任务出发拆解体验问题，推动大模型对话升级、组件规范落地与创新项目探索；累计发现 300+ 产品体验问题，72% 已解决上线，并获得 1 项专利与 3 项设计奖。" [ref=e180] [cursor=pointer]:
+            - paragraph [ref=e181]: 在同花顺人工智能集群 UED 团队，负责问财智能投顾机器人、ChatUI 设计规范、智能短视频等 AI 相关产品设计。持续从用户任务出发拆解体验问题，推动大模型对话升级、组件规范落地与创新项目探索；累计发现 300+ 产品体验问题，72% 已解决上线，并获得 1 项专利与 3 项设计奖。
+            - img [ref=e183]
+        - generic [ref=e185]:
+          - generic [ref=e186]:
+            - img "腾展" [ref=e188]
+            - generic [ref=e189]:
+              - generic [ref=e190]: UI 设计师
+              - generic [ref=e191]: 杭州腾展科技股份有限公司 ・ 2021 − 2023
+          - button "负责海外工具型产品的 UI 设计，覆盖交互输出、视觉风格、规范定义与界面绘制。期间支持产品实现日利润 8000 美元，并将个人工作方法沉淀为团队可复用经验，获得最佳新人奖与最佳创意新锐奖。" [ref=e192] [cursor=pointer]:
+            - paragraph [ref=e193]: 负责海外工具型产品的 UI 设计，覆盖交互输出、视觉风格、规范定义与界面绘制。期间支持产品实现日利润 8000 美元，并将个人工作方法沉淀为团队可复用经验，获得最佳新人奖与最佳创意新锐奖。
+            - img [ref=e195]
+        - generic [ref=e197]:
+          - generic [ref=e198]:
+            - img "慕尚" [ref=e200]
+            - generic [ref=e201]:
+              - generic [ref=e202]: 视频包装设计师
+              - generic [ref=e203]: 杭州慕尚科技有限公司 ・ 2019 − 2021
+          - button "负责公司视频包装与动态视觉设计，涵盖广告项目的视频画面设计、MG 动画制作。参与公司五周年司庆宣传片、App 推广视频等品牌传播内容制作，支持公司在产品推广、品牌宣传和活动传播中的视觉表达。" [ref=e204] [cursor=pointer]:
+            - paragraph [ref=e205]: 负责公司视频包装与动态视觉设计，涵盖广告项目的视频画面设计、MG 动画制作。参与公司五周年司庆宣传片、App 推广视频等品牌传播内容制作，支持公司在产品推广、品牌宣传和活动传播中的视觉表达。
+            - img [ref=e207]
+    - generic [ref=e210]:
+      - heading "关于我" [level=2] [ref=e212]
+      - generic [ref=e215]:
+        - paragraph [ref=e216]: 我是一名关注 AI 产品与复杂业务场景的体验设计师，具备 AI+金融、AI Agent 与企业协同产品设计经验。
+        - paragraph [ref=e217]: 过去几年，我持续参与大模型能力在实际业务中的产品化落地，重点关注 AI 产品中的用户信任、任务效率、交互范式与结果交付。在同花顺阶段，我主要负责 AI+金融方向的产品设计，推动智能投顾场景下的交互范式升级；在钉钉阶段，我参与 AIX 与悟空等 AI 项目，并开始将 AI Coding 纳入设计工作流，推进调研、规则沉淀、设计还原与真实交付。
+        - paragraph [ref=e218]: 我习惯从模糊问题中拆解关键矛盾，并推动问题从发现、评审到上线落地。目前已累计提出 300 多个产品与体验问题，其中 57% 已完成优化落地。同时，我也持续关注创新设计与方法沉淀，曾获得多项设计奖项，并申请一项产品相关专利。
+      - generic [ref=e223]:
+        - heading "与我的 AI 作品集助理聊聊" [level=2] [ref=e225]
+        - generic [ref=e226]:
+          - generic [ref=e228]:
+            - generic [ref=e230]: G
+            - generic [ref=e231]: 你好，我是钟佳豪的 AI 作品集助理。我基于他的简历、作品集和项目讲解内容，帮助你快速了解他的 AI 产品设计经验、项目方法和能力特点。
+          - generic [ref=e232]:
+            - button "他在 AI 产品设计上积累了哪些核心方法？" [ref=e233] [cursor=pointer]
+            - button "问财机器人大模型升级项目他是怎么推进的？" [ref=e234] [cursor=pointer]
+            - button "他是怎么把 AI Coding 融入设计工作流的？" [ref=e235] [cursor=pointer]
+            - button "钉钉经历时间较短，如何理解这段经历？" [ref=e236] [cursor=pointer]
+          - paragraph [ref=e237]: 基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
+          - textbox "留言…" [ref=e242]
+      - generic [ref=e244]:
+        - generic [ref=e245]: 联系我
+        - generic [ref=e246]:
+          - generic [ref=e247]:
+            - generic [ref=e248]: Email
+            - generic [ref=e249]: 邮箱
+            - generic [ref=e250]:
+              - link "zjh532169990@163.com" [ref=e251] [cursor=pointer]:
+                - /url: mailto:zjh532169990@163.com
+              - button "复制邮箱" [ref=e252] [cursor=pointer]
+          - generic [ref=e253]:
+            - generic [ref=e254]: Phone
+            - generic [ref=e255]: 手机号
+            - generic [ref=e256]:
+              - link "17681828517" [ref=e257] [cursor=pointer]:
+                - /url: tel:17681828517
+              - button "复制手机号" [ref=e258] [cursor=pointer]
+          - generic [ref=e259]:
+            - generic [ref=e260]:
+              - generic [ref=e261]: WeChat
+              - generic [ref=e262]: 微信
+            - img "微信二维码" [ref=e264]
+            - generic [ref=e265]:
+              - generic [ref=e266]: Jiahao0517
+              - button "复制微信" [ref=e267] [cursor=pointer]
+    - generic [ref=e273]:
+      - generic "AI时代的设计工作流" [ref=e274]:
+        - generic [ref=e275]:
+          - generic [ref=e277]: A
+          - generic [ref=e279]: I
+          - generic [ref=e281]: 时
+          - generic [ref=e283]: 代
+          - generic [ref=e285]: 的
+          - generic [ref=e287]: 设
+          - generic [ref=e289]: 计
+          - generic [ref=e291]: 工
+          - generic [ref=e293]: 作
+          - generic [ref=e295]: 流
+      - generic [ref=e296]:
+        - generic [ref=e298]: Yerevan 10:49 AM
+        - generic [ref=e300]: Creative Digital Designer / Working Worldwide
+        - button "Back to top" [ref=e301] [cursor=pointer]:
+          - img [ref=e303]
+          - generic [ref=e306]: Back to top
+  - button "Open Next.js Dev Tools" [ref=e312] [cursor=pointer]:
+    - img [ref=e313]
+  - alert [ref=e316]

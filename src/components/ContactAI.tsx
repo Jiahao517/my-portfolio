@@ -5,10 +5,10 @@ import type { ChatMessage } from "@/types/portfolio";
 import { BorderGlow } from "@/components/BorderGlow";
 
 const SUGGESTED = [
-  "你的设计风格有哪些标签？",
-  "你最适合哪个阶段的初创团队？",
-  "Twain 这段经历你是怎么从 0 到 1 的？",
-  "你怎么处理产品转型期的设计决策？",
+  "他在 AI 产品设计上积累了哪些核心方法？",
+  "他的个人亮点是什么？",
+  "你是怎么把 AI Coding 融入设计工作流的？",
+  "他的离职原因是什么？",
 ];
 
 function XIcon() {
@@ -100,7 +100,7 @@ export function ContactAI() {
     <section id="contact-ai" className="contact-ai">
       <div className="centered contact-ai__centered">
         <div className="contact-ai__col-left">
-          <h2 className="contact-ai__title shiny-hover">与我的数字分身聊聊</h2>
+          <h2 className="contact-ai__title shiny-hover">与我的 AI 作品集助理聊聊</h2>
         </div>
 
         <div className="contact-ai__panel">
@@ -111,7 +111,7 @@ export function ContactAI() {
                   <span>G</span>
                 </div>
                 <div className="contact-ai__bubble contact-ai__bubble--bot">
-                  你好，我是代表 Gregory 的 AI 助理。
+                  你好，我是钟家豪的 AI 作品集助理。我基于他的简历、作品集内容，帮助你快速了解他的 AI 产品设计经验、项目方法和能力特点。
                 </div>
               </div>
             ) : (
@@ -149,6 +149,10 @@ export function ContactAI() {
               ))}
             </div>
           ) : null}
+
+          <p className="contact-ai__disclaimer">
+            基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
+          </p>
 
           <form
             className="contact-ai__form"

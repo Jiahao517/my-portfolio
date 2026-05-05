@@ -1459,17 +1459,33 @@ video.case-study__image {
   flex-shrink: 0;
 }
 
-.experience__logo {
+.experience__logo-wrap {
   width: 56px;
   height: 56px;
-  border-radius: var(--radius-lg);
-  background: #EBEBEB;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
   transition: transform 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
   transform-origin: center center;
 }
 
-.experience__row:hover .experience__logo {
+.experience__logo-wrap--stroke::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.experience__logo {
+  width: 56px;
+  height: 56px;
+  display: block;
+  object-fit: cover;
+}
+
+.experience__row:hover .experience__logo-wrap {
   animation: logo-tilt 2s ease-in-out;
 }
 
@@ -4540,6 +4556,14 @@ a.work-card {
   padding: 8px 12px;
   border-radius: var(--radius-md);
   align-self: flex-start;
+}
+.contact-ai__disclaimer {
+  font-size: 12px;
+  color: var(--fg-muted);
+  opacity: 0.6;
+  text-align: center;
+  margin: 0 0 8px;
+  line-height: 1.5;
 }
 .contact-ai__suggestions {
   display: flex;

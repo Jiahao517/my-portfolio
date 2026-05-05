@@ -12,7 +12,17 @@ export function Experience() {
           {visibleExperience.map((row, i) => (
             <div key={i} className="experience__row reveal-scroll">
               <div className="experience__left">
-                <div aria-hidden className="experience__logo" />
+                <div
+                  className={`experience__logo-wrap${i >= 2 ? " experience__logo-wrap--stroke" : ""}`}
+                  style={{ borderRadius: row.logoRadius }}
+                >
+                  <img
+                    src={row.logo}
+                    alt={row.logoAlt}
+                    className="experience__logo"
+                    style={{ borderRadius: row.logoRadius }}
+                  />
+                </div>
                 <div className="experience__details">
                   <div className="experience__title">{row.title}</div>
                   <div className="experience__caption">
