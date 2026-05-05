@@ -131,7 +131,13 @@ export function About() {
           <div className="about__media-column">
             <div className="about__hero-photo reveal-scroll" id="aboutHeroPhoto">
               <div className="about__hero-glare" />
-              <div className="about__image-placeholder about__image-placeholder--hero" aria-hidden />
+              <Image
+                src="/images/about-hero.png"
+                alt="关于我"
+                width={600}
+                height={800}
+                className="about__hero-img"
+              />
             </div>
 
             <div className="about__photos" id="aboutPhotos">

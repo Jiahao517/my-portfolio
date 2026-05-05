@@ -47,6 +47,7 @@ const DESCRIPTIONS = [
 export function SocialProof() {
   const [tIdx, setTIdx] = useState(0);
   const [transitioning, setTransitioning] = useState(false);
+  const [activeServiceIdx, setActiveServiceIdx] = useState(0);
   const wheelRootRef = useRef<HTMLDivElement>(null);
 
   const t = TRAITS[tIdx];
@@ -68,121 +69,12 @@ export function SocialProof() {
     const track = root.querySelector<HTMLDivElement>(".sp-wheel__track");
     const arrow = root.querySelector<HTMLDivElement>(".sp-services__arrow");
     const wheelContainer = root.querySelector<HTMLDivElement>(".sp-services__wheel");
-    const pillStack = root.querySelector<HTMLDivElement>(".sp-services__pill-stack");
-    if (!track || !arrow || !wheelContainer || !pillStack) return;
+    if (!track || !arrow || !wheelContainer) return;
 
     const services = SERVICES;
-    const descriptions = DESCRIPTIONS;
     const N = services.length;
 
-    // ---------- Pill stack ----------
-    type StackSpec = {
-      w: number;
-      h: number;
-      bg: number;
-      r: string;
-      shadow: string;
-      stroke: string;
-      pad: string;
-      scale: number;
-      opacity: number;
-      yOff: number;
-    };
-    const S: Record<"top2" | "top1" | "active" | "bot1" | "bot2", StackSpec> = {
-      top2: { w: 134, h: 20, bg: 0.24, r: "14px 14px 0 0", shadow: "0 -12px 8px 0 rgba(255,243,244,0.35)", stroke: "none", pad: "0", scale: 1, opacity: 1, yOff: 0 },
-      top1: { w: 184, h: 28, bg: 0.44, r: "18px 18px 0 0", shadow: "0 -12px 8px 0 rgba(255,243,244,0.35)", stroke: "none", pad: "0", scale: 1, opacity: 1, yOff: 0 },
-      active: { w: 260, h: 175, bg: 0.92, r: "32px", shadow: "0 -12px 8px 0 rgba(255,243,244,0.35)", stroke: "inset 0 -2px 0 0 rgba(255,206,209,0.32)", pad: "22px 28px 23px", scale: 1, opacity: 1, yOff: 0 },
-      bot1: { w: 184, h: 28, bg: 0.44, r: "0 0 18px 18px", shadow: "none", stroke: "inset 0 -1.5px 0 0 rgba(255,222,224,0.32)", pad: "0", scale: 1, opacity: 1, yOff: 0 },
-      bot2: { w: 134, h: 20, bg: 0.24, r: "0 0 14px 14px", shadow: "none", stroke: "inset 0 -1.5px 0 0 rgba(255,222,224,0.24)", pad: "0", scale: 1, opacity: 1, yOff: 0 },
-    };
-
-    const ANIM_DUR = 450;
-    const ANIM_EASE = "cubic-bezier(0.4, 0, 0.2, 1)";
-    const ANIM_TR = `all ${ANIM_DUR}ms ${ANIM_EASE}`;
-
-    let elTop2 = root.querySelector<HTMLDivElement>("#stackTop2")!;
-    let elTop1 = root.querySelector<HTMLDivElement>("#stackTop1")!;
-    let elActive = root.querySelector<HTMLDivElement>("#stackActive")!;
-    let elBot1 = root.querySelector<HTMLDivElement>("#stackBot1")!;
-    let elBot2 = root.querySelector<HTMLDivElement>("#stackBot2")!;
-    let elActiveText = elActive.querySelector("span") as HTMLSpanElement;
-    let stackAnimating = false;
-
-    function applyState(el: HTMLDivElement, s: StackSpec, animate: boolean) {
-      el.style.transition = animate ? ANIM_TR : "none";
-      el.style.width = s.w + "px";
-      el.style.height = s.h + "px";
-      el.style.background = `rgba(255,222,224,${s.bg})`;
-      el.style.borderRadius = s.r;
-      el.style.boxShadow =
-        s.stroke !== "none" && s.shadow !== "none"
-          ? `${s.stroke},${s.shadow}`
-          : s.stroke !== "none"
-          ? s.stroke
-          : s.shadow;
-      el.style.padding = s.pad;
-      el.style.transform = `scale(${s.scale}) translateY(${s.yOff}px)`;
-      el.style.opacity = String(s.opacity);
-    }
-
-    applyState(elTop2, S.top2, false);
-    applyState(elTop1, S.top1, false);
-    applyState(elActive, S.active, false);
-    applyState(elBot1, S.bot1, false);
-    applyState(elBot2, S.bot2, false);
-    elActiveText.textContent = descriptions[0];
-
-    function updateDescription(idx: number) {
-      if (stackAnimating) return;
-      stackAnimating = true;
-      const nextText = descriptions[idx];
-
-      applyState(elTop2, { ...S.bot2, scale: 0.5, opacity: 0, yOff: 20 }, false);
-      pillStack!.appendChild(elTop2);
-
-      const newSpan = document.createElement("span");
-      newSpan.style.opacity = "0";
-      newSpan.textContent = nextText;
-      elBot1.appendChild(newSpan);
-      elBot1.classList.add("sp-stack__card--active");
-
-      elActiveText.style.transition = "opacity 0.15s ease-out";
-      elActiveText.style.opacity = "0";
-
-      void pillStack!.offsetHeight;
-
-      requestAnimationFrame(() => {
-        applyState(elTop1, S.top2, true);
-        applyState(elActive, { ...S.top1, pad: "0" }, true);
-        applyState(elBot1, S.active, true);
-        applyState(elBot2, S.bot1, true);
-        applyState(elTop2, S.bot2, true);
-      });
-
-      window.setTimeout(() => {
-        elActive.classList.remove("sp-stack__card--active");
-        if (elActiveText.parentNode) elActiveText.parentNode.removeChild(elActiveText);
-
-        const oldTop2 = elTop2;
-        elTop2 = elTop1;
-        elTop1 = elActive;
-        elActive = elBot1;
-        elActiveText = newSpan;
-        elBot1 = elBot2;
-        elBot2 = oldTop2;
-
-        void pillStack!.offsetHeight;
-        elActiveText.style.transition = "opacity 0.2s ease-in";
-        elActiveText.style.opacity = "1";
-
-        window.setTimeout(() => {
-          elActiveText.style.transition = "";
-          stackAnimating = false;
-        }, 220);
-      }, ANIM_DUR + 10);
-    }
-
-    // ---------- Wheel ----------
+    // ---------- Wheel geometry ----------
     let CARD_H = wheelContainer.offsetHeight || 364;
     let CENTER_Y = CARD_H / 2;
 
@@ -228,7 +120,6 @@ export function SocialProof() {
     let sweepingEl: HTMLElement | null = null;
 
     function activeSlotIdx() {
-      // Center the active slot in the middle of the COPIES list
       return Math.floor(COPIES / 2) * N + currentIdx;
     }
 
@@ -291,7 +182,6 @@ export function SocialProof() {
     }
 
     render();
-    updateDescription(currentIdx);
 
     // ---------- Sweep gradient ----------
     const isNarrowMobile = window.matchMedia("(max-width: 553px)");
@@ -378,7 +268,7 @@ export function SocialProof() {
       const start = performance.now();
       const distance = 16;
       const arrowLead = 60;
-      let sweepTriggered = false;
+      let activated = false;
 
       function tick(now: number) {
         const elapsed = now - start;
@@ -388,9 +278,9 @@ export function SocialProof() {
         const textT = Math.min(textElapsed / (NUDGE_DUR - arrowLead), 1);
         activeNudge = distance * springPushReturn(textT);
 
-        if (!sweepTriggered && elapsed >= 120) {
-          sweepTriggered = true;
-          updateDescription(currentIdx);
+        if (!activated && elapsed >= 120) {
+          activated = true;
+          setActiveServiceIdx(currentIdx);
           triggerSweep();
         }
         render();
@@ -682,14 +572,14 @@ export function SocialProof() {
               />
             </svg>
           </div>
-          <div className="sp-services__pill-stack" id="pillStack">
-            <div className="sp-stack__card" id="stackTop2" />
-            <div className="sp-stack__card" id="stackTop1" />
-            <div className="sp-stack__card sp-stack__card--active" id="stackActive">
-              <span />
+          <div className="sp-services__pill-stack">
+            <div className="sp-stack__deco sp-stack__deco--top2" aria-hidden />
+            <div className="sp-stack__deco sp-stack__deco--top1" aria-hidden />
+            <div className="sp-stack__active">
+              <span key={activeServiceIdx}>{DESCRIPTIONS[activeServiceIdx]}</span>
             </div>
-            <div className="sp-stack__card" id="stackBot1" />
-            <div className="sp-stack__card" id="stackBot2" />
+            <div className="sp-stack__deco sp-stack__deco--bot1" aria-hidden />
+            <div className="sp-stack__deco sp-stack__deco--bot2" aria-hidden />
           </div>
         </div>
       </div>
