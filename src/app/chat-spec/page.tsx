@@ -25,7 +25,7 @@ export default function ChatSpecPage() {
   const thumbs = IMAGES.map((src) => ({ src, ar: 16 / 9 }));
   return (
     <>
-      <SiteChrome thumbs={thumbs} />
+      <SiteChrome thumbs={thumbs} variant="light" />
       <main className="bg-black text-white">
         <section className="px-4 pt-32 pb-16 md:px-8 md:pt-40 md:pb-24">
           <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
