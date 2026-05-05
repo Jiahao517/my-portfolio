@@ -11,29 +11,6 @@ const SUGGESTED = [
   "他的离职原因是什么？",
 ];
 
-function XIcon() {
-  return (
-    <svg width="18" height="16" viewBox="0 0 21.854 19.933" fill="currentColor" aria-hidden>
-      <path d="M 17.203 0 L 20.555 0 L 13.234 8.367 L 21.846 19.754 L 15.103 19.754 L 9.819 12.846 L 3.778 19.754 L 0.422 19.754 L 8.252 10.804 L 0 0 L 6.91 0 L 11.687 6.314 L 17.203 0 Z M 16.027 17.747 L 17.884 17.747 L 5.904 1.901 L 3.911 1.901 L 16.027 17.747 Z" />
-    </svg>
-  );
-}
-function MailIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="M3 7l9 6 9-6" />
-    </svg>
-  );
-}
-function LinkedInIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
-      <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.22 8.06h4.56V24H.22zM7.94 8.06h4.36v2.18h.06c.61-1.16 2.1-2.38 4.32-2.38 4.62 0 5.48 3.04 5.48 7v9.14h-4.56v-8.1c0-1.93-.04-4.42-2.7-4.42-2.7 0-3.12 2.11-3.12 4.28V24H7.94z" />
-    </svg>
-  );
-}
-
 export function ContactAI() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -135,59 +112,61 @@ export function ContactAI() {
             {error ? <div className="contact-ai__error">{error}</div> : null}
           </div>
 
-          {showGreeting ? (
-            <div className="contact-ai__suggestions">
-              {SUGGESTED.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  className="contact-ai__chip"
-                  onClick={() => send(s)}
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          ) : null}
-
-          <p className="contact-ai__disclaimer">
-            基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
-          </p>
-
-          <form
-            className="contact-ai__form"
-            onSubmit={(e) => {
-              e.preventDefault();
-              send(input);
-            }}
-          >
-            <BorderGlow
-              colors={["#c084fc", "#f472b6", "#38bdf8"]}
-              borderRadius={16}
-              borderWidth={1.5}
-              edgeSensitivity={40}
-              glowRadius={50}
-              coneSpread={30}
-              style={{ flex: 1 }}
-            >
-              <div className="contact-ai__input-wrap">
-                <textarea
-                  className="contact-ai__input"
-                  placeholder="留言…"
-                  rows={2}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  disabled={streaming}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && !e.shiftKey) {
-                      e.preventDefault();
-                      send(input);
-                    }
-                  }}
-                />
+          <div className="contact-ai__composer">
+            {showGreeting ? (
+              <div className="contact-ai__suggestions">
+                {SUGGESTED.map((s) => (
+                  <button
+                    key={s}
+                    type="button"
+                    className="contact-ai__chip"
+                    onClick={() => send(s)}
+                  >
+                    {s}
+                  </button>
+                ))}
               </div>
-            </BorderGlow>
-          </form>
+            ) : null}
+
+            <form
+              className="contact-ai__form"
+              onSubmit={(e) => {
+                e.preventDefault();
+                send(input);
+              }}
+            >
+              <BorderGlow
+                colors={["#c084fc", "#f472b6", "#38bdf8"]}
+                borderRadius={16}
+                borderWidth={1.5}
+                edgeSensitivity={40}
+                glowRadius={50}
+                coneSpread={30}
+                style={{ flex: 1 }}
+              >
+                <div className="contact-ai__input-wrap">
+                  <textarea
+                    className="contact-ai__input"
+                    placeholder="留言…"
+                    rows={2}
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    disabled={streaming}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && !e.shiftKey) {
+                        e.preventDefault();
+                        send(input);
+                      }
+                    }}
+                  />
+                </div>
+              </BorderGlow>
+            </form>
+
+            <p className="contact-ai__disclaimer">
+              基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
+            </p>
+          </div>
         </div>
       </div>
     </section>
