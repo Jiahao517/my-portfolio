@@ -16,6 +16,10 @@ npm install
 npm run dev
 ```
 
+## Deployment
+
+Production deployment notes live in [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 ## Available Commands
 
 ```bash
