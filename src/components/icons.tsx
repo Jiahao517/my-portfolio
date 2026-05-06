@@ -26,13 +26,3 @@ export function ArrowLeftIcon({ fill = "#002E71", ...props }: SVGProps<SVGSVGEle
   );
 }
 
-export function GlobeIcon({ stroke = "#6B6666", ...props }: SVGProps<SVGSVGElement> & { stroke?: string }) {
-  return (
-    <svg className="globe-svg" viewBox="0 0 22 22" width="22" height="22" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-      <circle cx="11" cy="11" r="10" stroke={stroke} strokeWidth="1.5" />
-      <line x1="1" y1="11" x2="21" y2="11" stroke={stroke} strokeWidth="1.5" />
-      <ellipse className="globe-meridian" cx="11" cy="11" rx="10" ry="10" stroke={stroke} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-      <ellipse className="globe-meridian m2" cx="11" cy="11" rx="10" ry="10" stroke={stroke} strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
-    </svg>
-  );
-}

@@ -24,7 +24,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
           <Link
             href={cs.href}
             target={cs.externalHref ? "_blank" : undefined}
-            rel={cs.externalHref ? "noopener" : undefined}
+            rel={cs.externalHref ? "noopener noreferrer" : undefined}
             className="case-study__btn"
           >
             <span>{cs.ctaLabel}</span>
@@ -35,7 +35,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
       <Link
         href={cs.href}
         target={cs.externalHref ? "_blank" : undefined}
-        rel={cs.externalHref ? "noopener" : undefined}
+        rel={cs.externalHref ? "noopener noreferrer" : undefined}
         className="case-study__image-wrap"
         style={cs.imageBg ? { background: cs.imageBg } : undefined}
       >

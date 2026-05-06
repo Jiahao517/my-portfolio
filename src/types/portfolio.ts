@@ -1,10 +1,3 @@
-export type Testimonial = {
-  name: string;
-  role: string;
-  photo: string;
-  quote: string[];
-};
-
 export type CaseStudy = {
   slug: string;
   title: string;
@@ -28,31 +21,6 @@ export type ExperienceRow = {
   company: string;
   period: string;
   description: string;
-};
-
-export type PublicationCard = {
-  href: string;
-  bg: string;
-  logo: string;
-  logoBg?: string;
-  title: string;
-  caption: string;
-};
-
-export type ToolCard = {
-  href: string;
-  logo: string;
-  logoAlt: string;
-  titleFull: string;
-  titleShort: string;
-  captionFull: string;
-  captionShort: string;
-};
-
-export type AiPill = {
-  href: string;
-  icon: string;
-  label: string;
 };
 
 export type ChatMessage = {

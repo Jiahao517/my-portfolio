@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { experience } from "@/data/experience";
 import { ExperienceRowExpand } from "./ExperienceRowExpand";
 
@@ -16,9 +17,11 @@ export function Experience() {
                   className={`experience__logo-wrap${i >= 2 ? " experience__logo-wrap--stroke" : ""}`}
                   style={{ borderRadius: row.logoRadius }}
                 >
-                  <img
+                  <Image
                     src={row.logo}
                     alt={row.logoAlt}
+                    width={56}
+                    height={56}
                     className="experience__logo"
                     style={{ borderRadius: row.logoRadius }}
                   />

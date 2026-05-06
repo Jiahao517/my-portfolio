@@ -52,14 +52,13 @@ export function SocialProof() {
 
   const t = TRAITS[tIdx];
 
-  const goto = (next: number, dir: 1 | -1) => {
+  const goto = (next: number) => {
     if (next < 0 || next >= TRAITS.length || transitioning) return;
     setTransitioning(true);
     window.setTimeout(() => {
       setTIdx(next);
       setTransitioning(false);
     }, 220);
-    void dir;
   };
 
   useEffect(() => {
@@ -598,7 +597,7 @@ export function SocialProof() {
               className="sp-testimonial__btn sp-testimonial__btn--prev"
               disabled={tIdx === 0}
               aria-label="上一条"
-              onClick={() => goto(tIdx - 1, -1)}
+              onClick={() => goto(tIdx - 1)}
             >
               <ArrowLeftIcon />
             </button>
@@ -607,7 +606,7 @@ export function SocialProof() {
               className="sp-testimonial__btn sp-testimonial__btn--next"
               disabled={tIdx === TRAITS.length - 1}
               aria-label="下一条"
-              onClick={() => goto(tIdx + 1, 1)}
+              onClick={() => goto(tIdx + 1)}
             >
               <ArrowRightIcon fill="#002E71" />
             </button>
@@ -626,7 +625,7 @@ export function SocialProof() {
               type="button"
               aria-label={`切换到第 ${i + 1} 条`}
               className={`sp-testimonial__dot${i === tIdx ? " sp-testimonial__dot--active" : ""}`}
-              onClick={() => goto(i, i > tIdx ? 1 : -1)}
+              onClick={() => goto(i)}
             />
           ))}
         </div>

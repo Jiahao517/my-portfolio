@@ -145,8 +145,9 @@ function ScrambleRevealText({
   );
 }
 
+const FOOTER_TITLE = "AI时代的设计工作流";
+
 export function ArtFooter() {
-  const footerTitle = "AI时代的设计工作流";
   const [time, setTime] = useState(() => formatHangzhouTime());
   const [isVisualActive, setIsVisualActive] = useState(false);
   const [isMainVisible, setIsMainVisible] = useState(false);
@@ -234,7 +235,7 @@ export function ArtFooter() {
     [],
   );
 
-  const nameOrder = useMemo(() => buildCenterOutOrder(Array.from(footerTitle).length), [footerTitle]);
+  const nameOrder = useMemo(() => buildCenterOutOrder(Array.from(FOOTER_TITLE).length), []);
 
   const scrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -279,8 +280,8 @@ export function ArtFooter() {
               </div>
             </div>
 
-            <div className="art-footer__big-name" aria-label={footerTitle}>
-              <span className="art-footer__big-name-main">{splitChars(footerTitle, 0, nameOrder)}</span>
+            <div className="art-footer__big-name" aria-label={FOOTER_TITLE}>
+              <span className="art-footer__big-name-main">{splitChars(FOOTER_TITLE, 0, nameOrder)}</span>
             </div>
 
             <div className="art-footer__utility-row">

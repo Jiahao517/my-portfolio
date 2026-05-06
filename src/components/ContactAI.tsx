@@ -20,6 +20,10 @@ export function ContactAI() {
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => {
+    return () => { abortRef.current?.abort(); };
+  }, []);
+
+  useEffect(() => {
     const el = listRef.current;
     if (el) el.scrollTop = el.scrollHeight;
   }, [messages, streaming]);
