@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
+import { WencaiBrandVideo } from "@/components/WencaiBrandVideo";
 
 export const metadata: Metadata = {
   title: "问财智能投顾",
@@ -89,19 +90,25 @@ export default function WencaiPage() {
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">
           {BLOCKS.map((block, i) => (
-            <div
-              key={i}
-              className={
-                block.type === "twoColumn"
-                  ? "grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-3"
-                  : "grid grid-cols-1"
-              }
-            >
-              {block.items.map((item, j) => (
-                <div key={j} className="overflow-hidden bg-neutral-900">
-                  <Media item={item} />
+            <div key={i} className="contents">
+              <div
+                className={
+                  block.type === "twoColumn"
+                    ? "grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-3"
+                    : "grid grid-cols-1"
+                }
+              >
+                {block.items.map((item, j) => (
+                  <div key={j} className="overflow-hidden bg-neutral-900">
+                    <Media item={item} />
+                  </div>
+                ))}
+              </div>
+              {block.items.some((item) => item.image === "/images/wencai/32.问财.png") ? (
+                <div className="grid grid-cols-1">
+                  <WencaiBrandVideo />
                 </div>
-              ))}
+              ) : null}
             </div>
           ))}
         </div>

@@ -98,6 +98,12 @@ git pull
 SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
 ```
 
+To enable the AI chat in production, pass the server-side OpenAI variables when redeploying:
+
+```bash
+OPENAI_API_KEY="sk-..." OPENAI_BASE_URL="https://api.openai.com" SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
+```
+
 Or from anywhere on the server:
 
 ```bash

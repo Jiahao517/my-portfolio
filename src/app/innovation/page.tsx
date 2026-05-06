@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import { CaseFloatingVideo } from "@/components/CaseFloatingVideo";
 import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
 
@@ -39,16 +40,23 @@ export default function InnovationPage() {
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">
           {IMAGES.map((src, i) => (
-            <div key={i} className="overflow-hidden bg-neutral-900">
-              <Image
-                src={src}
-                alt=""
-                width={1920}
-                height={1080}
-                sizes="100vw"
-                className="block h-auto w-full"
-                priority={i === 0}
-              />
+            <div key={i} className="contents">
+              <div className="overflow-hidden bg-neutral-900">
+                <Image
+                  src={src}
+                  alt=""
+                  width={1920}
+                  height={1080}
+                  sizes="100vw"
+                  className="block h-auto w-full"
+                  priority={i === 0}
+                />
+              </div>
+              {src === "/images/chuangxin-ordered/01-46.专利.png" ? (
+                <div className="grid grid-cols-1">
+                  <CaseFloatingVideo src="/videos/innovation-aime-brand.mp4" />
+                </div>
+              ) : null}
             </div>
           ))}
         </div>

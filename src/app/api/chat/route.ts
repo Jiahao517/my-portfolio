@@ -80,7 +80,7 @@ export async function POST(req: NextRequest) {
         const enc = new TextEncoder();
         const lines = [
           "（演示回退：尚未配置 OPENAI_API_KEY。）",
-          "把 OPENAI_API_KEY 加进 Vercel 环境变量后，这里就会接到 GPT-4.1 真实回答。",
+          "把 OPENAI_API_KEY 加进线上运行环境后，这里就会接到 GPT-4.1 真实回答。",
         ];
         let i = 0;
         const id = setInterval(() => {

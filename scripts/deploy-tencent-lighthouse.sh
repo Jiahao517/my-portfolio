@@ -8,6 +8,7 @@ APP_PORT="3000"
 PUBLIC_HOST="${PUBLIC_HOST:-43.156.238.85}"
 SITE_URL="${SITE_URL:-http://$PUBLIC_HOST}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-}"
+OPENAI_BASE_URL="${OPENAI_BASE_URL:-}"
 
 if [ "$(id -u)" -eq 0 ]; then
   SUDO=""
@@ -57,22 +58,14 @@ build_and_run() {
 
   $SUDO docker rm -f "$APP_NAME" >/dev/null 2>&1 || true
 
-  if [ -n "$OPENAI_API_KEY" ]; then
-    $SUDO docker run -d \
-      --name "$APP_NAME" \
-      --restart unless-stopped \
-      -p "$APP_PORT:$APP_PORT" \
-      -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
-      -e OPENAI_API_KEY="$OPENAI_API_KEY" \
-      "$APP_NAME"
-  else
-    $SUDO docker run -d \
-      --name "$APP_NAME" \
-      --restart unless-stopped \
-      -p "$APP_PORT:$APP_PORT" \
-      -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
-      "$APP_NAME"
-  fi
+  $SUDO docker run -d \
+    --name "$APP_NAME" \
+    --restart unless-stopped \
+    -p "$APP_PORT:$APP_PORT" \
+    -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
+    -e OPENAI_API_KEY="$OPENAI_API_KEY" \
+    -e OPENAI_BASE_URL="$OPENAI_BASE_URL" \
+    "$APP_NAME"
 }
 
 configure_nginx() {
