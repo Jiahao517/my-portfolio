@@ -12,10 +12,10 @@ const SiteLogo = (
   <img src="/images/site-logo.png" alt="Logo" className="h-7 w-auto object-contain" />
 );
 
-const ArrowIcon = ({ dark }: { dark?: boolean }) => (
+const ArrowIcon = () => (
   <svg width="16" height="12" viewBox="0 0 16 12" fill="none">
     <path
-      fill={dark ? "#111" : "currentColor"}
+      fill="currentColor"
       fillRule="evenodd"
       d="M10.707.293a1 1 0 1 0-1.414 1.414L12.586 5H1a1 1 0 0 0 0 2h11.586l-3.293 3.293a1 1 0 1 0 1.414 1.414L15.5 7l.026-.026C15.896 6.604 16 6.5 16 6s-.105-.605-.474-.974L15.5 5z"
       clipRule="evenodd"
@@ -102,6 +102,10 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
   const panelBg = isLight ? "bg-white/95" : "bg-neutral-800/95";
   const panelRing = isLight ? "ring-black/8" : "ring-white/10";
   const dividerColor = isLight ? "border-black/10" : "border-white/15";
+  const menuItemColor = (isActive: boolean) =>
+    isActive
+      ? (isLight ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.4)")
+      : (isLight ? "rgba(0,0,0,0.92)" : "rgba(255,255,255,0.92)");
 
   return (
     <>
@@ -177,11 +181,11 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                     <Link
                       href={item.href ?? "#"}
                       className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 first:border-t-0 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
-                      style={{ color: isActive ? (isLight ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)") : (isLight ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.4)") }}
+                      style={{ color: menuItemColor(isActive) }}
                       onClick={() => setMenuOpen(false)}
                     >
                       <span>{item.label}</span>
-                      <ArrowIcon dark={isLight} />
+                      <ArrowIcon />
                     </Link>
                   </div>
                 );
@@ -193,11 +197,11 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                     key={cs.slug}
                     href={cs.href}
                     className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
-                    style={{ color: isActive ? (isLight ? "rgba(0,0,0,1)" : "rgba(255,255,255,1)") : (isLight ? "rgba(0,0,0,0.35)" : "rgba(255,255,255,0.4)") }}
+                    style={{ color: menuItemColor(isActive) }}
                     onClick={() => setMenuOpen(false)}
                   >
                     <span>{cs.title}</span>
-                    <ArrowIcon dark={isLight} />
+                    <ArrowIcon />
                   </Link>
                 );
               })}

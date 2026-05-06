@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import type { ChatMessage } from "@/types/portfolio";
 import { BorderGlow } from "@/components/BorderGlow";
+import { ChatMarkdown } from "@/components/ChatMarkdown";
 
 const SUGGESTED = [
   "他在 AI 产品设计上积累了哪些核心方法？",
@@ -10,6 +12,21 @@ const SUGGESTED = [
   "你是怎么把 AI Coding 融入设计工作流的？",
   "他的离职原因是什么？",
 ];
+
+function AssistantAvatar() {
+  return (
+    <div className="contact-ai__avatar" aria-hidden>
+      <Image
+        src="/images/assistant-avatar.png"
+        alt=""
+        width={48}
+        height={48}
+        sizes="48px"
+        className="contact-ai__avatar-img"
+      />
+    </div>
+  );
+}
 
 export function ContactAI() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -88,22 +105,18 @@ export function ContactAI() {
           <div ref={listRef} className="contact-ai__list">
             {showGreeting ? (
               <div className="contact-ai__row">
-                <div className="contact-ai__avatar" aria-hidden>
-                  <span>G</span>
-                </div>
+                <AssistantAvatar />
                 <div className="contact-ai__bubble contact-ai__bubble--bot">
-                  你好，我是钟家豪的 AI 作品集助理。我基于他的简历、作品集内容，帮助你快速了解他的 AI 产品设计经验、项目方法和能力特点。
+                  <ChatMarkdown content="你好，我是钟家豪的 AI 作品集助理。我基于他的简历、作品集内容，帮助你快速了解他的 AI 产品设计经验、项目方法和能力特点。" />
                 </div>
               </div>
             ) : (
               messages.map((m, i) =>
                 m.role === "assistant" ? (
                   <div key={i} className="contact-ai__row">
-                    <div className="contact-ai__avatar" aria-hidden>
-                      <span>G</span>
-                    </div>
+                    <AssistantAvatar />
                     <div className="contact-ai__bubble contact-ai__bubble--bot">
-                      {m.content || (streaming && i === messages.length - 1 ? "正在思考…" : "")}
+                      <ChatMarkdown content={m.content || (streaming && i === messages.length - 1 ? "正在思考…" : "")} />
                     </div>
                   </div>
                 ) : (

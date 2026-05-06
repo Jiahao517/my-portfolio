@@ -89,6 +89,9 @@ export default function WencaiPage() {
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">
+          <div className="grid grid-cols-1">
+            <WencaiBrandVideo />
+          </div>
           {BLOCKS.map((block, i) => (
             <div key={i} className="contents">
               <div
@@ -104,11 +107,6 @@ export default function WencaiPage() {
                   </div>
                 ))}
               </div>
-              {block.items.some((item) => item.image === "/images/wencai/32.问财.png") ? (
-                <div className="grid grid-cols-1">
-                  <WencaiBrandVideo />
-                </div>
-              ) : null}
             </div>
           ))}
         </div>
