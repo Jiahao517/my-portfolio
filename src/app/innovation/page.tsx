@@ -26,7 +26,13 @@ const IMAGES = [
 ];
 
 export default function InnovationPage() {
-  const thumbs = IMAGES.map((src) => ({ src, ar: 16 / 9 }));
+  const imagesThumbs = IMAGES.map((src) => ({ src, ar: 16 / 9 }));
+  // 视频插在第一张图后面，在 index 1 补一个占位缩略图保持导航条对齐
+  const thumbs = [
+    imagesThumbs[0],
+    { src: "/images/chuangxin-ordered/02-47.专利.png", ar: 16 / 9 },
+    ...imagesThumbs.slice(1),
+  ];
   return (
     <>
       <SiteChrome thumbs={thumbs} variant="light" />

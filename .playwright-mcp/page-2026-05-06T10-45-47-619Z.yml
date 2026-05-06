@@ -1,0 +1,95 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - generic [ref=e2]:
+      - button "Open menu" [ref=e3]:
+        - img [ref=e4]
+      - link "钟家豪作品集" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logo" [ref=e7]
+      - generic [ref=e8]:
+        - dialog:
+          - generic:
+            - generic:
+              - generic:
+                - generic: 邮箱
+                - generic: zjh532169990@163.com
+              - generic:
+                - generic: 手机号
+                - generic: "17681828517"
+            - generic:
+              - generic:
+                - generic: 微信
+              - generic:
+                - img
+              - generic: Jiahao0517
+        - button "Contact" [ref=e9]:
+          - img [ref=e10]
+  - generic:
+    - button
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: /
+              - generic: 首页
+              - img
+          - link:
+            - /url: /dingtalk
+            - generic: 钉钉 AI 产品实践
+            - img
+          - link:
+            - /url: /wencai
+            - generic: 问财智能投顾
+            - img
+          - link:
+            - /url: /chat-spec
+            - generic: 智能对话设计规范
+            - img
+          - link:
+            - /url: /innovation
+            - generic: 设计创新
+            - img
+  - generic [ref=e14]:
+    - button "Jump to image 1" [ref=e15]
+    - button "Jump to image 2" [ref=e16]
+    - button "Jump to image 3" [ref=e17]
+    - button "Jump to image 4" [ref=e18]
+    - button "Jump to image 5" [ref=e19]
+    - button "Jump to image 6" [ref=e20]
+    - button "Jump to image 7" [ref=e21]
+    - button "Jump to image 8" [ref=e22]
+    - button "Jump to image 9" [ref=e23]
+    - button "Jump to image 10" [ref=e24]
+    - button "Jump to image 11" [ref=e25]
+    - button "Jump to image 12" [ref=e26]
+    - button "Jump to image 13" [ref=e27]
+    - button "Jump to image 14" [ref=e28]
+  - main [ref=e29]:
+    - generic [ref=e30]:
+      - heading "设计创新" [level=1] [ref=e31]
+      - paragraph [ref=e32]: 围绕业务问题做创新，并落到专利与设计成果中 · '21 − '25
+    - navigation [ref=e63]:
+      - link "返回首页 →" [ref=e64] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e65]: 返回首页
+        - generic [ref=e66]: →
+      - link "钉钉 AI 产品实践 →" [ref=e67] [cursor=pointer]:
+        - /url: /dingtalk
+        - generic [ref=e68]: 钉钉 AI 产品实践
+        - generic [ref=e69]: →
+      - link "问财智能投顾 →" [ref=e70] [cursor=pointer]:
+        - /url: /wencai
+        - generic [ref=e71]: 问财智能投顾
+        - generic [ref=e72]: →
+      - link "智能对话设计规范 →" [ref=e73] [cursor=pointer]:
+        - /url: /chat-spec
+        - generic [ref=e74]: 智能对话设计规范
+        - generic [ref=e75]: →
+      - link "设计创新 →" [ref=e76]:
+        - /url: /innovation
+        - generic [ref=e77]: 设计创新
+        - generic [ref=e78]: →
+  - button "Open Next.js Dev Tools" [ref=e84] [cursor=pointer]:
+    - img [ref=e85]
+  - alert [ref=e88]

@@ -1,0 +1,114 @@
+- generic [active] [ref=e1]:
+  - banner:
+    - generic [ref=e2]:
+      - button "Open menu" [ref=e3]:
+        - img [ref=e4]
+      - link "钟家豪作品集" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img "Logo" [ref=e7]
+      - generic [ref=e8]:
+        - dialog:
+          - generic:
+            - generic:
+              - generic:
+                - generic: 邮箱
+                - generic: zjh532169990@163.com
+              - generic:
+                - generic: 手机号
+                - generic: "17681828517"
+            - generic:
+              - generic:
+                - generic: 微信
+              - generic:
+                - img
+              - generic: Jiahao0517
+        - button "Contact" [ref=e9]:
+          - img [ref=e10]
+  - generic:
+    - button
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - link:
+              - /url: /
+              - generic: 首页
+              - img
+          - link:
+            - /url: /dingtalk
+            - generic: 钉钉 AI 产品实践
+            - img
+          - link:
+            - /url: /wencai
+            - generic: 问财智能投顾
+            - img
+          - link:
+            - /url: /chat-spec
+            - generic: 智能对话设计规范
+            - img
+          - link:
+            - /url: /innovation
+            - generic: 设计创新
+            - img
+  - generic [ref=e14]:
+    - button "Jump to image 1" [ref=e15]
+    - button "Jump to image 2" [ref=e16]
+    - button "Jump to image 3" [ref=e17]
+    - button "Jump to image 4" [ref=e18]
+    - button "Jump to image 5" [ref=e19]
+    - button "Jump to image 6" [ref=e20]
+    - button "Jump to image 7" [ref=e21]
+    - button "Jump to image 8" [ref=e22]
+    - button "Jump to image 9" [ref=e23]
+    - button "Jump to image 10" [ref=e24]
+    - button "Jump to image 11" [ref=e25]
+    - button "Jump to image 12" [ref=e26]
+    - button "Jump to image 13" [ref=e27]
+    - button "Jump to image 14" [ref=e28]
+    - button "Jump to image 15" [ref=e29]
+    - button "Jump to image 16" [ref=e30]
+    - button "Jump to image 17" [ref=e31]
+    - button "Jump to image 18" [ref=e32]
+    - button "Jump to image 19" [ref=e33]
+    - button "Jump to image 20" [ref=e34]
+    - button "Jump to image 21" [ref=e35]
+    - button "Jump to image 22" [ref=e36]
+    - button "Jump to image 23" [ref=e37]
+    - button "Jump to image 24" [ref=e38]
+  - main [ref=e39]:
+    - generic [ref=e40]:
+      - heading "问财智能投顾" [level=1] [ref=e41]
+      - paragraph [ref=e42]: AI+金融，交互范式升级，让答案可理解、可验证 · '23 − '25
+    - navigation [ref=e119]:
+      - link "返回首页 →" [ref=e120] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e121]: 返回首页
+        - generic [ref=e122]: →
+      - link "钉钉 AI 产品实践 →" [ref=e123] [cursor=pointer]:
+        - /url: /dingtalk
+        - generic [ref=e124]: 钉钉 AI 产品实践
+        - generic [ref=e125]: →
+      - link "问财智能投顾 →" [ref=e126]:
+        - /url: /wencai
+        - generic [ref=e127]: 问财智能投顾
+        - generic [ref=e128]: →
+      - link "智能对话设计规范 →" [ref=e129] [cursor=pointer]:
+        - /url: /chat-spec
+        - generic [ref=e130]: 智能对话设计规范
+        - generic [ref=e131]: →
+      - link "设计创新 →" [ref=e132] [cursor=pointer]:
+        - /url: /innovation
+        - generic [ref=e133]: 设计创新
+        - generic [ref=e134]: →
+    - generic [ref=e135]:
+      - generic [ref=e136]: © 钟家豪
+      - generic [ref=e137]:
+        - link "邮箱" [ref=e138] [cursor=pointer]:
+          - /url: mailto:zjh532169990@163.com
+        - link "手机号" [ref=e139] [cursor=pointer]:
+          - /url: tel:17681828517
+        - link "微信" [ref=e140] [cursor=pointer]:
+          - /url: /#about
+  - button "Open Next.js Dev Tools" [ref=e146] [cursor=pointer]:
+    - img [ref=e147]
+  - alert [ref=e150]

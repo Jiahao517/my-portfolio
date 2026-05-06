@@ -69,14 +69,17 @@ function Media({ item }: { item: MediaItem }) {
 }
 
 export default function WencaiPage() {
-  const thumbs = BLOCKS.flatMap((b) =>
-    b.items.map((it) => {
-      const m = it.image.match(/\/(\d+)x(\d+)\//);
-      const w = m ? Number(m[1]) : 16;
-      const h = m ? Number(m[2]) : 9;
-      return { src: it.image, ar: w / h };
-    }),
-  );
+  const thumbs = [
+    { src: "/images/wencai/04.png", ar: 16 / 9 },
+    ...BLOCKS.flatMap((b) =>
+      b.items.map((it) => {
+        const m = it.image.match(/\/(\d+)x(\d+)\//);
+        const w = m ? Number(m[1]) : 16;
+        const h = m ? Number(m[2]) : 9;
+        return { src: it.image, ar: w / h };
+      }),
+    ),
+  ];
   return (
     <>
       <SiteChrome thumbs={thumbs} variant="light" />
