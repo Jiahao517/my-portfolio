@@ -24,7 +24,7 @@ const ArrowIcon = ({ dark }: { dark?: boolean }) => (
 );
 
 const NAV_ITEMS = [
-  { label: "Index", href: "/" },
+  { label: "首页", href: "/" },
 ];
 
 type Thumb = { src: string; ar: number };
@@ -102,7 +102,6 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
   const panelBg = isLight ? "bg-white/95" : "bg-neutral-800/95";
   const panelRing = isLight ? "ring-black/8" : "ring-white/10";
   const dividerColor = isLight ? "border-black/10" : "border-white/15";
-  const socialText = isLight ? "text-black/60 hover:text-black hover:bg-black/5" : "text-white/80 hover:text-white hover:bg-white/10";
 
   return (
     <>
@@ -202,23 +201,6 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                   </Link>
                 );
               })}
-            </div>
-            <div className={`grid grid-cols-3 border-t ${dividerColor}`}>
-              {[
-                { label: "Email", href: "mailto:zjh532169990@163.com" },
-                { label: "Phone", href: "tel:17681828517" },
-                { label: "WeChat", href: "/#about" },
-              ].map((s, i) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target={s.href.startsWith("/") ? undefined : "_blank"}
-                  rel={s.href.startsWith("/") ? undefined : "noopener noreferrer"}
-                  className={`grid place-items-center py-5 text-xs uppercase tracking-widest transition-colors duration-150 ${socialText} ${i > 0 ? `border-l ${dividerColor}` : ""}`}
-                >
-                  {s.label}
-                </a>
-              ))}
             </div>
           </div>
         </div>

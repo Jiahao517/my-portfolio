@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -9,19 +9,19 @@ export const metadata: Metadata = {
 };
 
 const IMAGES = [
-  "/images/chuangxin/1.专利.png",
-  "/images/chuangxin/2.专利.png",
-  "/images/chuangxin/3.专利.png",
-  "/images/chuangxin/4.专利.png",
-  "/images/chuangxin/5.专利.png",
-  "/images/chuangxin/6.专利.png",
-  "/images/chuangxin/7.专利.png",
-  "/images/chuangxin/8.专利.png",
-  "/images/chuangxin/9.专利.png",
-  "/images/chuangxin/10.专利.png",
-  "/images/chuangxin/11.专利.png",
-  "/images/chuangxin/12.专利.png",
-  "/images/chuangxin/37.专利.png",
+  "/images/chuangxin-ordered/01-46.专利.png",
+  "/images/chuangxin-ordered/02-47.专利.png",
+  "/images/chuangxin-ordered/03-48.专利.png",
+  "/images/chuangxin-ordered/04-49.专利.png",
+  "/images/chuangxin-ordered/05-50.专利.png",
+  "/images/chuangxin-ordered/06-51.专利.png",
+  "/images/chuangxin-ordered/07-52.专利.png",
+  "/images/chuangxin-ordered/08-53.专利.png",
+  "/images/chuangxin-ordered/09-54.专利.png",
+  "/images/chuangxin-ordered/10-55.专利.png",
+  "/images/chuangxin-ordered/11-56.专利.png",
+  "/images/chuangxin-ordered/12-57.专利.png",
+  "/images/chuangxin-ordered/13-58.专利.png",
 ];
 
 export default function InnovationPage() {
@@ -53,21 +53,7 @@ export default function InnovationPage() {
           ))}
         </div>
 
-        <nav className="border-t border-white/15 px-4 py-8 md:px-10 mt-16">
-          {[
-            { label: "返回首页", href: "/" },
-            { label: "作品", href: "/#work" },
-          ].map((it) => (
-            <Link
-              key={it.label}
-              href={it.href}
-              className="flex items-center justify-between border-t border-white/15 py-5 text-2xl uppercase tracking-tight transition-colors hover:text-white/60 md:text-3xl"
-            >
-              <span>{it.label}</span>
-              <span className="text-white">→</span>
-            </Link>
-          ))}
-        </nav>
+        <CaseFooterNav currentSlug="innovation" />
       </main>
     </>
   );

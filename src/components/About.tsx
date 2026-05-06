@@ -9,24 +9,21 @@ const CONTACTS: {
   key: string;
   label: string;
   value: string;
-  hint: string;
   href?: string;
 }[] = [
   {
     key: "email",
     label: "邮箱",
     value: "zjh532169990@163.com",
-    hint: "Email",
     href: "mailto:zjh532169990@163.com",
   },
   {
     key: "phone",
     label: "手机号",
     value: "17681828517",
-    hint: "Phone",
     href: "tel:17681828517",
   },
-  { key: "wechat", label: "微信", value: "Jiahao0517", hint: "WeChat" },
+  { key: "wechat", label: "微信", value: "Jiahao0517" },
 ];
 
 export function About() {
@@ -167,7 +164,6 @@ export function About() {
                   key={c.key}
                   className={`contact-bento__card contact-bento__card--${c.key}`}
                 >
-                  <span className="contact-bento__hint">{c.hint}</span>
                   <span className="contact-bento__label">{c.label}</span>
                   <div className="contact-bento__value-row">
                     {c.href ? (
@@ -199,7 +195,6 @@ export function About() {
                 className="contact-bento__card contact-bento__card--wechat"
               >
                 <div className="contact-bento__wechat-head">
-                  <span className="contact-bento__hint">WeChat</span>
                   <span className="contact-bento__label">微信</span>
                 </div>
                 <div className="contact-bento__qr">

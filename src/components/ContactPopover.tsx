@@ -79,7 +79,6 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
               className="contact-popover__card"
               onPointerMove={onCardMove}
             >
-              <span className="contact-popover__hint">EMAIL</span>
               <span className="contact-popover__label">邮箱</span>
               <span className="contact-popover__value">
                 zjh532169990@163.com
@@ -89,7 +88,6 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
               className="contact-popover__card"
               onPointerMove={onCardMove}
             >
-              <span className="contact-popover__hint">PHONE</span>
               <span className="contact-popover__label">手机号</span>
               <span className="contact-popover__value">17681828517</span>
             </div>
@@ -100,7 +98,6 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
             onPointerMove={onCardMove}
           >
             <div className="contact-popover__wechat-head">
-              <span className="contact-popover__hint">WECHAT</span>
               <span className="contact-popover__label">微信</span>
             </div>
             <div className="contact-popover__qr">

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -50,21 +50,7 @@ export default function ChatSpecPage() {
           ))}
         </div>
 
-        <nav className="border-t border-white/15 px-4 py-8 md:px-10 mt-16">
-          {[
-            { label: "返回首页", href: "/" },
-            { label: "作品", href: "/#work" },
-          ].map((it) => (
-            <Link
-              key={it.label}
-              href={it.href}
-              className="flex items-center justify-between border-t border-white/15 py-5 text-2xl uppercase tracking-tight transition-colors hover:text-white/60 md:text-3xl"
-            >
-              <span>{it.label}</span>
-              <span className="text-white">→</span>
-            </Link>
-          ))}
-        </nav>
+        <CaseFooterNav currentSlug="chat-spec" />
       </main>
     </>
   );

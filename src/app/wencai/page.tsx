@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
 
 export const metadata: Metadata = {
@@ -12,45 +13,31 @@ type MediaItem = { image: string; video?: string };
 type Block = { type: "fullColumn" | "twoColumn"; items: MediaItem[] };
 
 const BLOCKS: Block[] = [
-  { type: "fullColumn", items: [{ image: "/images/wencai/04.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/05.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/06.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/07.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/08.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/09.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/10.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/11.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/12.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/13.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/14.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/15.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/16.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/17.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/18.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/19.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/20.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/21.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/21b.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/22.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/23.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/24.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/25.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/26.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/12.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/13.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/14.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/15.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/16.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/17.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/18.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/19.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/20.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/21.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/22.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/23.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/24.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/25.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/26.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/27.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/28.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/29.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/30.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/31.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/32.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/33.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/34.问财.png" }] },
+  { type: "fullColumn", items: [{ image: "/images/wencai/35.问财.png" }] },
 ];
-
-const PROJECT_INFO = `问财智能投顾项目围绕 AI+金融场景展开，重点解决大模型回答在专业决策中的可理解、可验证和可追溯问题。
-
-设计上，我从用户任务、信息层级和风险提示出发，梳理问答过程中的输入、生成、引用、追问与结果呈现规则，让复杂金融信息能被更快理解。
-
-项目同时沉淀了多轮对话、数据解释、图表辅助和异常状态的设计规范，帮助体验从单点页面延展到可复用的产品系统。
-
-这些工作支持了智能投顾场景中的交互范式升级，也让我形成了从问题发现、规则定义到实现推进的完整方法。`;
-
-const CREDITS = `产品体验设计
-钟家豪
-
-方向
-AI 金融产品 / 对话体验 / 设计规范`;
 
 function Media({ item }: { item: MediaItem }) {
   if (item.video) {
@@ -119,53 +106,14 @@ export default function WencaiPage() {
           ))}
         </div>
 
-        <section id="contact" className="grid grid-cols-1 gap-12 px-4 py-24 md:grid-cols-3 md:gap-16 md:px-10 md:py-32">
-          <div>
-            <h2 className="text-sm uppercase tracking-widest text-white/60">项目信息</h2>
-            <div className="mt-4 space-y-4 text-sm leading-relaxed text-white/85 md:text-base">
-              {PROJECT_INFO.split("\n\n").map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-sm uppercase tracking-widest text-white/60">项目角色</h2>
-            <div className="mt-4 whitespace-pre-line text-sm leading-relaxed text-white/85 md:text-base">
-              {CREDITS}
-            </div>
-          </div>
-          <div>
-            <h2 className="text-sm uppercase tracking-widest text-white/60">作品图片</h2>
-            <p className="mt-4 text-sm leading-relaxed text-white/85 md:text-base">
-              页面展示为项目关键页面与设计过程节选。
-            </p>
-          </div>
-        </section>
-
-        <nav className="border-t border-white/15 px-4 py-8 md:px-10">
-          {[
-            { label: "返回首页", href: "/" },
-            { label: "作品", href: "/#work" },
-            { label: "关于", href: "/#about" },
-            { label: "联系", href: "/#about" },
-          ].map((it) => (
-            <Link
-              key={it.label}
-              href={it.href}
-              className="flex items-center justify-between border-t border-white/15 py-5 text-2xl uppercase tracking-tight transition-colors hover:text-white/60 md:text-3xl"
-            >
-              <span>{it.label}</span>
-              <span className="text-white">→</span>
-            </Link>
-          ))}
-        </nav>
+        <CaseFooterNav currentSlug="wencai" />
 
         <footer className="flex flex-wrap items-center justify-between gap-4 px-4 py-10 text-xs text-white/50 md:px-10">
           <span>© 钟家豪</span>
           <div className="flex gap-6">
-            <a href="mailto:zjh532169990@163.com" className="hover:text-white">Email</a>
-            <a href="tel:17681828517" className="hover:text-white">Phone</a>
-            <Link href="/#about" className="hover:text-white">WeChat</Link>
+            <a href="mailto:zjh532169990@163.com" className="hover:text-white">邮箱</a>
+            <a href="tel:17681828517" className="hover:text-white">手机号</a>
+            <Link href="/#about" className="hover:text-white">微信</Link>
           </div>
         </footer>
       </main>
