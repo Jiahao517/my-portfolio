@@ -104,6 +104,14 @@ To enable the AI chat in production, pass the server-side OpenAI variables when 
 OPENAI_API_KEY="sk-..." OPENAI_BASE_URL="https://api.openai.com" SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
 ```
 
+For ChatAnywhere, set the base URL to the host only:
+
+```bash
+OPENAI_API_KEY="sk-..." OPENAI_BASE_URL="https://api.chatanywhere.tech" SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
+```
+
+Do not use `https://api.chatanywhere.tech/v1` here. The app's `/api/chat` route appends `/v1/chat/completions` automatically, so including `/v1` in `OPENAI_BASE_URL` causes a `/v1/v1/chat/completions` request and a 404 response.
+
 Or from anywhere on the server:
 
 ```bash
@@ -136,6 +144,13 @@ NEXT_PUBLIC_SITE_URL
 ```
 
 `OPENAI_API_KEY` is optional for basic site access. Without it, `/api/chat` returns the demo fallback response.
+
+`OPENAI_BASE_URL` should be the provider host before the `/v1` path. Examples:
+
+```text
+https://api.openai.com
+https://api.chatanywhere.tech
+```
 
 When HTTPS is enabled, use:
 

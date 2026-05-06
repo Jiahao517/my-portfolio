@@ -18,7 +18,10 @@ Node ≥ 24 required (see `.nvmrc`).
 
 ```
 OPENAI_API_KEY   # Required for ContactAI chat to use GPT-4.1; without it the API returns a demo fallback
+OPENAI_BASE_URL  # Optional OpenAI-compatible API host. Do not include /v1 for ChatAnywhere; use https://api.chatanywhere.tech
 ```
+
+`/api/chat` appends `/v1/chat/completions` itself. For ChatAnywhere, set `OPENAI_BASE_URL=https://api.chatanywhere.tech`, not `https://api.chatanywhere.tech/v1`, otherwise requests become `/v1/v1/chat/completions` and return 404.
 
 ## Architecture
 

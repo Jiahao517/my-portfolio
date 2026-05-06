@@ -4177,6 +4177,12 @@ a.work-card {
 .chat-markdown ol {
   padding-left: 20px;
 }
+.chat-markdown ul {
+  list-style: disc;
+}
+.chat-markdown ol {
+  list-style: decimal;
+}
 .chat-markdown li + li {
   margin-top: 4px;
 }

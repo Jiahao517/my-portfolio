@@ -7,9 +7,9 @@ import { BorderGlow } from "@/components/BorderGlow";
 import { ChatMarkdown } from "@/components/ChatMarkdown";
 
 const SUGGESTED = [
-  "他在 AI 产品设计上积累了哪些核心方法？",
   "他的个人亮点是什么？",
-  "你是怎么把 AI Coding 融入设计工作流的？",
+  "他是怎么把 AI Coding 融入设计工作流的？",
+  "他最有成就感的项目是什么？",
   "他的离职原因是什么？",
 ];
 

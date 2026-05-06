@@ -44,16 +44,53 @@ export function About() {
 
   const [copiedKey, setCopiedKey] = useState<string | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const copyResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const onCopy = async (key: string, value: string) => {
-    try {
+  const writeClipboard = async (value: string) => {
+    if (navigator.clipboard?.writeText) {
       await navigator.clipboard.writeText(value);
-      setCopiedKey(key);
-      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1500);
-    } catch {
-      /* ignore */
+      return;
+    }
+
+    const textarea = document.createElement("textarea");
+    textarea.value = value;
+    textarea.setAttribute("readonly", "");
+    textarea.style.position = "fixed";
+    textarea.style.top = "-9999px";
+    document.body.appendChild(textarea);
+    textarea.select();
+
+    try {
+      document.execCommand("copy");
+    } finally {
+      document.body.removeChild(textarea);
     }
   };
+
+  const onCopy = (key: string, value: string) => {
+    setCopiedKey(key);
+
+    if (copyResetTimerRef.current) {
+      clearTimeout(copyResetTimerRef.current);
+    }
+
+    copyResetTimerRef.current = setTimeout(() => {
+      setCopiedKey((currentKey) => (currentKey === key ? null : currentKey));
+      copyResetTimerRef.current = null;
+    }, 1500);
+
+    writeClipboard(value).catch(() => {
+      /* ignore */
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      if (copyResetTimerRef.current) {
+        clearTimeout(copyResetTimerRef.current);
+      }
+    };
+  }, []);
 
   // Cross-card glow: track mouse on grid, update --mx/--my/--glow-intensity on every card
   useEffect(() => {
