@@ -13,6 +13,16 @@ const SUGGESTED = [
   "他的离职原因是什么？",
 ];
 
+function ThinkingDots() {
+  return (
+    <span className="contact-ai__thinking-dots" aria-label="正在思考">
+      <span />
+      <span />
+      <span />
+    </span>
+  );
+}
+
 function AssistantAvatar() {
   return (
     <div className="contact-ai__avatar" aria-hidden>
@@ -116,7 +126,10 @@ export function ContactAI() {
                   <div key={i} className="contact-ai__row">
                     <AssistantAvatar />
                     <div className="contact-ai__bubble contact-ai__bubble--bot">
-                      <ChatMarkdown content={m.content || (streaming && i === messages.length - 1 ? "正在思考…" : "")} />
+                      {!m.content && streaming && i === messages.length - 1
+                        ? <ThinkingDots />
+                        : <ChatMarkdown content={m.content} />
+                      }
                     </div>
                   </div>
                 ) : (
