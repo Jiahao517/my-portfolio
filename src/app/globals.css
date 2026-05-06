@@ -4004,21 +4004,6 @@ a.work-card {
   height: 18px;
 }
 
-.contact-bento__copied {
-  position: absolute;
-  bottom: 12px;
-  right: 16px;
-  z-index: 3;
-  font-size: 12px;
-  font-weight: 500;
-  color: #4f46e5;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 4px 10px;
-  border-radius: var(--radius-full);
-  box-shadow: 0 4px 12px -4px rgba(0, 46, 113, 0.2);
-  animation: bento-fade 200ms ease-out;
-}
-
 @keyframes bento-fade {
   from { opacity: 0; transform: translateY(4px); }
   to   { opacity: 1; transform: translateY(0); }

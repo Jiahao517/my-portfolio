@@ -49,7 +49,7 @@ export function About() {
     try {
       await navigator.clipboard.writeText(value);
       setCopiedKey(key);
-      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1800);
+      setTimeout(() => setCopiedKey((k) => (k === key ? null : k)), 1500);
     } catch {
       /* ignore */
     }
@@ -182,12 +182,14 @@ export function About() {
                       onClick={() => onCopy(c.key, c.value)}
                       aria-label={`复制${c.label}`}
                     >
-                      <Image src="/images/icon-copy.svg" alt="" width={20} height={20} />
+                      <Image
+                        src={copiedKey === c.key ? "/images/check.svg" : "/images/icon-copy.svg"}
+                        alt=""
+                        width={20}
+                        height={20}
+                      />
                     </button>
                   </div>
-                  {copiedKey === c.key ? (
-                    <span className="contact-bento__copied">已复制</span>
-                  ) : null}
                 </div>
               ))}
 
@@ -214,12 +216,14 @@ export function About() {
                     onClick={() => onCopy("wechat", "Jiahao0517")}
                     aria-label="复制微信"
                   >
-                    <Image src="/images/icon-copy.svg" alt="" width={20} height={20} />
+                    <Image
+                      src={copiedKey === "wechat" ? "/images/check.svg" : "/images/icon-copy.svg"}
+                      alt=""
+                      width={20}
+                      height={20}
+                    />
                   </button>
                 </div>
-                {copiedKey === "wechat" ? (
-                  <span className="contact-bento__copied">已复制</span>
-                ) : null}
               </div>
             </div>
           </div>
