@@ -190,6 +190,16 @@ export function ContactAI() {
                         }
                       }}
                     />
+                    <button
+                      type="submit"
+                      className="contact-ai__send-btn"
+                      disabled={streaming || !input.trim()}
+                      aria-label="发送"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                        <path d="M9 15V3M9 3L4 8M9 3l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                    </button>
                   </div>
                 </BorderGlow>
               </form>

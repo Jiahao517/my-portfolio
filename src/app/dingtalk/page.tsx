@@ -29,7 +29,7 @@ export default function DingtalkPage() {
           <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             钉钉 AI 产品实践
           </h1>
-          <p className="mt-8 text-lg text-white/60">设计即交付：把设计推进到结果 · &apos;26</p>
+          <p className="md:mt-8 text-lg text-white/60">设计即交付：把设计推进到结果 · &apos;26</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

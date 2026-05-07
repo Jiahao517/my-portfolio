@@ -88,7 +88,7 @@ export default function WencaiPage() {
           <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             问财智能投顾
           </h1>
-          <p className="mt-4 text-lg text-white/60">AI+金融，交互范式升级，让答案可理解、可验证 · &apos;23 − &apos;25</p>
+          <p className="md:mt-4 text-lg text-white/60">AI+金融，交互范式升级，让答案可理解、可验证 · &apos;23 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

@@ -41,7 +41,7 @@ export default function InnovationPage() {
           <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             设计创新
           </h1>
-          <p className="mt-4 text-lg text-white/60">围绕业务问题做创新，并落到专利与设计成果中 · &apos;21 − &apos;25</p>
+          <p className="md:mt-4 text-lg text-white/60">围绕业务问题做创新，并落到专利与设计成果中 · &apos;21 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

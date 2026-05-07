@@ -49,6 +49,7 @@ export function SocialProof() {
   const [transitioning, setTransitioning] = useState(false);
   const [activeServiceIdx, setActiveServiceIdx] = useState(0);
   const wheelRootRef = useRef<HTMLDivElement>(null);
+  const swipeTouchStartX = useRef(0);
 
   const t = TRAITS[tIdx];
 
@@ -583,7 +584,15 @@ export function SocialProof() {
         </div>
       </div>
 
-      <div className="sp-card sp-card--testimonial" id="testimonialCard">
+      <div
+        className="sp-card sp-card--testimonial"
+        id="testimonialCard"
+        onTouchStart={(e) => { swipeTouchStartX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          const diff = swipeTouchStartX.current - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 48) goto(diff > 0 ? tIdx + 1 : tIdx - 1);
+        }}
+      >
         <div className="sp-testimonial__header">
           <div
             className="sp-testimonial__trait-title"

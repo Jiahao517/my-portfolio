@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Cormorant_Garamond, Inter, Manrope, Noto_Serif_SC } from "next/font/google";
+import { ContactModalProvider } from "@/components/ContactModal";
 import "./globals.css";
 
 const inter = Inter({
@@ -28,7 +29,7 @@ const notoSerifSc = Noto_Serif_SC({
 });
 
 const fzFont140 = localFont({
-  src: "./fonts/FZfont140.ttf",
+  src: "./fonts/FZfont140-subset.woff2",
   variable: "--font-fzfont140",
   display: "swap",
 });
@@ -70,7 +71,7 @@ export default function RootLayout({
           <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
         ) : null}
       </head>
-      <body className="fonts-ready">{children}</body>
+      <body className="fonts-ready"><ContactModalProvider>{children}</ContactModalProvider></body>
     </html>
   );
 }

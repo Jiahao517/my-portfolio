@@ -31,7 +31,7 @@ export default function ChatSpecPage() {
           <h1 className="text-[10vw] font-bold leading-[0.9] tracking-[-0.04em] md:text-[8vw] pb-4">
             智能对话设计规范
           </h1>
-          <p className="mt-4 text-lg text-white/60">统一对话组件与规则，让设计直接进入开发与使用 · &apos;23 − &apos;25</p>
+          <p className="md:mt-4 text-lg text-white/60">统一对话组件与规则，让设计直接进入开发与使用 · &apos;23 − &apos;25</p>
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">

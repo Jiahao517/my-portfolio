@@ -20,7 +20,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
             <span className="case-study__caption-year">{cs.year}</span>
           </p>
         </div>
-        <div className="case-study__buttons">
+        <div className="case-study__buttons case-study__buttons--desktop">
           <Link
             href={cs.href}
             target={cs.externalHref ? "_blank" : undefined}
@@ -73,6 +73,17 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
           ) : null}
         </div>
       </Link>
+      <div className="case-study__buttons case-study__buttons--mobile">
+        <Link
+          href={cs.href}
+          target={cs.externalHref ? "_blank" : undefined}
+          rel={cs.externalHref ? "noopener noreferrer" : undefined}
+          className="case-study__btn case-study__btn--mobile-full"
+        >
+          <span>{cs.ctaLabel}</span>
+          <ArrowRightIcon />
+        </Link>
+      </div>
     </div>
   );
 }

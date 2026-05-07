@@ -231,7 +231,7 @@ export function ArtFooter() {
   }, [isVisualActive]);
 
   const mobileSocialText = useMemo(
-    () => ["AI 产品设计师。", "为真实交付而设计。"],
+    () => ["AI 产品设计师", "为真实交付而设计"],
     [],
   );
 

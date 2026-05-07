@@ -76,7 +76,7 @@ export function HeroVideo() {
         <ContactPopover>
           <Magnet padding={60} magnetStrength={6}>
             <span className="case-study__btn hero-video__cta hero-video__cta--static">
-              <span>联系方式</span>
+              <span>联系我</span>
             </span>
           </Magnet>
         </ContactPopover>

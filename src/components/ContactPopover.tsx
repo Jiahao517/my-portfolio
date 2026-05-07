@@ -8,6 +8,7 @@ import {
   type PointerEvent as ReactPointerEvent,
   type ReactNode,
 } from "react";
+import { useContactModal } from "@/components/ContactModal";
 
 interface ContactPopoverProps {
   children: ReactNode;
@@ -20,6 +21,7 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
   const [open, setOpen] = useState(false);
   const [resolvedPlacement, setResolvedPlacement] = useState<"above" | "below">("above");
   const ref = useRef<HTMLDivElement>(null);
+  const { openModal } = useContactModal();
 
   const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -55,6 +57,10 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
     .join(" ");
 
   const handleToggle = () => {
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      openModal();
+      return;
+    }
     if (!open && placement === "auto" && ref.current) {
       const rect = ref.current.getBoundingClientRect();
       setResolvedPlacement(rect.top >= POPOVER_HEIGHT ? "above" : "below");
