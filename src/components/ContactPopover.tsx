@@ -78,6 +78,7 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
         className={panelClass}
         role="dialog"
         aria-hidden={!open}
+        data-no-trail
       >
         <div className="contact-popover__grid">
           <div className="contact-popover__col">

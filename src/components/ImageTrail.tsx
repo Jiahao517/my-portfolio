@@ -94,6 +94,7 @@ export function ImageTrail({ items, containerRef, threshold = 80 }: ImageTrailPr
     };
 
     const onMove = (e: MouseEvent | TouchEvent) => {
+      if ((e.target as Element).closest?.("[data-no-trail]")) return;
       const rect = eventTarget.getBoundingClientRect();
       mousePos = getLocalPos(e, rect);
       if (!started) {

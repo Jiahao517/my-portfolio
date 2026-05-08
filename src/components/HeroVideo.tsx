@@ -5,9 +5,26 @@ import { Magnet } from "@/components/Magnet";
 import { SplitText } from "@/components/SplitText";
 import { DecryptedText } from "@/components/DecryptedText";
 import { ContactPopover } from "@/components/ContactPopover";
+import { ImageTrail } from "@/components/ImageTrail";
+
+const HERO_TRAIL_IMAGES = [
+  "/images/case-dingtalk.png",
+  "/images/case-wencai.png",
+  "/images/case-chatspec.png",
+  "/images/case-innovation.png",
+  "/images/case-voiceflow.png",
+  "/images/dingtalk/1.png",
+  "/images/dingtalk/2.png",
+  "/images/wencai/06.png",
+  "/images/wencai/07.png",
+  "/images/guifan/28.规范.png",
+  "/images/chuangxin/1.专利.png",
+  "/images/chuangxin/2.专利.png",
+];
 
 export function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -31,7 +48,8 @@ export function HeroVideo() {
   }, [isMobile]);
 
   return (
-    <section className="hero-video">
+    <section ref={sectionRef} className="hero-video">
+      <ImageTrail items={HERO_TRAIL_IMAGES} containerRef={sectionRef} threshold={80} />
       <video
         ref={videoRef}
         className="hero-video__media"
