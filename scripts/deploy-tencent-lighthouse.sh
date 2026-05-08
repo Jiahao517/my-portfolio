@@ -5,8 +5,8 @@ APP_NAME="my-portfolio"
 REPO_URL="https://github.com/Jiahao517/my-portfolio.git"
 APP_DIR="/opt/$APP_NAME"
 APP_PORT="3000"
-PUBLIC_HOST="${PUBLIC_HOST:-43.156.238.85}"
-SITE_URL="${SITE_URL:-http://$PUBLIC_HOST}"
+PUBLIC_HOST="${PUBLIC_HOST:-www.zhongjiahao.art}"
+SITE_URL="${SITE_URL:-https://$PUBLIC_HOST}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-}"
 OPENAI_BASE_URL="${OPENAI_BASE_URL:-}"
 
@@ -69,10 +69,39 @@ build_and_run() {
 }
 
 configure_nginx() {
+  CERT_DIR="/etc/letsencrypt/live/zhongjiahao.art"
+
   if [ -d /etc/nginx/sites-available ]; then
     NGINX_CONF="/etc/nginx/sites-available/$APP_NAME"
     NGINX_LINK="/etc/nginx/sites-enabled/$APP_NAME"
-    $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
+    if [ -f "$CERT_DIR/fullchain.pem" ] && [ -f "$CERT_DIR/privkey.pem" ]; then
+      $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
+server {
+    listen 80;
+    server_name $PUBLIC_HOST;
+
+    return 301 https://\$host\$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name $PUBLIC_HOST;
+
+    ssl_certificate $CERT_DIR/fullchain.pem;
+    ssl_certificate_key $CERT_DIR/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:$APP_PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
+    else
+      $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
 server {
     listen 80;
     server_name $PUBLIC_HOST;
@@ -87,10 +116,38 @@ server {
     }
 }
 EOF
+    fi
     $SUDO ln -sf "$NGINX_CONF" "$NGINX_LINK"
   else
     NGINX_CONF="/etc/nginx/conf.d/$APP_NAME.conf"
-    $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
+    if [ -f "$CERT_DIR/fullchain.pem" ] && [ -f "$CERT_DIR/privkey.pem" ]; then
+      $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
+server {
+    listen 80;
+    server_name $PUBLIC_HOST;
+
+    return 301 https://\$host\$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name $PUBLIC_HOST;
+
+    ssl_certificate $CERT_DIR/fullchain.pem;
+    ssl_certificate_key $CERT_DIR/privkey.pem;
+
+    location / {
+        proxy_pass http://127.0.0.1:$APP_PORT;
+        proxy_http_version 1.1;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+}
+EOF
+    else
+      $SUDO tee "$NGINX_CONF" >/dev/null <<EOF
 server {
     listen 80;
     server_name $PUBLIC_HOST;
@@ -105,6 +162,7 @@ server {
     }
 }
 EOF
+    fi
   fi
 
   $SUDO nginx -t
