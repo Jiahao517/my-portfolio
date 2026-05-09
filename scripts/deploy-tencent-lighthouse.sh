@@ -56,6 +56,8 @@ sync_repo() {
 
 build_and_run() {
   cd "$APP_DIR"
+  $SUDO mkdir -p /opt/my-portfolio-data
+
   $SUDO docker build \
     --build-arg NEXT_PUBLIC_SITE_URL="$SITE_URL" \
     --build-arg NEXT_PUBLIC_CLARITY_ID="$NEXT_PUBLIC_CLARITY_ID" \
@@ -67,7 +69,7 @@ build_and_run() {
     --name "$APP_NAME" \
     --restart unless-stopped \
     -p "$APP_PORT:$APP_PORT" \
-    -v /opt/my-portfolio-data:/data \
+    -v /opt/my-portfolio-data:/app/data \
     -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
     -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e OPENAI_BASE_URL="$OPENAI_BASE_URL" \

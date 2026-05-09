@@ -5,7 +5,7 @@ import type { NextRequest } from "next/server";
 import { buildAnalyticsSummary } from "./summary";
 import type { AnalyticsEventInput, AnalyticsEventRecord, AnalyticsSummary, AnalyticsVisitorInfo } from "./types";
 
-const DATA_DIR = process.env.ANALYTICS_DATA_DIR || "/data/analytics";
+const DATA_DIR = path.join(process.cwd(), "data", "analytics");
 const EVENT_FILE = path.join(DATA_DIR, "events.jsonl");
 const MAX_EVENT_BYTES = 1024 * 1024 * 12;
 const ROTATE_EVENT_BYTES = 1024 * 1024 * 50;
@@ -33,11 +33,8 @@ export async function appendAnalyticsEvent(req: NextRequest, input: AnalyticsEve
 
 export async function readAnalyticsEvents(): Promise<AnalyticsEventRecord[]> {
   try {
-    const fileStat = await stat(EVENT_FILE);
-    if (fileStat.size > MAX_EVENT_BYTES) {
-      return parseEvents((await readFile(EVENT_FILE, "utf8")).slice(-MAX_EVENT_BYTES));
-    }
-    return parseEvents(await readFile(EVENT_FILE, "utf8"));
+    const content = await readRecentEventContent();
+    return parseEvents(content);
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") return [];
     throw error;
@@ -79,16 +76,22 @@ async function getVisitorInfo(req: NextRequest): Promise<AnalyticsVisitorInfo> {
 }
 
 async function queueWrite(line: string) {
-  writeQueue = writeQueue.then(async () => {
+  const next = writeQueue.then(async () => {
     await ensureDataDir();
     await rotateEventsIfNeeded();
     await appendFile(EVENT_FILE, line, "utf8");
   });
-  await writeQueue;
+  writeQueue = next.catch(() => undefined);
+  await next;
 }
 
 async function ensureDataDir() {
-  ensureDataDirPromise ??= mkdir(DATA_DIR, { recursive: true }).then(() => undefined);
+  ensureDataDirPromise ??= mkdir(DATA_DIR, { recursive: true })
+    .then(() => undefined)
+    .catch((error) => {
+      ensureDataDirPromise = undefined;
+      throw error;
+    });
   await ensureDataDirPromise;
 }
 
@@ -97,8 +100,34 @@ async function rotateEventsIfNeeded() {
     const fileStat = await stat(EVENT_FILE);
     if (fileStat.size < ROTATE_EVENT_BYTES) return;
     const rotated = `${EVENT_FILE}.1`;
-    await unlink(rotated).catch(() => undefined);
+    await unlinkIfExists(rotated);
     await rename(EVENT_FILE, rotated);
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") return;
+    throw error;
+  }
+}
+
+async function readRecentEventContent() {
+  const chunks: string[] = [];
+  const rotated = `${EVENT_FILE}.1`;
+
+  for (const file of [rotated, EVENT_FILE]) {
+    try {
+      chunks.push(await readFile(file, "utf8"));
+    } catch (error) {
+      if (error instanceof Error && "code" in error && error.code === "ENOENT") continue;
+      throw error;
+    }
+  }
+
+  const content = chunks.join("");
+  return content.length > MAX_EVENT_BYTES ? content.slice(-MAX_EVENT_BYTES) : content;
+}
+
+async function unlinkIfExists(file: string) {
+  try {
+    await unlink(file);
   } catch (error) {
     if (error instanceof Error && "code" in error && error.code === "ENOENT") return;
     throw error;
