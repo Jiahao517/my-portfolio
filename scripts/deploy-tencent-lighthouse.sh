@@ -9,6 +9,10 @@ PUBLIC_HOST="${PUBLIC_HOST:-www.zhongjiahao.art}"
 SITE_URL="${SITE_URL:-https://$PUBLIC_HOST}"
 OPENAI_API_KEY="${OPENAI_API_KEY:-}"
 OPENAI_BASE_URL="${OPENAI_BASE_URL:-}"
+NEXT_PUBLIC_CLARITY_ID="${NEXT_PUBLIC_CLARITY_ID:-}"
+ANALYTICS_ADMIN_PASSWORD="${ANALYTICS_ADMIN_PASSWORD:-}"
+ANALYTICS_SALT="${ANALYTICS_SALT:-}"
+IPINFO_TOKEN="${IPINFO_TOKEN:-}"
 
 if [ "$(id -u)" -eq 0 ]; then
   SUDO=""
@@ -54,6 +58,7 @@ build_and_run() {
   cd "$APP_DIR"
   $SUDO docker build \
     --build-arg NEXT_PUBLIC_SITE_URL="$SITE_URL" \
+    --build-arg NEXT_PUBLIC_CLARITY_ID="$NEXT_PUBLIC_CLARITY_ID" \
     -t "$APP_NAME" .
 
   $SUDO docker rm -f "$APP_NAME" >/dev/null 2>&1 || true
@@ -62,9 +67,14 @@ build_and_run() {
     --name "$APP_NAME" \
     --restart unless-stopped \
     -p "$APP_PORT:$APP_PORT" \
+    -v /opt/my-portfolio-data:/data \
     -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
+    -e NEXT_PUBLIC_CLARITY_ID="$NEXT_PUBLIC_CLARITY_ID" \
     -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e OPENAI_BASE_URL="$OPENAI_BASE_URL" \
+    -e ANALYTICS_ADMIN_PASSWORD="$ANALYTICS_ADMIN_PASSWORD" \
+    -e ANALYTICS_SALT="$ANALYTICS_SALT" \
+    -e IPINFO_TOKEN="$IPINFO_TOKEN" \
     "$APP_NAME"
 }
 

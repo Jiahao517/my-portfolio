@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Cormorant_Garamond, Inter, Manrope, Noto_Serif_SC } from "next/font/google";
+import { AnalyticsTracker } from "@/components/AnalyticsTracker";
+import { ClarityScript } from "@/components/ClarityScript";
 import { ContactModalProvider } from "@/components/ContactModal";
 import "./globals.css";
 
@@ -71,7 +73,11 @@ export default function RootLayout({
           <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async />
         ) : null}
       </head>
-      <body className="fonts-ready"><ContactModalProvider>{children}</ContactModalProvider></body>
+      <body className="fonts-ready">
+        <ContactModalProvider>{children}</ContactModalProvider>
+        <AnalyticsTracker />
+        <ClarityScript />
+      </body>
     </html>
   );
 }
