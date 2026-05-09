@@ -157,7 +157,7 @@ export function CaseStudies() {
   }, []);
 
   return (
-    <div className="case-studies section" id="work">
+    <div className="case-studies section" id="work" data-analytics-section="case-studies">
       {caseStudies.map((cs) => (
         <CaseStudyCard key={cs.slug} cs={cs} />
       ))}

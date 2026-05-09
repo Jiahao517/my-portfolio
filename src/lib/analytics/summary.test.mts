@@ -39,7 +39,7 @@ test("buildAnalyticsSummary aggregates sessions, pages, clicks, sections, and su
     event({ type: "page_view", path: "/" }),
     event({ type: "heartbeat", path: "/", durationMs: 15000 }),
     event({ type: "heartbeat", path: "/wencai", durationMs: 30000 }),
-    event({ type: "section_view", path: "/", sectionId: "hero", sectionLabel: "Hero", durationMs: 12000 }),
+    event({ type: "section_view", path: "/", sectionId: "case-studies", sectionLabel: "案例", durationMs: 32000 }),
     event({ type: "click", path: "/", targetText: "联系我", targetRole: "button" }),
     event({ type: "scroll_depth", path: "/", depth: 75 }),
     event({
@@ -58,6 +58,7 @@ test("buildAnalyticsSummary aggregates sessions, pages, clicks, sections, and su
   assert.equal(summary.pages[0].path, "/wencai");
   assert.equal(summary.pages[0].durationMs, 30000);
   assert.equal(summary.clicks[0].label, "联系我");
-  assert.equal(summary.sections[0].label, "Hero");
+  assert.equal(summary.sections[0].label, "案例");
   assert.equal(summary.maxScrollDepthByPath[0].maxDepth, 75);
+  assert.equal(summary.recentVisitors[1].interest, "有联系意向");
 });

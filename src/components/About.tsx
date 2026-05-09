@@ -141,7 +141,7 @@ export function About() {
 
 
   return (
-    <section id="about" className="section about-section">
+    <section id="about" className="section about-section" data-analytics-section="about">
       <div className="centered about__section-shell">
         <div className="about__header reveal-scroll">
           <h2 className="about__heading shiny-hover">关于我</h2>

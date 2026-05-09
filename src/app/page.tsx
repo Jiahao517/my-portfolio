@@ -15,7 +15,7 @@ export default function Home() {
       <main className="content">
         <HeroVideo />
 
-        <section id="services" className="section section--hero">
+        <section id="services" className="section section--hero" data-analytics-section="services">
           <div className="centered">
             <SocialProof />
             <CaseStudies />

@@ -18,6 +18,7 @@ interface MutableSession {
   durationMs: number;
   pageViews: number;
   clicks: number;
+  contactClicks: number;
   maxScrollDepth: number;
   pageDurations: Map<string, number>;
   sectionDurations: Map<string, number>;
@@ -85,6 +86,9 @@ export function buildAnalyticsSummary(events: AnalyticsEventRecord[]): Analytics
     if (event.type === "click") {
       session.clicks += 1;
       const label = event.targetText || event.targetRole || "未命名点击";
+      if (/contact|联系|mailto:|tel:|wechat|微信|邮箱|手机号/i.test(`${label} ${event.targetHref ?? ""}`)) {
+        session.contactClicks += 1;
+      }
       const clickKey = `${event.path}::${label}::${event.targetHref ?? ""}`;
       const current = clicks.get(clickKey) ?? {
         label,
@@ -155,6 +159,7 @@ function getSession(sessions: Map<string, MutableSession>, event: AnalyticsEvent
     durationMs: 0,
     pageViews: 0,
     clicks: 0,
+    contactClicks: 0,
     maxScrollDepth: 0,
     pageDurations: new Map(),
     sectionDurations: new Map(),
@@ -186,14 +191,18 @@ function toVisitorSummary(session: MutableSession): AnalyticsVisitorSummary {
     suspectOrg: session.visitor.suspectOrg,
     device: session.device,
     referrer: session.referrer,
-    interest: inferInterest(session, topPage),
+    interest: inferInterest(session, topPage, topSection),
   };
 }
 
-function inferInterest(session: MutableSession, topPage?: string) {
+function inferInterest(session: MutableSession, topPage?: string, topSection?: string) {
+  const sectionSignal = [...session.sectionDurations.keys(), topSection ?? ""].join(" ");
   if (session.durationMs < 10_000 && session.pageViews <= 1 && session.maxScrollDepth < 25) return "快速跳出";
-  if (session.clicks > 0 && /contact|联系|mailto|tel/i.test([...session.sectionDurations.keys(), topPage ?? ""].join(" "))) {
+  if (session.contactClicks > 0 || (session.clicks > 0 && /contact|联系|mailto|tel/i.test(`${sectionSignal} ${topPage ?? ""}`))) {
     return "有联系意向";
+  }
+  if (/case|work|project|作品|案例|experience|经历/i.test(sectionSignal) && session.durationMs >= 30_000) {
+    return "重点查看案例";
   }
   if (topPage && topPage !== "/" && session.durationMs >= 30_000) return "重点查看案例";
   if (session.maxScrollDepth >= 75 || session.durationMs >= 60_000) return "深度浏览";

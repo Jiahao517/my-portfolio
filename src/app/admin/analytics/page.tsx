@@ -28,6 +28,7 @@ export default async function AnalyticsAdminPage() {
           <p className="analytics-admin__eyebrow">Portfolio Intelligence</p>
           <h1>访问行为分析</h1>
           <p>更新时间：{formatDate(summary.generatedAt)}</p>
+          <p className="analytics-admin__note">公司网络判断基于城市、ASN 和组织名，只代表概率信号；工作日 9-19 点、杭州、Alibaba/Ant ASN 同时命中时可信度更高。</p>
         </div>
         <div className="analytics-admin__stats">
           <Metric label="事件" value={summary.totalEvents.toLocaleString("zh-CN")} />

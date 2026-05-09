@@ -245,6 +245,7 @@ export function ArtFooter() {
     <footer className="art-footer">
       <section
         ref={visualRef}
+        data-analytics-section="art-footer"
         className={`art-footer__visual-shell${isVisualActive ? " art-footer__visual-shell--active" : ""}`}
         style={{ position: "relative" }}
       >

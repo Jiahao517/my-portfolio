@@ -6,7 +6,7 @@ export function Experience() {
   const visibleExperience = experience.slice(0, 4);
 
   return (
-    <section id="experience" className="section experience-section">
+    <section id="experience" className="section experience-section" data-analytics-section="experience">
       <div className="centered">
         <h2 className="experience__heading shiny-hover reveal-scroll">经历</h2>
         <div className="experience__rows">

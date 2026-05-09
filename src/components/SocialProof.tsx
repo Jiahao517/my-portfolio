@@ -555,7 +555,7 @@ export function SocialProof() {
   }, []);
 
   return (
-    <div className="social-proof reveal-load reveal-load--active" ref={wheelRootRef}>
+    <div className="social-proof reveal-load reveal-load--active" ref={wheelRootRef} data-analytics-section="social-proof">
       <div className="social-proof__left">
         <div className="sp-card sp-card--services">
           <div className="sp-services__wheel" aria-hidden="true">

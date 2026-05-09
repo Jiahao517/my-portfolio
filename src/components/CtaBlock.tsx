@@ -5,7 +5,7 @@ import { ContactPopover } from "@/components/ContactPopover";
 
 export function CtaBlock() {
   return (
-    <section className="cta-block reveal-scroll">
+    <section className="cta-block reveal-scroll" data-analytics-section="cta">
       <div className="centered">
         <div className="cta-block__content">
           <span className="cta-block__label cta-block__label--desktop shiny-hover shiny-hover--blue">

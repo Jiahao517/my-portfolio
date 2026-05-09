@@ -69,7 +69,6 @@ build_and_run() {
     -p "$APP_PORT:$APP_PORT" \
     -v /opt/my-portfolio-data:/data \
     -e NEXT_PUBLIC_SITE_URL="$SITE_URL" \
-    -e NEXT_PUBLIC_CLARITY_ID="$NEXT_PUBLIC_CLARITY_ID" \
     -e OPENAI_API_KEY="$OPENAI_API_KEY" \
     -e OPENAI_BASE_URL="$OPENAI_BASE_URL" \
     -e ANALYTICS_ADMIN_PASSWORD="$ANALYTICS_ADMIN_PASSWORD" \

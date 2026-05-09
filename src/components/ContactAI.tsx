@@ -105,7 +105,7 @@ export function ContactAI() {
   const showGreeting = messages.length === 0;
 
   return (
-    <section id="contact-ai" className="contact-ai">
+    <section id="contact-ai" className="contact-ai" data-analytics-section="contact-ai">
       <div className="centered contact-ai__centered">
         <div className="contact-ai__col-left">
           <h2 className="contact-ai__title shiny-hover">与我的 AI 作品集助理聊聊</h2>

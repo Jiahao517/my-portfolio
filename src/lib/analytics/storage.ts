@@ -1,5 +1,5 @@
 import { createHash, randomUUID } from "node:crypto";
-import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, rename, stat, unlink } from "node:fs/promises";
 import path from "node:path";
 import type { NextRequest } from "next/server";
 import { buildAnalyticsSummary } from "./summary";
@@ -8,8 +8,13 @@ import type { AnalyticsEventInput, AnalyticsEventRecord, AnalyticsSummary, Analy
 const DATA_DIR = process.env.ANALYTICS_DATA_DIR || "/data/analytics";
 const EVENT_FILE = path.join(DATA_DIR, "events.jsonl");
 const MAX_EVENT_BYTES = 1024 * 1024 * 12;
-const GEO_CACHE = new Map<string, AnalyticsVisitorInfo>();
+const ROTATE_EVENT_BYTES = 1024 * 1024 * 50;
+const GEO_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+const GEO_CACHE_MAX = 500;
+const GEO_CACHE = new Map<string, { info: AnalyticsVisitorInfo; expires: number }>();
 const SUSPECT_ORG_PATTERNS = [/alibaba/i, /aliyun/i, /ant group/i, /蚂蚁/, /阿里/];
+let ensureDataDirPromise: Promise<void> | undefined;
+let writeQueue: Promise<unknown> = Promise.resolve();
 
 export async function appendAnalyticsEvent(req: NextRequest, input: AnalyticsEventInput) {
   const visitor = await getVisitorInfo(req);
@@ -22,8 +27,7 @@ export async function appendAnalyticsEvent(req: NextRequest, input: AnalyticsEve
     visitor,
   };
 
-  await mkdir(DATA_DIR, { recursive: true });
-  await writeFile(EVENT_FILE, `${JSON.stringify(record)}\n`, { flag: "a" });
+  await queueWrite(`${JSON.stringify(record)}\n`);
   return record;
 }
 
@@ -63,11 +67,42 @@ async function getVisitorInfo(req: NextRequest): Promise<AnalyticsVisitorInfo> {
   if (!ip) return {};
   const ipHash = hashIp(ip);
   const cached = GEO_CACHE.get(ipHash);
-  if (cached) return cached;
+  if (cached && cached.expires > Date.now()) return cached.info;
 
   const info = await lookupIpInfo(ip, ipHash);
-  GEO_CACHE.set(ipHash, info);
+  if (GEO_CACHE.size >= GEO_CACHE_MAX) {
+    const oldestKey = GEO_CACHE.keys().next().value;
+    if (oldestKey) GEO_CACHE.delete(oldestKey);
+  }
+  GEO_CACHE.set(ipHash, { info, expires: Date.now() + GEO_CACHE_TTL_MS });
   return info;
+}
+
+async function queueWrite(line: string) {
+  writeQueue = writeQueue.then(async () => {
+    await ensureDataDir();
+    await rotateEventsIfNeeded();
+    await appendFile(EVENT_FILE, line, "utf8");
+  });
+  await writeQueue;
+}
+
+async function ensureDataDir() {
+  ensureDataDirPromise ??= mkdir(DATA_DIR, { recursive: true }).then(() => undefined);
+  await ensureDataDirPromise;
+}
+
+async function rotateEventsIfNeeded() {
+  try {
+    const fileStat = await stat(EVENT_FILE);
+    if (fileStat.size < ROTATE_EVENT_BYTES) return;
+    const rotated = `${EVENT_FILE}.1`;
+    await unlink(rotated).catch(() => undefined);
+    await rename(EVENT_FILE, rotated);
+  } catch (error) {
+    if (error instanceof Error && "code" in error && error.code === "ENOENT") return;
+    throw error;
+  }
 }
 
 function getClientIp(req: NextRequest): string | undefined {

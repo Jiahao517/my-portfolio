@@ -48,7 +48,7 @@ export function HeroVideo() {
   }, [isMobile]);
 
   return (
-    <section ref={sectionRef} className="hero-video">
+    <section ref={sectionRef} className="hero-video" data-analytics-section="hero" aria-label="Hero">
       <ImageTrail items={HERO_TRAIL_IMAGES} containerRef={sectionRef} threshold={80} />
       <video
         ref={videoRef}

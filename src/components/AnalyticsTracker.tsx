@@ -93,14 +93,14 @@ export function AnalyticsTracker() {
 
     const flushSections = () => {
       const now = performance.now();
-      for (const [sectionId, active] of activeSections.current) {
+      for (const [sectionId, active] of activeSections.current.entries()) {
         send("section_view", {
           sectionId,
           sectionLabel: active.label,
           durationMs: Math.round(now - active.startedAt),
         });
+        active.startedAt = now;
       }
-      activeSections.current.clear();
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
