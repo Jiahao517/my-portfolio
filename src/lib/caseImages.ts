@@ -26,6 +26,10 @@ export function caseImage(caseSlug: string, index: number): CaseImage {
   };
 }
 
+export function publicImage(publicPath: string) {
+  return withFileVersion(publicPath);
+}
+
 function withFileVersion(publicPath: string) {
   const filePath = publicPathToFilePath(publicPath);
   try {

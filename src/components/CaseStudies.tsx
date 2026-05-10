@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@/components/icons";
-import { caseStudies } from "@/data/case-studies";
 import { useMouseTilt } from "@/lib/useMouseTilt";
 import type { CaseStudy } from "@/types/portfolio";
 
@@ -88,7 +87,7 @@ function CaseStudyCard({ cs }: { cs: CaseStudy }) {
   );
 }
 
-export function CaseStudies() {
+export function CaseStudies({ studies }: { studies: CaseStudy[] }) {
   useMouseTilt(".case-study__image-wrap", {
     targetSelector: ".case-study__tilt",
     glareSelector: ".tilt-glare",
@@ -158,7 +157,7 @@ export function CaseStudies() {
 
   return (
     <div className="case-studies section" id="work" data-analytics-section="case-studies">
-      {caseStudies.map((cs) => (
+      {studies.map((cs) => (
         <CaseStudyCard key={cs.slug} cs={cs} />
       ))}
     </div>

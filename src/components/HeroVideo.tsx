@@ -45,7 +45,7 @@ const HERO_TRAIL_IMAGES = [
   "/case-images/innovation/02.png",
 ];
 
-export function HeroVideo() {
+export function HeroVideo({ trailImages = HERO_TRAIL_IMAGES }: { trailImages?: string[] }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [playing, setPlaying] = useState(false);
@@ -72,7 +72,7 @@ export function HeroVideo() {
 
   return (
     <section ref={sectionRef} className="hero-video" data-analytics-section="hero" aria-label="Hero">
-      <ImageTrail items={HERO_TRAIL_IMAGES} containerRef={sectionRef} threshold={80} />
+      <ImageTrail items={trailImages} containerRef={sectionRef} threshold={80} />
       <video
         ref={videoRef}
         className="hero-video__media"
