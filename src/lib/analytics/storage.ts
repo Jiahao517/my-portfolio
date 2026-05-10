@@ -2,8 +2,15 @@ import { createHash, randomUUID } from "node:crypto";
 import { appendFile, mkdir, readFile, rename, stat, unlink } from "node:fs/promises";
 import path from "node:path";
 import type { NextRequest } from "next/server";
-import { buildAnalyticsSummary } from "./summary";
-import type { AnalyticsEventInput, AnalyticsEventRecord, AnalyticsSummary, AnalyticsVisitorInfo } from "./types";
+import { buildAnalyticsSummary, buildVisitorDetail } from "./summary";
+import { readChatRecords } from "./chat-store";
+import type {
+  AnalyticsEventInput,
+  AnalyticsEventRecord,
+  AnalyticsSummary,
+  AnalyticsVisitorDetail,
+  AnalyticsVisitorInfo,
+} from "./types";
 
 const DATA_DIR = path.join(process.cwd(), "data", "analytics");
 const EVENT_FILE = path.join(DATA_DIR, "events.jsonl");
@@ -43,6 +50,42 @@ export async function readAnalyticsEvents(): Promise<AnalyticsEventRecord[]> {
 
 export async function readAnalyticsSummary(): Promise<AnalyticsSummary> {
   return buildAnalyticsSummary(await readAnalyticsEvents());
+}
+
+export interface AnalyticsRangeOption {
+  from?: string;
+  to?: string;
+}
+
+export async function readAnalyticsSummaryInRange(
+  range: AnalyticsRangeOption = {},
+): Promise<AnalyticsSummary> {
+  const events = await readAnalyticsEvents();
+  const filtered = filterByRange(events, range);
+  const chats = await readChatRecords({ from: range.from, to: range.to });
+  return buildAnalyticsSummary(filtered, { range, chats });
+}
+
+export async function readVisitorDetail(visitorId: string): Promise<AnalyticsVisitorDetail | null> {
+  const events = await readAnalyticsEvents();
+  const visitorEvents = events.filter((event) => event.visitorId === visitorId);
+  if (visitorEvents.length === 0) return null;
+  const chats = await readChatRecords({ visitorId });
+  return buildVisitorDetail(visitorEvents, visitorId, chats);
+}
+
+function filterByRange(events: AnalyticsEventRecord[], range: AnalyticsRangeOption): AnalyticsEventRecord[] {
+  const fromTs = range.from ? new Date(range.from).getTime() : -Infinity;
+  const toTs = range.to ? new Date(range.to).getTime() : Infinity;
+  if (!Number.isFinite(fromTs) && !Number.isFinite(toTs)) return events;
+  return events.filter((event) => {
+    const ts = new Date(event.timestamp).getTime();
+    return ts >= fromTs && ts <= toTs;
+  });
+}
+
+export async function getVisitorInfoForRequest(req: NextRequest) {
+  return getVisitorInfo(req);
 }
 
 function parseEvents(content: string): AnalyticsEventRecord[] {
@@ -151,14 +194,14 @@ function hashIp(ip: string) {
 
 async function lookupIpInfo(ip: string, ipHash: string): Promise<AnalyticsVisitorInfo> {
   const token = process.env.IPINFO_TOKEN;
-  if (!token) return { ipHash };
+  if (!token) return { ip, ipHash };
 
   try {
     const response = await fetch(`https://ipinfo.io/${encodeURIComponent(ip)}?token=${encodeURIComponent(token)}`, {
       cache: "no-store",
       signal: AbortSignal.timeout(1800),
     });
-    if (!response.ok) return { ipHash };
+    if (!response.ok) return { ip, ipHash };
     const data = (await response.json()) as {
       city?: string;
       region?: string;
@@ -169,6 +212,7 @@ async function lookupIpInfo(ip: string, ipHash: string): Promise<AnalyticsVisito
     const org = data.org || data.asn?.name;
     const asn = data.asn?.asn || data.org?.match(/AS\d+/i)?.[0];
     return {
+      ip,
       ipHash,
       city: clean(data.city),
       region: clean(data.region),
@@ -178,7 +222,7 @@ async function lookupIpInfo(ip: string, ipHash: string): Promise<AnalyticsVisito
       suspectOrg: org && SUSPECT_ORG_PATTERNS.some((pattern) => pattern.test(org)) ? "Alibaba/Ant related network" : undefined,
     };
   } catch {
-    return { ipHash };
+    return { ip, ipHash };
   }
 }
 

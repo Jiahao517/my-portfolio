@@ -1,5 +1,8 @@
+import { randomUUID } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { buildSystemPrompt } from "@/data/persona";
+import { appendChatRecord } from "@/lib/analytics/chat-store";
+import { getVisitorInfoForRequest } from "@/lib/analytics/storage";
 import type { ChatMessage } from "@/types/portfolio";
 
 export const runtime = "nodejs";
@@ -38,7 +41,43 @@ function getClientIp(req: NextRequest): string {
   return "anon";
 }
 
-type ChatBody = { messages?: ChatMessage[] };
+type ChatBody = { messages?: ChatMessage[]; visitorId?: string; sessionId?: string };
+
+function lastUserMessage(messages: ChatMessage[]): string {
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    if (messages[i].role === "user") return messages[i].content;
+  }
+  return "";
+}
+
+async function persistChat(args: {
+  req: NextRequest;
+  visitorId?: string;
+  sessionId?: string;
+  userMessage: string;
+  assistantMessage: string;
+  durationMs: number;
+  model: string;
+  error?: string;
+}) {
+  try {
+    const visitor = await getVisitorInfoForRequest(args.req);
+    await appendChatRecord({
+      id: randomUUID(),
+      sessionId: args.sessionId || `anon-${visitor.ipHash ?? "unknown"}`,
+      visitorId: args.visitorId || `anon-${visitor.ipHash ?? "unknown"}`,
+      timestamp: new Date().toISOString(),
+      visitor,
+      userMessage: args.userMessage,
+      assistantMessage: args.assistantMessage,
+      durationMs: args.durationMs,
+      model: args.model,
+      error: args.error,
+    });
+  } catch (err) {
+    console.warn("[chat] failed to persist record", err);
+  }
+}
 
 export async function POST(req: NextRequest) {
   const ip = getClientIp(req);
@@ -72,21 +111,36 @@ export async function POST(req: NextRequest) {
     return new Response("会话内容过长", { status: 413 });
   }
 
+  const visitorId = typeof body.visitorId === "string" ? body.visitorId.slice(0, 96) : undefined;
+  const sessionId = typeof body.sessionId === "string" ? body.sessionId.slice(0, 96) : undefined;
+  const userMessage = lastUserMessage(inMsgs);
+  const startedAt = Date.now();
+
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
     // Graceful local fallback so the UI is testable without a key.
+    const lines = [
+      "（演示回退：尚未配置 OPENAI_API_KEY。）",
+      "把 OPENAI_API_KEY 加进线上运行环境后，这里就会接到 GPT-4.1 真实回答。",
+    ];
+    const fallbackText = lines.join("\n");
     const stream = new ReadableStream<Uint8Array>({
       start(controller) {
         const enc = new TextEncoder();
-        const lines = [
-          "（演示回退：尚未配置 OPENAI_API_KEY。）",
-          "把 OPENAI_API_KEY 加进线上运行环境后，这里就会接到 GPT-4.1 真实回答。",
-        ];
         let i = 0;
         const id = setInterval(() => {
           if (i >= lines.length) {
             clearInterval(id);
             controller.close();
+            void persistChat({
+              req,
+              visitorId,
+              sessionId,
+              userMessage,
+              assistantMessage: fallbackText,
+              durationMs: Date.now() - startedAt,
+              model: "fallback",
+            });
             return;
           }
           controller.enqueue(enc.encode(lines[i] + "\n"));
@@ -119,11 +173,23 @@ export async function POST(req: NextRequest) {
 
   if (!upstream.ok || !upstream.body) {
     const text = await upstream.text().catch(() => "");
+    void persistChat({
+      req,
+      visitorId,
+      sessionId,
+      userMessage,
+      assistantMessage: "",
+      durationMs: Date.now() - startedAt,
+      model: "gpt-4.1-mini",
+      error: text || `upstream ${upstream.status}`,
+    });
     return new Response(text || "上游服务异常", { status: upstream.status });
   }
 
   const decoder = new TextDecoder();
   const encoder = new TextEncoder();
+  let assistantBuffer = "";
+  let streamError: string | undefined;
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
@@ -147,14 +213,29 @@ export async function POST(req: NextRequest) {
             try {
               const parsed = JSON.parse(data) as { choices?: Array<{ delta?: { content?: string } }> };
               const piece = parsed.choices?.[0]?.delta?.content;
-              if (piece) controller.enqueue(encoder.encode(piece));
+              if (piece) {
+                assistantBuffer += piece;
+                controller.enqueue(encoder.encode(piece));
+              }
             } catch {
               // skip malformed lines
             }
           }
         }
+      } catch (err) {
+        streamError = err instanceof Error ? err.message : "stream error";
       } finally {
         controller.close();
+        void persistChat({
+          req,
+          visitorId,
+          sessionId,
+          userMessage,
+          assistantMessage: assistantBuffer,
+          durationMs: Date.now() - startedAt,
+          model: "gpt-4.1-mini",
+          error: streamError,
+        });
       }
     },
   });

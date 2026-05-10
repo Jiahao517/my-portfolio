@@ -1,25 +1,27 @@
-import { readAnalyticsSummary } from "@/lib/analytics/storage";
+import { Suspense } from "react";
+import { readAnalyticsSummaryInRange } from "@/lib/analytics/storage";
+import { resolveRange } from "@/lib/analytics/range";
+import { formatDate, formatDuration } from "@/lib/analytics/format";
+import { RangeTabs } from "@/components/analytics/RangeTabs";
+import { VisitorRow } from "@/components/analytics/VisitorRow";
+import { ChatRow } from "@/components/analytics/ChatRow";
+import { AnalyticsTrendChart } from "@/components/analytics/AnalyticsTrendChart";
+import { AnalyticsHourlyHeatmap } from "@/components/analytics/AnalyticsHourlyHeatmap";
+import { AnalyticsPagesBar } from "@/components/analytics/AnalyticsPagesBar";
+import { AnalyticsDevicesPie } from "@/components/analytics/AnalyticsDevicesPie";
 
 export const dynamic = "force-dynamic";
 
-function formatDuration(ms: number) {
-  const totalSeconds = Math.round(ms / 1000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return minutes > 0 ? `${minutes}m ${seconds}s` : `${seconds}s`;
+interface Props {
+  searchParams: Promise<{ range?: string; from?: string; to?: string }>;
 }
 
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    month: "2-digit",
-    day: "2-digit",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(new Date(value));
-}
+export default async function AnalyticsAdminPage({ searchParams }: Props) {
+  const sp = await searchParams;
+  const range = resolveRange({ range: sp.range, from: sp.from, to: sp.to });
+  const summary = await readAnalyticsSummaryInRange(range);
 
-export default async function AnalyticsAdminPage() {
-  const summary = await readAnalyticsSummary();
+  const rangeLabel = describeRange(range.preset, range.from, range.to);
 
   return (
     <main className="analytics-admin">
@@ -27,35 +29,57 @@ export default async function AnalyticsAdminPage() {
         <div>
           <p className="analytics-admin__eyebrow">Portfolio Intelligence</p>
           <h1>访问行为分析</h1>
-          <p>更新时间：{formatDate(summary.generatedAt)}</p>
-          <p className="analytics-admin__note">公司网络判断基于城市、ASN 和组织名，只代表概率信号；工作日 9-19 点、杭州、Alibaba/Ant ASN 同时命中时可信度更高。</p>
+          <p>
+            范围：<strong>{rangeLabel}</strong> · 更新于 {formatDate(summary.generatedAt)}
+          </p>
+          <p className="analytics-admin__note">
+            公司网络判断基于城市、ASN 和组织名，只代表概率信号；工作日 9-19 点、杭州、Alibaba/Ant ASN 同时命中时可信度更高。原始 IP 仅在此后台可见。
+          </p>
         </div>
         <div className="analytics-admin__stats">
           <Metric label="事件" value={summary.totalEvents.toLocaleString("zh-CN")} />
           <Metric label="会话" value={summary.totalSessions.toLocaleString("zh-CN")} />
           <Metric label="访客" value={summary.totalVisitors.toLocaleString("zh-CN")} />
+          <Metric label="AI 对话" value={summary.totalChats.toLocaleString("zh-CN")} />
           <Metric label="疑似阿里/蚂蚁" value={summary.suspectOrgSessions.toLocaleString("zh-CN")} />
         </div>
       </header>
 
+      <Suspense fallback={null}>
+        <RangeTabs />
+      </Suspense>
+
+      <section className="analytics-admin__charts">
+        <Panel title={`访问趋势（按${summary.range.granularity === "hour" ? "小时" : "日"}聚合）`}>
+          <AnalyticsTrendChart data={summary.timeSeries} granularity={summary.range.granularity} />
+        </Panel>
+        <Panel title="访问时段热力图（按本机时区）">
+          <AnalyticsHourlyHeatmap data={summary.hourlyHeatmap} />
+        </Panel>
+        <Panel title="页面访问与停留 Top 8">
+          <AnalyticsPagesBar data={summary.pages} />
+        </Panel>
+        <Panel title="设备分布">
+          <AnalyticsDevicesPie data={summary.devices} />
+        </Panel>
+      </section>
+
       <section className="analytics-admin__grid">
-        <Panel title="最近访客">
+        <Panel title="最近访客（点击展开）" wide>
           <div className="analytics-admin__visitor-list">
             {summary.recentVisitors.map((visitor) => (
-              <article key={visitor.sessionId} className="analytics-admin__visitor">
-                <div>
-                  <strong>{visitor.city || "未知城市"} {visitor.org ? `· ${visitor.org}` : ""}</strong>
-                  <p>{visitor.suspectOrg || "普通网络"} · {visitor.device || "未知设备"}</p>
-                </div>
-                <div className="analytics-admin__visitor-meta">
-                  <span>{formatDuration(visitor.durationMs)}</span>
-                  <span>{visitor.interest}</span>
-                  <span>{visitor.topPage || "无页面停留"}</span>
-                  <span>{formatDate(visitor.lastSeen)}</span>
-                </div>
-              </article>
+              <VisitorRow key={visitor.sessionId} visitor={visitor} />
             ))}
             {summary.recentVisitors.length === 0 ? <Empty /> : null}
+          </div>
+        </Panel>
+
+        <Panel title={`ContactAI 问答（${summary.recentChats.length}）`} wide>
+          <div className="analytics-admin__chat-list">
+            {summary.recentChats.map((record) => (
+              <ChatRow key={record.id} record={record} />
+            ))}
+            {summary.recentChats.length === 0 ? <Empty /> : null}
           </div>
         </Panel>
 
@@ -107,6 +131,23 @@ export default async function AnalyticsAdminPage() {
   );
 }
 
+function describeRange(preset: string, from?: string, to?: string) {
+  switch (preset) {
+    case "today":
+      return "今日";
+    case "7d":
+      return "最近 7 天";
+    case "30d":
+      return "最近 30 天";
+    case "all":
+      return "全部";
+    case "custom":
+      return `${from ? formatDate(from) : "起始"} → ${to ? formatDate(to) : "现在"}`;
+    default:
+      return "全部";
+  }
+}
+
 function Metric({ label, value }: { label: string; value: string }) {
   return (
     <div className="analytics-admin__metric">
@@ -116,9 +157,17 @@ function Metric({ label, value }: { label: string; value: string }) {
   );
 }
 
-function Panel({ title, children }: { title: string; children: React.ReactNode }) {
+function Panel({
+  title,
+  children,
+  wide,
+}: {
+  title: string;
+  children: React.ReactNode;
+  wide?: boolean;
+}) {
   return (
-    <section className="analytics-admin__panel">
+    <section className={`analytics-admin__panel${wide ? " analytics-admin__panel--wide" : ""}`}>
       <h2>{title}</h2>
       {children}
     </section>

@@ -1,10 +1,15 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 
-const PROTECTED_PATHS = ["/admin/analytics", "/api/analytics/summary"];
+const PROTECTED_PATHS = ["/admin/analytics", "/api/analytics"];
+const PUBLIC_API_PATHS = ["/api/analytics/event"];
 
 export function middleware(req: NextRequest) {
-  if (!PROTECTED_PATHS.some((path) => req.nextUrl.pathname.startsWith(path))) {
+  const pathname = req.nextUrl.pathname;
+  if (PUBLIC_API_PATHS.some((path) => pathname.startsWith(path))) {
+    return NextResponse.next();
+  }
+  if (!PROTECTED_PATHS.some((path) => pathname.startsWith(path))) {
     return NextResponse.next();
   }
 
@@ -23,7 +28,12 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/admin/analytics/:path*", "/api/analytics/summary"],
+  matcher: [
+    "/admin/analytics",
+    "/admin/analytics/:path*",
+    "/api/analytics",
+    "/api/analytics/:path*",
+  ],
 };
 
 function isAuthorized(auth: string | null, password: string) {

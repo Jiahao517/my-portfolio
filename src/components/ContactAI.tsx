@@ -13,6 +13,18 @@ const SUGGESTED = [
   "他的离职原因是什么？",
 ];
 
+function readAnalyticsIds() {
+  if (typeof window === "undefined") return { visitorId: undefined, sessionId: undefined };
+  try {
+    return {
+      visitorId: window.localStorage.getItem("portfolio_analytics_visitor_id") ?? undefined,
+      sessionId: window.sessionStorage.getItem("portfolio_analytics_session_id") ?? undefined,
+    };
+  } catch {
+    return { visitorId: undefined, sessionId: undefined };
+  }
+}
+
 function ThinkingDots() {
   return (
     <span className="contact-ai__thinking-dots" aria-label="正在思考">
@@ -67,10 +79,15 @@ export function ContactAI() {
     abortRef.current = controller;
 
     try {
+      const ids = readAnalyticsIds();
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ messages: next.slice(0, -1) }),
+        body: JSON.stringify({
+          messages: next.slice(0, -1),
+          visitorId: ids.visitorId,
+          sessionId: ids.sessionId,
+        }),
         signal: controller.signal,
       });
 
