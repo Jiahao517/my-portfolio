@@ -1,11 +1,35 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
 import { Magnet } from "@/components/Magnet";
 import { SplitText } from "@/components/SplitText";
 import { DecryptedText } from "@/components/DecryptedText";
 import { ContactPopover } from "@/components/ContactPopover";
 import { ImageTrail } from "@/components/ImageTrail";
+
+function ScrollMouse() {
+  const dotRef = useRef<SVGCircleElement>(null);
+
+  useEffect(() => {
+    const dot = dotRef.current;
+    if (!dot) return;
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.4 });
+    tl.set(dot, { opacity: 0, y: 0 })
+      .to(dot, { opacity: 1, duration: 0.2, ease: "none" })
+      .to(dot, { y: 10, opacity: 0, duration: 0.9, ease: "power2.in" });
+    return () => { tl.kill(); };
+  }, []);
+
+  return (
+    <div className="hero-video__scroll-hint" aria-hidden>
+      <svg width="26" height="40" viewBox="0 0 26 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="24" height="38" rx="12" stroke="currentColor" strokeWidth="1.5"/>
+        <circle ref={dotRef} cx="13" cy="10" r="3" fill="currentColor"/>
+      </svg>
+    </div>
+  );
+}
 
 const HERO_TRAIL_IMAGES = [
   "/images/case-dingtalk.png",
@@ -91,13 +115,6 @@ export function HeroVideo() {
           threshold={0.05}
           rootMargin="0px"
         />
-        <ContactPopover>
-          <Magnet padding={60} magnetStrength={6}>
-            <span className="case-study__btn hero-video__cta hero-video__cta--static">
-              <span>联系我</span>
-            </span>
-          </Magnet>
-        </ContactPopover>
         <div className="hero-video__logos" aria-label="专业标签">
           <span className="hero-video__logos-item">AI 产品</span>
           <span className="hero-video__logos-sep">｜</span>
@@ -105,13 +122,19 @@ export function HeroVideo() {
           <span className="hero-video__logos-sep">｜</span>
           <span className="hero-video__logos-item">设计系统</span>
           <span className="hero-video__logos-sep">｜</span>
-          <span className="hero-video__logos-item">落地交付</span>
+          <span className="hero-video__logos-item">设计代码交付</span>
           <span className="hero-video__logos-sep">｜</span>
-          <span className="hero-video__logos-item">设计奖</span>
-          <span className="hero-video__logos-sep">｜</span>
-          <span className="hero-video__logos-item">专利</span>
+          <span className="hero-video__logos-item">设计奖&amp;专利</span>
         </div>
+        <ContactPopover>
+          <Magnet padding={60} magnetStrength={6}>
+            <span className="case-study__btn hero-video__cta hero-video__cta--static">
+              <span>联系我</span>
+            </span>
+          </Magnet>
+        </ContactPopover>
       </div>
+      <ScrollMouse />
     </section>
   );
 }

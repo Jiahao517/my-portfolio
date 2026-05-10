@@ -2,33 +2,37 @@
 
 This project is deployed as a Dockerized Next.js standalone app on Tencent Cloud Lighthouse.
 
-## Production
+## Production Overview
 
-- Primary domain: `http://zhongjiahao.art`
-- WWW domain: `http://www.zhongjiahao.art`
+- Primary domain: `https://www.zhongjiahao.art`
+- Apex domain: `https://zhongjiahao.art`
 - Server public IPv4: `43.156.238.85`
 - Cloud provider: Tencent Cloud Lighthouse
 - Region: Singapore
 - Image: Docker CE
 - App directory on server: `/opt/my-portfolio`
+- Persistent analytics data: `/opt/my-portfolio-data`
 - Container name: `my-portfolio`
-- App port inside server: `3000`
-- Public traffic: `80` -> Nginx -> `127.0.0.1:3000`
+- Container working directory: `/app`
+- App port on server: `3000`
+- Public traffic: `80/443` -> Nginx -> `127.0.0.1:3000`
+
+Do not expose port `3000` publicly. Nginx reaches the Next.js container through localhost.
 
 ## DNS
 
-The active domains are:
+The active DNS records are:
 
 ```text
 A    zhongjiahao.art        43.156.238.85
 A    www.zhongjiahao.art    43.156.238.85
 ```
 
-Both records are managed from the Tencent Cloud Lighthouse domain binding page and currently show normal resolution.
+Both records are managed from Tencent Cloud Lighthouse domain/DNS settings.
 
 ## Firewall
 
-Keep these ports open:
+Keep these ports open in Tencent Cloud Lighthouse firewall:
 
 ```text
 22     SSH / Tencent Cloud login
@@ -36,45 +40,257 @@ Keep these ports open:
 443    HTTPS
 ```
 
-Do not expose `3000` publicly. Nginx reaches the Next.js container through localhost.
+The Windows remote desktop port `3389` is not needed for this Linux server.
 
-The default Windows remote desktop rules for `3389` are not needed for this Linux server and can stay deleted.
+## Environment Variables
 
-## Nginx
+Required for normal production deploy:
 
-The active site config should contain:
-
-```nginx
-server {
-    listen 80;
-    server_name zhongjiahao.art www.zhongjiahao.art;
-
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
-    }
-}
+```text
+OPENAI_API_KEY               Server-side key for /api/chat
+OPENAI_BASE_URL              Provider host, without /v1
+PUBLIC_HOST                  Public host used by Nginx, usually www.zhongjiahao.art
+SITE_URL                     Public site URL, usually https://www.zhongjiahao.art
+ANALYTICS_ADMIN_PASSWORD     Password for /admin/analytics
+ANALYTICS_SALT               Fixed random salt for hashing visitor IPs
 ```
 
-Expected path on Ubuntu/Debian-style images:
+Optional:
+
+```text
+IPINFO_TOKEN                 Enables city / ASN / organization lookup for visitor IPs
+NEXT_PUBLIC_CLARITY_ID       Enables Microsoft Clarity heatmaps
+```
+
+`ANALYTICS_SALT` must stay stable across deploys. Generate it once, save it, and reuse the same value:
 
 ```bash
+openssl rand -hex 32
+```
+
+`OPENAI_BASE_URL` must be the provider host before the `/v1` path:
+
+```text
+https://api.openai.com
+https://api.chatanywhere.tech
+```
+
+Do not set `OPENAI_BASE_URL` to `https://api.chatanywhere.tech/v1`. The app appends `/v1/chat/completions` itself.
+
+## Redeploy From Tencent Cloud
+
+Login to the Tencent Cloud server, then run:
+
+```bash
+cd /opt/my-portfolio
+git pull
+OPENAI_API_KEY="YOUR_OPENAI_KEY" \
+OPENAI_BASE_URL="https://api.chatanywhere.tech" \
+PUBLIC_HOST="www.zhongjiahao.art" \
+SITE_URL="https://www.zhongjiahao.art" \
+ANALYTICS_ADMIN_PASSWORD="YOUR_ANALYTICS_PASSWORD" \
+ANALYTICS_SALT="YOUR_FIXED_RANDOM_SALT" \
+sh scripts/deploy-tencent-lighthouse.sh
+```
+
+With IPinfo and Clarity enabled:
+
+```bash
+cd /opt/my-portfolio
+git pull
+OPENAI_API_KEY="YOUR_OPENAI_KEY" \
+OPENAI_BASE_URL="https://api.chatanywhere.tech" \
+PUBLIC_HOST="www.zhongjiahao.art" \
+SITE_URL="https://www.zhongjiahao.art" \
+ANALYTICS_ADMIN_PASSWORD="YOUR_ANALYTICS_PASSWORD" \
+ANALYTICS_SALT="YOUR_FIXED_RANDOM_SALT" \
+IPINFO_TOKEN="YOUR_IPINFO_TOKEN" \
+NEXT_PUBLIC_CLARITY_ID="YOUR_CLARITY_ID" \
+sh scripts/deploy-tencent-lighthouse.sh
+```
+
+The deploy script will:
+
+1. Install/update `git` and `nginx`.
+2. Ensure Docker is running.
+3. Fetch/reset `/opt/my-portfolio` to `origin/main`.
+4. Build the Docker image.
+5. Recreate the `my-portfolio` container.
+6. Mount analytics data from `/opt/my-portfolio-data` to `/app/data`.
+7. Generate/reload Nginx config.
+8. Preserve HTTPS config if the Let's Encrypt certificate exists.
+
+## First Deploy
+
+If `/opt/my-portfolio` does not exist yet:
+
+```bash
+sudo mkdir -p /opt
+cd /opt
+sudo git clone https://github.com/Jiahao517/my-portfolio.git
+cd /opt/my-portfolio
+```
+
+Then run the redeploy command above.
+
+If the GitHub repository is private, configure authenticated Git access first.
+
+## HTTPS
+
+The server uses Let's Encrypt certificates at:
+
+```text
+/etc/letsencrypt/live/zhongjiahao.art/fullchain.pem
+/etc/letsencrypt/live/zhongjiahao.art/privkey.pem
+```
+
+If HTTPS is missing or port `443` refuses connections, install Certbot and create/reinstall the certificate:
+
+```bash
+sudo apt update
+sudo apt install -y certbot python3-certbot-nginx
+sudo certbot --nginx -d www.zhongjiahao.art -d zhongjiahao.art
+```
+
+If Certbot cannot find a matching Nginx server block, make sure the active Nginx config has:
+
+```nginx
+server_name www.zhongjiahao.art;
+```
+
+The deploy script writes HTTPS config automatically when the certificate files exist.
+
+Expected Nginx paths on Ubuntu/Debian-style images:
+
+```text
 /etc/nginx/sites-available/my-portfolio
 /etc/nginx/sites-enabled/my-portfolio
 ```
 
-Reload after changes:
+Validate and reload manually if needed:
 
 ```bash
 sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-If the domain shows the default "Welcome to nginx!" page, the DNS is working but Nginx is not matching the domain. Check `server_name` and remove/disable the default site:
+## Analytics
+
+The site has a private analytics dashboard:
+
+```text
+https://www.zhongjiahao.art/admin/analytics
+```
+
+Basic Auth:
+
+```text
+username: any value, e.g. admin
+password: ANALYTICS_ADMIN_PASSWORD
+```
+
+Analytics data is stored as JSONL on the server:
+
+```text
+/opt/my-portfolio-data/analytics/events.jsonl
+/opt/my-portfolio-data/analytics/events.jsonl.1
+```
+
+The app stores:
+
+- Anonymous visitor/session ids
+- Page views
+- Heartbeat duration
+- Section dwell time
+- Scroll depth
+- Button/link clicks
+- Device/browser summary
+- IP hash
+- Optional city / ASN / organization from IPinfo
+
+The app does not store or display raw IP addresses in the dashboard.
+
+If `IPINFO_TOKEN` is omitted, analytics still works, but city / ASN / organization detection is limited.
+
+If `NEXT_PUBLIC_CLARITY_ID` is omitted, self-hosted analytics still works, but Microsoft Clarity heatmaps are disabled.
+
+## Verification After Deploy
+
+Run these on the server:
+
+```bash
+curl -I https://www.zhongjiahao.art/
+curl -I https://www.zhongjiahao.art/admin/analytics
+sudo nginx -T | grep -n "listen 443\|server_name\|ssl_certificate"
+docker ps --filter "name=my-portfolio"
+```
+
+Expected:
+
+```text
+https://www.zhongjiahao.art/                 HTTP/1.1 200 OK
+https://www.zhongjiahao.art/admin/analytics HTTP/1.1 401 Unauthorized
+```
+
+`401 Unauthorized` for `/admin/analytics` is correct. It means the dashboard is password protected.
+
+To verify event ingestion:
+
+1. Open `https://www.zhongjiahao.art/`.
+2. Scroll and click a few buttons.
+3. Open `https://www.zhongjiahao.art/admin/analytics`.
+4. Confirm recent visitor/session data appears.
+
+## Local Change Workflow
+
+Before pushing:
+
+```bash
+npm run test
+npm run lint
+npm run typecheck
+npm run build
+```
+
+Then:
+
+```bash
+git add .
+git commit -m "Update portfolio"
+git push
+```
+
+After pushing, login to Tencent Cloud and run the redeploy command.
+
+## Useful Operations
+
+Check container logs:
+
+```bash
+docker logs --tail 200 my-portfolio
+```
+
+Restart the app container:
+
+```bash
+docker restart my-portfolio
+```
+
+Check Nginx status:
+
+```bash
+sudo systemctl status nginx
+sudo nginx -t
+```
+
+Check analytics data size:
+
+```bash
+du -sh /opt/my-portfolio-data
+ls -lh /opt/my-portfolio-data/analytics
+```
+
+If the site shows the default Nginx welcome page, disable the default site and reload:
 
 ```bash
 sudo rm -f /etc/nginx/sites-enabled/default
@@ -82,97 +298,8 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
-## First Deploy / Redeploy
+## Notes And Limits
 
-A deploy helper is included at:
-
-```bash
-scripts/deploy-tencent-lighthouse.sh
-```
-
-On the Tencent Cloud server, redeploy from GitHub with:
-
-```bash
-cd /opt/my-portfolio
-git pull
-SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
-```
-
-To enable the AI chat in production, pass the server-side OpenAI variables when redeploying:
-
-```bash
-OPENAI_API_KEY="sk-..." OPENAI_BASE_URL="https://api.openai.com" SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
-```
-
-For ChatAnywhere, set the base URL to the host only:
-
-```bash
-OPENAI_API_KEY="sk-..." OPENAI_BASE_URL="https://api.chatanywhere.tech" SITE_URL="http://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
-```
-
-Do not use `https://api.chatanywhere.tech/v1` here. The app's `/api/chat` route appends `/v1/chat/completions` automatically, so including `/v1` in `OPENAI_BASE_URL` causes a `/v1/v1/chat/completions` request and a 404 response.
-
-Or from anywhere on the server:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/Jiahao517/my-portfolio/main/scripts/deploy-tencent-lighthouse.sh | SITE_URL="http://zhongjiahao.art" sh
-```
-
-If the GitHub repository is private, the raw `curl` command will return `404`. Make the repository public or use an authenticated deploy method.
-
-## Local Change Workflow
-
-After editing locally:
-
-```bash
-npm run build
-git add .
-git commit -m "Update portfolio"
-git push
-```
-
-Then SSH/login to the Tencent Cloud server and run the redeploy commands above.
-
-## Environment Variables
-
-The chat API uses:
-
-```text
-OPENAI_API_KEY
-OPENAI_BASE_URL
-NEXT_PUBLIC_SITE_URL
-```
-
-`OPENAI_API_KEY` is optional for basic site access. Without it, `/api/chat` returns the demo fallback response.
-
-`OPENAI_BASE_URL` should be the provider host before the `/v1` path. Examples:
-
-```text
-https://api.openai.com
-https://api.chatanywhere.tech
-```
-
-When HTTPS is enabled, use:
-
-```bash
-SITE_URL="https://zhongjiahao.art" sh scripts/deploy-tencent-lighthouse.sh
-```
-
-## HTTPS Todo
-
-Current production access is HTTP. Next step is enabling HTTPS for:
-
-```text
-zhongjiahao.art
-www.zhongjiahao.art
-```
-
-Recommended simple path:
-
-```bash
-sudo apt update
-sudo apt install -y certbot python3-certbot-nginx
-sudo certbot --nginx -d zhongjiahao.art -d www.zhongjiahao.art
-```
-
-After HTTPS is working, redeploy with `SITE_URL="https://zhongjiahao.art"` so metadata URLs use HTTPS.
+- IP-based organization detection is probabilistic. It can suggest Alibaba/Ant-related networks, but cannot identify a specific person or exact office building.
+- HR/interviewer satisfaction should be inferred from behavior signals: dwell time, case depth, scroll completion, and contact clicks.
+- Microsoft Clarity can provide heatmaps. Configure masking in Clarity if session replay is enabled.

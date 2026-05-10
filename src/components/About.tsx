@@ -3,8 +3,6 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { useMouseTilt } from "@/lib/useMouseTilt";
-import { ContactAI } from "@/components/ContactAI";
-
 const CONTACTS: {
   key: string;
   label: string;
@@ -187,8 +185,6 @@ export function About() {
             </div>
           </div>
         </div>
-
-        <ContactAI />
 
         <div className="about__footer reveal-scroll">
           <div className="about__cta-card contact-bento">

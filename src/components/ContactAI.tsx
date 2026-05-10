@@ -2,15 +2,16 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import TextareaAutosize from "react-textarea-autosize";
 import type { ChatMessage } from "@/types/portfolio";
 import { BorderGlow } from "@/components/BorderGlow";
 import { ChatMarkdown } from "@/components/ChatMarkdown";
 
 const SUGGESTED = [
   "他的个人亮点是什么？",
+  "他的离职原因是什么？",
   "他是怎么把 AI Coding 融入设计工作流的？",
   "他最有成就感的项目是什么？",
-  "他的离职原因是什么？",
 ];
 
 function readAnalyticsIds() {
@@ -193,10 +194,12 @@ export function ContactAI() {
                   style={{ flex: 1 }}
                 >
                   <div className="contact-ai__input-wrap">
-                    <textarea
+                    <TextareaAutosize
                       className="contact-ai__input"
                       placeholder="有问题就问我..."
-                      rows={2}
+                      minRows={2}
+                      maxRows={5}
+                      maxLength={500}
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       disabled={streaming}

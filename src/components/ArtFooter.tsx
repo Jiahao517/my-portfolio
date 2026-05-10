@@ -301,7 +301,6 @@ export function ArtFooter() {
                   active={utilityStep >= 2}
                   runId={revealRunId}
                 />
-                <a className="art-footer__privacy-link" href="/privacy">隐私说明</a>
               </div>
 
               <button

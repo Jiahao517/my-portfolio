@@ -4140,7 +4140,7 @@ a.work-card {
   line-height: 1.55;
   max-width: 800px;
   color: rgba(255,255,255,0.85);
-  margin: 0 0 40px;
+  margin: 0 0 8px;
 }
 .hero-video__cta {
   background: #fff;
@@ -4154,11 +4154,6 @@ a.work-card {
 .hero-video__cta svg path { fill: #181212; }
 .hero-video__cta:hover { background: #f4f4f4; }
 .hero-video__logos {
-  margin-top: auto;
-  position: absolute;
-  bottom: 36px;
-  left: 0;
-  right: 0;
   display: flex;
   justify-content: center;
   gap: 8px;
@@ -4167,10 +4162,20 @@ a.work-card {
   color: rgba(255,255,255,0.7);
   flex-wrap: wrap;
   padding: 0 24px;
+  margin: 0 0 32px;
 }
 .hero-video__logos-label { opacity: 0.6; margin-right: 8px; }
 .hero-video__logos-item { font-weight: 500; }
 .hero-video__logos-sep { opacity: 0.4; }
+.hero-video__scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.2));
+}
 .hero-video__play {
   position: absolute;
   z-index: 3;
@@ -4190,12 +4195,12 @@ a.work-card {
 }
 @media (max-width: 720px) {
   .hero-video { height: 92vh; min-height: 560px; }
-  .hero-video__logos { bottom: 24px; gap: 18px; font-size: 11px; }
+  .hero-video__logos { gap: 18px; font-size: 11px; }
 }
 
 /* ---------- Contact AI block (Gabriel Valdivia-style) ---------- */
 .contact-ai {
-  padding: 160px 0 96px;
+  padding: 80px 0 120px;
 }
 .contact-ai__centered {
   display: grid;
@@ -4225,7 +4230,8 @@ a.work-card {
   overflow: hidden;
 }
 .contact-ai__list {
-  height: 206px;
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -4362,8 +4368,7 @@ a.work-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  flex: 1;
-  min-height: 0;
+  flex-shrink: 0;
   padding-bottom: 8px;
   box-sizing: border-box;
 }
@@ -4431,13 +4436,30 @@ a.work-card {
   min-width: 0;
   background: rgba(0, 0, 0, 0.05);
   border-radius: 16px;
-  padding: 12px 16px;
+  padding: 10px 12px 10px 16px;
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
+  gap: 8px;
   position: relative;
 }
 .contact-ai__send-btn {
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 0;
+  background: var(--text);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+  margin-bottom: 1px;
+}
+.contact-ai__send-btn:disabled {
+  background: rgba(0, 0, 0, 0.2);
+  cursor: not-allowed;
 }
 .contact-ai__input {
   flex: 1;
@@ -4453,7 +4475,10 @@ a.work-card {
   padding: 0;
   font-family: inherit;
   resize: none;
+  overflow-y: auto;
+  scrollbar-width: none;
 }
+.contact-ai__input::-webkit-scrollbar { display: none; }
 .contact-ai__input::placeholder { color: var(--text-muted); }
 
 .contact-ai__panel--chat .contact-ai__list {
@@ -4517,29 +4542,6 @@ a.work-card {
   .contact-ai__bubble--bot {
     max-width: 100%;
     width: 100%;
-  }
-  .contact-ai__input {
-    padding-bottom: 28px;
-  }
-  .contact-ai__send-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    right: 12px;
-    bottom: 10px;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 0;
-    background: var(--text);
-    color: #fff;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .contact-ai__send-btn:disabled {
-    background: rgba(0, 0, 0, 0.2);
-    cursor: not-allowed;
   }
 }
 
