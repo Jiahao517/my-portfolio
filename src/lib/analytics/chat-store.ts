@@ -2,7 +2,7 @@ import { appendFile, mkdir, readFile, rename, stat, unlink } from "node:fs/promi
 import path from "node:path";
 import type { AnalyticsChatRecord } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data", "analytics");
+const DATA_DIR = path.join(/*turbopackIgnore: true*/ process.cwd(), "data", "analytics");
 const CHAT_FILE = path.join(DATA_DIR, "chats.jsonl");
 const MAX_CHAT_BYTES = 1024 * 1024 * 12;
 const ROTATE_CHAT_BYTES = 1024 * 1024 * 50;

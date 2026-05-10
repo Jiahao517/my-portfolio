@@ -367,13 +367,16 @@ function buildTimeSeries(events: AnalyticsEventRecord[], granularity: "hour" | "
     }));
 }
 
+const TZ_OFFSET_MS = 8 * 60 * 60 * 1000; // Asia/Shanghai UTC+8, no DST
+
 function buildHourlyHeatmap(events: AnalyticsEventRecord[]): AnalyticsHeatmapCell[] {
   const cells: number[][] = Array.from({ length: 7 }, () => Array<number>(24).fill(0));
   for (const event of events) {
     if (event.type !== "page_view" && event.type !== "heartbeat") continue;
     const date = new Date(event.timestamp);
     if (Number.isNaN(date.getTime())) continue;
-    cells[date.getDay()][date.getHours()] += 1;
+    const local = new Date(date.getTime() + TZ_OFFSET_MS);
+    cells[local.getUTCDay()][local.getUTCHours()] += 1;
   }
   const out: AnalyticsHeatmapCell[] = [];
   for (let weekday = 0; weekday < 7; weekday += 1) {
@@ -403,8 +406,7 @@ function computeRangeInfo(
 function bucketIso(timestamp: string, granularity: "hour" | "day"): string {
   const date = new Date(timestamp);
   if (Number.isNaN(date.getTime())) return timestamp;
-  const tzOffsetMs = date.getTimezoneOffset() * 60 * 1000;
-  const local = new Date(date.getTime() - tzOffsetMs);
+  const local = new Date(date.getTime() + TZ_OFFSET_MS);
   if (granularity === "day") {
     return local.toISOString().slice(0, 10);
   }

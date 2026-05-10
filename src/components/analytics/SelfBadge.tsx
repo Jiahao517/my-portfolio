@@ -1,18 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useLocalStorageItem } from "@/hooks/useLocalStorageItem";
 
 export function SelfBadge({ visitorId }: { visitorId: string }) {
-  const [isSelf, setIsSelf] = useState(false);
-
-  useEffect(() => {
-    try {
-      const selfId = window.localStorage.getItem("portfolio_analytics_visitor_id");
-      setIsSelf(!!selfId && selfId === visitorId);
-    } catch {
-      // ignore
-    }
-  }, [visitorId]);
+  const selfId = useLocalStorageItem("portfolio_analytics_visitor_id");
+  const isSelf = !!selfId && selfId === visitorId;
 
   if (!isSelf) return null;
   return (

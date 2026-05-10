@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { AnalyticsChatRecord } from "@/lib/analytics/types";
 import { formatDate, formatDuration, truncate } from "@/lib/analytics/format";
+import { useLocalStorageItem } from "@/hooks/useLocalStorageItem";
 
 interface Props {
   record: AnalyticsChatRecord;
@@ -12,16 +13,8 @@ interface Props {
 
 export function ChatRow({ record, showVisitorLink = true }: Props) {
   const [open, setOpen] = useState(false);
-  const [isSelf, setIsSelf] = useState(false);
-
-  useEffect(() => {
-    try {
-      const selfId = window.localStorage.getItem("portfolio_analytics_visitor_id");
-      setIsSelf(!!selfId && selfId === record.visitorId);
-    } catch {
-      // ignore
-    }
-  }, [record.visitorId]);
+  const selfId = useLocalStorageItem("portfolio_analytics_visitor_id");
+  const isSelf = !!selfId && selfId === record.visitorId;
   const ipLabel = record.visitor.ip || (record.visitor.ipHash ? `#${record.visitor.ipHash.slice(0, 12)}` : "—");
   const cityLabel = record.visitor.city || record.visitor.country || "未知地区";
   return (

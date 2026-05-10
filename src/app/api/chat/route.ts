@@ -195,6 +195,7 @@ export async function POST(req: NextRequest) {
     async start(controller) {
       const reader = upstream.body!.getReader();
       let buffer = "";
+      let closed = false;
       try {
         while (true) {
           const { value, done } = await reader.read();
@@ -207,6 +208,7 @@ export async function POST(req: NextRequest) {
             if (!line.startsWith("data:")) continue;
             const data = line.slice(5).trim();
             if (data === "[DONE]") {
+              closed = true;
               controller.close();
               return;
             }
@@ -225,7 +227,7 @@ export async function POST(req: NextRequest) {
       } catch (err) {
         streamError = err instanceof Error ? err.message : "stream error";
       } finally {
-        controller.close();
+        if (!closed) controller.close();
         void persistChat({
           req,
           visitorId,

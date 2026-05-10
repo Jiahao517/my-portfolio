@@ -12,7 +12,7 @@ import type {
   AnalyticsVisitorInfo,
 } from "./types";
 
-const DATA_DIR = path.join(process.cwd(), "data", "analytics");
+const DATA_DIR = path.join(/*turbopackIgnore: true*/ process.cwd(), "data", "analytics");
 const EVENT_FILE = path.join(DATA_DIR, "events.jsonl");
 const MAX_EVENT_BYTES = 1024 * 1024 * 12;
 const ROTATE_EVENT_BYTES = 1024 * 1024 * 50;

@@ -1,9 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { AnalyticsVisitorSummary } from "@/lib/analytics/types";
 import { formatDate, formatDuration, truncate } from "@/lib/analytics/format";
+import { useLocalStorageItem } from "@/hooks/useLocalStorageItem";
 
 interface Props {
   visitor: AnalyticsVisitorSummary;
@@ -17,16 +18,8 @@ function ipDisplay(visitor: AnalyticsVisitorSummary) {
 
 export function VisitorRow({ visitor }: Props) {
   const [open, setOpen] = useState(false);
-  const [isSelf, setIsSelf] = useState(false);
-
-  useEffect(() => {
-    try {
-      const selfId = window.localStorage.getItem("portfolio_analytics_visitor_id");
-      setIsSelf(!!selfId && selfId === visitor.visitorId);
-    } catch {
-      // ignore
-    }
-  }, [visitor.visitorId]);
+  const selfId = useLocalStorageItem("portfolio_analytics_visitor_id");
+  const isSelf = !!selfId && selfId === visitor.visitorId;
   const subtitleParts = [
     visitor.org || (visitor.suspectOrg ? "可疑公司网络" : "普通网络"),
     visitor.device,
