@@ -2,27 +2,16 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
+import { caseImages } from "@/lib/caseImages";
 
 export const metadata: Metadata = {
   title: "智能对话设计规范",
   description: "统一对话组件与规则，让设计直接进入开发与使用",
 };
 
-const IMAGES = [
-  "/images/guifan/27.规范.png",
-  "/images/guifan/28.规范.png",
-  "/images/guifan/29.规范.png",
-  "/images/guifan/30.规范.png",
-  "/images/guifan/31.规范.png",
-  "/images/guifan/32.规范.png",
-  "/images/guifan/33.规范.png",
-  "/images/guifan/34.规范.png",
-  "/images/guifan/35.规范.png",
-  "/images/guifan/36.规范.png",
-];
-
 export default function ChatSpecPage() {
-  const thumbs = IMAGES.map((src) => ({ src, ar: 16 / 9 }));
+  const IMAGES = caseImages("chat-spec", 10);
+  const thumbs = IMAGES.map(({ src, ar }) => ({ src, ar }));
   return (
     <>
       <SiteChrome thumbs={thumbs} variant="light" />
@@ -35,13 +24,13 @@ export default function ChatSpecPage() {
         </section>
 
         <div className="flex flex-col gap-2 px-2 md:gap-3 md:px-3">
-          {IMAGES.map((src, i) => (
+          {IMAGES.map((image, i) => (
             <div key={i} className="overflow-hidden bg-neutral-900">
               <Image
-                src={src}
+                src={image.src}
                 alt=""
-                width={1920}
-                height={1080}
+                width={image.width}
+                height={image.height}
                 sizes="100vw"
                 className="block h-auto w-full"
                 priority={i === 0}

@@ -36,14 +36,13 @@ const HERO_TRAIL_IMAGES = [
   "/images/case-wencai.png",
   "/images/case-chatspec.png",
   "/images/case-innovation.png",
-  "/images/case-voiceflow.png",
-  "/images/dingtalk/1.png",
-  "/images/dingtalk/2.png",
-  "/images/wencai/06.png",
-  "/images/wencai/07.png",
-  "/images/guifan/28.规范.png",
-  "/images/chuangxin/1.专利.png",
-  "/images/chuangxin/2.专利.png",
+  "/case-images/dingtalk/01.png",
+  "/case-images/dingtalk/02.png",
+  "/case-images/wencai/01.png",
+  "/case-images/wencai/02.png",
+  "/case-images/chat-spec/02.png",
+  "/case-images/innovation/01.png",
+  "/case-images/innovation/02.png",
 ];
 
 export function HeroVideo() {

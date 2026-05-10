@@ -4,41 +4,15 @@ import Link from "next/link";
 import { CaseFooterNav } from "@/components/CaseFooterNav";
 import { SiteChrome } from "@/components/SiteChrome";
 import { WencaiBrandVideo } from "@/components/WencaiBrandVideo";
+import { type CaseImage, caseImages } from "@/lib/caseImages";
 
 export const metadata: Metadata = {
   title: "问财智能投顾",
   description: "AI+金融，交互范式升级，让答案可理解、可验证",
 };
 
-type MediaItem = { image: string; video?: string };
+type MediaItem = { image: CaseImage; video?: string };
 type Block = { type: "fullColumn" | "twoColumn"; items: MediaItem[] };
-
-const BLOCKS: Block[] = [
-  { type: "fullColumn", items: [{ image: "/images/wencai/12.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/13.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/14.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/15.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/16.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/17.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/18.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/19.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/20.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/21.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/22.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/23.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/24.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/25.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/26.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/27.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/28.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/29.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/30.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/31.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/32.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/33.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/34.问财.png" }] },
-  { type: "fullColumn", items: [{ image: "/images/wencai/35.问财.png" }] },
-];
 
 function Media({ item }: { item: MediaItem }) {
   if (item.video) {
@@ -46,7 +20,7 @@ function Media({ item }: { item: MediaItem }) {
       <video
         className="block h-auto w-full"
         src={item.video}
-        poster={item.image}
+        poster={item.image.src}
         autoPlay
         muted
         loop
@@ -57,10 +31,10 @@ function Media({ item }: { item: MediaItem }) {
   }
   return (
     <Image
-      src={item.image}
+      src={item.image.src}
       alt=""
-      width={1920}
-      height={1080}
+      width={item.image.width}
+      height={item.image.height}
       sizes="100vw"
       className="block h-auto w-full"
       priority={false}
@@ -69,15 +43,14 @@ function Media({ item }: { item: MediaItem }) {
 }
 
 export default function WencaiPage() {
+  const BLOCKS: Block[] = caseImages("wencai", 24).map((image) => ({
+    type: "fullColumn",
+    items: [{ image }],
+  }));
   const thumbs = [
-    { src: "/images/wencai/04.png", ar: 16 / 9 },
+    { src: BLOCKS[0]?.items[0]?.image.src ?? "/case-images/wencai/01.png", ar: BLOCKS[0]?.items[0]?.image.ar ?? 16 / 9 },
     ...BLOCKS.flatMap((b) =>
-      b.items.map((it) => {
-        const m = it.image.match(/\/(\d+)x(\d+)\//);
-        const w = m ? Number(m[1]) : 16;
-        const h = m ? Number(m[2]) : 9;
-        return { src: it.image, ar: w / h };
-      }),
+      b.items.map((it) => ({ src: it.image.src, ar: it.image.ar })),
     ),
   ];
   return (

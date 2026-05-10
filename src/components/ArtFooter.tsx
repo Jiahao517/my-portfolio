@@ -4,18 +4,18 @@ import { type CSSProperties, useEffect, useMemo, useRef, useState } from "react"
 import { ImageTrail } from "@/components/ImageTrail";
 
 const TRAIL_IMAGES = [
-  "/images/dingtalk/1.png",
-  "/images/dingtalk/2.png",
-  "/images/dingtalk/3.png",
-  "/images/dingtalk/4.png",
-  "/images/wencai/06.png",
-  "/images/wencai/07.png",
-  "/images/wencai/08.png",
-  "/images/wencai/09.png",
-  "/images/chuangxin/1.专利.png",
-  "/images/chuangxin/2.专利.png",
-  "/images/guifan/28.规范.png",
-  "/images/guifan/29.规范.png",
+  "/case-images/dingtalk/01.png",
+  "/case-images/dingtalk/02.png",
+  "/case-images/dingtalk/03.png",
+  "/case-images/dingtalk/04.png",
+  "/case-images/wencai/01.png",
+  "/case-images/wencai/02.png",
+  "/case-images/wencai/03.png",
+  "/case-images/wencai/04.png",
+  "/case-images/innovation/01.png",
+  "/case-images/innovation/02.png",
+  "/case-images/chat-spec/02.png",
+  "/case-images/chat-spec/03.png",
 ];
 
 function ArtFooterArrowUp() {
@@ -260,7 +260,6 @@ export function ArtFooter() {
               muted
               playsInline
               preload="auto"
-              poster="/images/art-footer-poster.jpg"
             >
               <source src="/videos/new_bg1.mp4" type="video/mp4" />
             </video>

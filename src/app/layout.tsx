@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     description: "AI 产品体验设计师，关注复杂业务场景、对话体验、设计系统与产品落地交付。",
     type: "website",
     url: "/",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/images/assistant-avatar.png", width: 180, height: 180 }],
   },
   icons: {
     icon: [
