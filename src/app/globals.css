@@ -425,7 +425,7 @@ blockquote {
 }
 
 .section--hero {
-  padding-top: 50px;
+  padding-top: 80px;
 }
 
 .section--contact {
@@ -561,7 +561,7 @@ blockquote {
   display: flex;
   gap: 12px;
   padding-top: 69px;
-  padding-bottom: 120px;
+  padding-bottom: 69px;
   align-items: stretch;
 }
 
@@ -1647,6 +1647,12 @@ video.case-study__image {
   .section {
     padding-top: 88px;
   }
+  .section--hero {
+    padding-top: 50px;
+  }
+  .case-studies {
+    padding-top: 50px;
+  }
   .section-divider {
     margin-top: 88px;
   }
@@ -1702,6 +1708,8 @@ video.case-study__image {
   .social-proof {
     flex-direction: column;
     gap: 24px;
+    padding-top: 50px;
+    padding-bottom: 50px;
   }
   .social-proof__left {
     width: 100%;
@@ -3816,7 +3824,7 @@ a.work-card {
 
   .about__main {
     flex-direction: column;
-    gap: 0;
+    gap: 24px;
   }
 
   .about__media-column {
@@ -4200,7 +4208,7 @@ a.work-card {
 
 /* ---------- Contact AI block (Gabriel Valdivia-style) ---------- */
 .contact-ai {
-  padding: 80px 0 120px;
+  padding: 80px 0 150px;
 }
 .contact-ai__centered {
   display: grid;
@@ -4545,7 +4553,10 @@ a.work-card {
 
 @media (max-width: 900px) {
   .contact-ai__centered { grid-template-columns: 1fr; gap: 20px; }
-  .contact-ai { padding-top: 100px; }
+  .contact-ai {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
   .contact-ai__title {
     font-size: 32px;
     line-height: 1.3;
