@@ -27,21 +27,34 @@ interface AnalyticsPayload {
 
 const VISITOR_KEY = "portfolio_analytics_visitor_id";
 const SESSION_KEY = "portfolio_analytics_session_id";
-const HEARTBEAT_MS = 15_000;
+const HEARTBEAT_MS = 5_000;
+const MIN_HEARTBEAT_MS = 1_000;
 const SCROLL_DEPTHS = [25, 50, 75, 100] as const;
 
 export function AnalyticsTracker() {
   const pathname = usePathname();
   const activeSections = useRef(new Map<string, { startedAt: number; label: string }>());
+  const lastHeartbeatAt = useRef<number | null>(null);
 
   useEffect(() => {
     if (!shouldTrack(pathname)) return;
 
     const send = createSender(pathname);
+    lastHeartbeatAt.current = performance.now();
     send("page_view");
 
+    const sendHeartbeat = () => {
+      if (document.visibilityState !== "visible" || lastHeartbeatAt.current === null) return;
+      const now = performance.now();
+      const durationMs = Math.round(now - lastHeartbeatAt.current);
+      if (durationMs >= MIN_HEARTBEAT_MS) {
+        send("heartbeat", { durationMs });
+        lastHeartbeatAt.current = now;
+      }
+    };
+
     const heartbeat = window.setInterval(() => {
-      if (document.visibilityState === "visible") send("heartbeat", { durationMs: HEARTBEAT_MS });
+      sendHeartbeat();
     }, HEARTBEAT_MS);
 
     const sentDepths = new Set<number>();
@@ -103,19 +116,35 @@ export function AnalyticsTracker() {
       }
     };
 
+    const onVisibilityChange = () => {
+      if (document.visibilityState === "hidden") {
+        sendHeartbeat();
+        flushSections();
+        lastHeartbeatAt.current = null;
+        return;
+      }
+      lastHeartbeatAt.current = performance.now();
+    };
+
+    const onPageHide = () => {
+      sendHeartbeat();
+      flushSections();
+    };
+
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("click", onClick, { capture: true });
-    document.addEventListener("visibilitychange", flushSections);
-    window.addEventListener("pagehide", flushSections);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("pagehide", onPageHide);
     onScroll();
 
     return () => {
+      sendHeartbeat();
       window.clearInterval(heartbeat);
       observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("click", onClick, { capture: true });
-      document.removeEventListener("visibilitychange", flushSections);
-      window.removeEventListener("pagehide", flushSections);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("pagehide", onPageHide);
       flushSections();
     };
   }, [pathname]);

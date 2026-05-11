@@ -298,7 +298,7 @@ export function buildVisitorDetail(
       sessionId: session.sessionId,
       startedAt: session.startedAt,
       lastSeen: session.lastSeen,
-      durationMs: session.durationMs,
+      durationMs: effectiveSessionDuration(session),
       pageViews: session.pageViews,
       clicks: session.clicks,
       maxScrollDepth: session.maxScrollDepth,
@@ -427,6 +427,10 @@ function pagesFromSession(session: MutableSession): AnalyticsVisitorPage[] {
     .sort((a, b) => b.durationMs - a.durationMs || b.views - a.views);
 }
 
+function effectiveSessionDuration(session: MutableSession) {
+  return Math.max(session.durationMs, sumValues(session.sectionDurations));
+}
+
 function getSession(sessions: Map<string, MutableSession>, event: AnalyticsEventRecord) {
   const current = sessions.get(event.sessionId);
   if (current) return current;
@@ -453,12 +457,13 @@ function getSession(sessions: Map<string, MutableSession>, event: AnalyticsEvent
 function toVisitorSummary(session: MutableSession): AnalyticsVisitorSummary {
   const topPage = topEntry(session.pageDurations)?.[0];
   const topSection = topEntry(session.sectionDurations)?.[0]?.split("::")[1];
+  const durationMs = effectiveSessionDuration(session);
   return {
     sessionId: session.sessionId,
     visitorId: session.visitorId,
     startedAt: session.startedAt,
     lastSeen: session.lastSeen,
-    durationMs: session.durationMs,
+    durationMs,
     pageViews: session.pageViews,
     clicks: session.clicks,
     maxScrollDepth: session.maxScrollDepth,
@@ -474,22 +479,22 @@ function toVisitorSummary(session: MutableSession): AnalyticsVisitorSummary {
     suspectOrg: session.visitor.suspectOrg,
     device: session.device,
     referrer: session.referrer,
-    interest: inferInterest(session, topPage, topSection),
+    interest: inferInterest(session, durationMs, topPage, topSection),
     pagesVisited: pagesFromSession(session).slice(0, 12),
   };
 }
 
-function inferInterest(session: MutableSession, topPage?: string, topSection?: string) {
+function inferInterest(session: MutableSession, durationMs: number, topPage?: string, topSection?: string) {
   const sectionSignal = [...session.sectionDurations.keys(), topSection ?? ""].join(" ");
-  if (session.durationMs < 10_000 && session.pageViews <= 1 && session.maxScrollDepth < 25) return "快速跳出";
+  if (durationMs < 10_000 && session.pageViews <= 1 && session.maxScrollDepth < 25) return "快速跳出";
   if (session.contactClicks > 0 || (session.clicks > 0 && /contact|联系|mailto|tel/i.test(`${sectionSignal} ${topPage ?? ""}`))) {
     return "有联系意向";
   }
-  if (/case|work|project|作品|案例|experience|经历/i.test(sectionSignal) && session.durationMs >= 30_000) {
+  if (/case|work|project|作品|案例|experience|经历/i.test(sectionSignal) && durationMs >= 30_000) {
     return "重点查看案例";
   }
-  if (topPage && topPage !== "/" && session.durationMs >= 30_000) return "重点查看案例";
-  if (session.maxScrollDepth >= 75 || session.durationMs >= 60_000) return "深度浏览";
+  if (topPage && topPage !== "/" && durationMs >= 30_000) return "重点查看案例";
+  if (session.maxScrollDepth >= 75 || durationMs >= 60_000) return "深度浏览";
   return "普通浏览";
 }
 
@@ -541,6 +546,12 @@ function increment(map: Map<string, number>, key: string) {
 
 function addToMap(map: Map<string, number>, key: string, value: number) {
   map.set(key, (map.get(key) ?? 0) + value);
+}
+
+function sumValues(map: Map<string, number>) {
+  let total = 0;
+  for (const value of map.values()) total += value;
+  return total;
 }
 
 function clampDuration(durationMs: number) {

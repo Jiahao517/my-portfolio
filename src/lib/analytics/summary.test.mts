@@ -62,3 +62,20 @@ test("buildAnalyticsSummary aggregates sessions, pages, clicks, sections, and su
   assert.equal(summary.maxScrollDepthByPath[0].maxDepth, 75);
   assert.equal(summary.recentVisitors[1].interest, "有联系意向");
 });
+
+test("buildAnalyticsSummary uses section dwell time as a duration fallback", () => {
+  const summary = buildAnalyticsSummary([
+    event({ type: "page_view", sessionId: "s-section", visitorId: "v-section", path: "/" }),
+    event({
+      type: "section_view",
+      sessionId: "s-section",
+      visitorId: "v-section",
+      path: "/",
+      sectionId: "hero",
+      sectionLabel: "Hero",
+      durationMs: 4200,
+    }),
+  ]);
+
+  assert.equal(summary.recentVisitors[0].durationMs, 4200);
+});
