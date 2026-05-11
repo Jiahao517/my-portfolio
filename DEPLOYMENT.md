@@ -174,6 +174,32 @@ sudo nginx -t
 sudo systemctl reload nginx
 ```
 
+### Streaming chat through Nginx
+
+`/api/chat` streams tokens from the server. If production replies appear all at once while local preview streams normally, check that Nginx is not buffering the route:
+
+```nginx
+location /api/chat {
+    proxy_pass http://127.0.0.1:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_buffering off;
+    proxy_cache off;
+    gzip off;
+    add_header X-Accel-Buffering no;
+}
+```
+
+After editing the live Nginx config:
+
+```bash
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
 ## Analytics
 
 The site has a private analytics dashboard:

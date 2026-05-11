@@ -14,6 +14,11 @@ const MAX_MESSAGES = 24;
 const MAX_CONTENT_CHARS = 2000;
 const MAX_TOTAL_CHARS = 8000;
 const CHAT_MODEL = "gpt-4.1-mini";
+const STREAM_HEADERS = {
+  "content-type": "text/plain; charset=utf-8",
+  "cache-control": "no-cache, no-transform",
+  "x-accel-buffering": "no",
+};
 
 function rateLimit(ip: string) {
   const now = Date.now();
@@ -150,7 +155,7 @@ export async function POST(req: NextRequest) {
       },
     });
     return new Response(stream, {
-      headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+      headers: STREAM_HEADERS,
     });
   }
 
@@ -244,6 +249,6 @@ export async function POST(req: NextRequest) {
   });
 
   return new Response(stream, {
-    headers: { "content-type": "text/plain; charset=utf-8", "cache-control": "no-store" },
+    headers: STREAM_HEADERS,
   });
 }
