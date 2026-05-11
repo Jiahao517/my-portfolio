@@ -6002,6 +6002,11 @@ a.work-card {
     text-align: center;
   }
 
+  .art-footer__mobile-social span {
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
   .art-footer__big-name {
     --art-footer-name-sans-size: clamp(44.352px, 15.84vw, 88.704px);
     --art-footer-name-serif-size: clamp(70.4px, 23.1vw, 136.4px);

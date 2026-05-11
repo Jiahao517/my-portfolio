@@ -277,7 +277,6 @@ export function ArtFooter() {
                 {mobileSocialText.map((line) => (
                   <span key={line}>{line}</span>
                 ))}
-                <a href="/privacy">隐私说明</a>
               </div>
             </div>
 
