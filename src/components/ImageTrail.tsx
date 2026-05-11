@@ -34,8 +34,22 @@ export function ImageTrail({ items, containerRef, threshold = 80 }: ImageTrailPr
     let mousePos = { x: 0, y: 0 };
     let lastMousePos = { x: 0, y: 0 };
     let cacheMousePos = { x: 0, y: 0 };
-    let rafId: number;
+    let rafId: number | null = null;
     let started = false;
+    let paused = false;
+
+    const stopTrail = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      started = false;
+      if (!paused) {
+        paused = true;
+        gsap.killTweensOf(imgs);
+        gsap.to(imgs, { duration: 0.15, opacity: 0, scale: 0.2, ease: "power2.out" });
+      }
+    };
 
     const showNext = () => {
       zVal++;
@@ -94,9 +108,16 @@ export function ImageTrail({ items, containerRef, threshold = 80 }: ImageTrailPr
     };
 
     const onMove = (e: MouseEvent | TouchEvent) => {
-      if ((e.target as Element).closest?.("[data-no-trail]")) return;
       const rect = eventTarget.getBoundingClientRect();
       mousePos = getLocalPos(e, rect);
+      const target = e.target instanceof Element ? e.target : null;
+      if (target?.closest("[data-no-trail]")) {
+        lastMousePos = { ...mousePos };
+        cacheMousePos = { ...mousePos };
+        stopTrail();
+        return;
+      }
+      paused = false;
       if (!started) {
         cacheMousePos = { ...mousePos };
         started = true;
@@ -108,7 +129,7 @@ export function ImageTrail({ items, containerRef, threshold = 80 }: ImageTrailPr
     eventTarget.addEventListener("touchmove", onMove as EventListener);
 
     return () => {
-      cancelAnimationFrame(rafId);
+      if (rafId !== null) cancelAnimationFrame(rafId);
       eventTarget.removeEventListener("mousemove", onMove as EventListener);
       eventTarget.removeEventListener("touchmove", onMove as EventListener);
       gsap.killTweensOf(imgs);

@@ -4161,6 +4161,11 @@ a.work-card {
 }
 .hero-video__cta svg path { fill: #181212; }
 .hero-video__cta:hover { background: #f4f4f4; }
+.hero-video__cta-trail-safe {
+  display: inline-block;
+  padding: 72px;
+  margin: -72px;
+}
 .hero-video__logos {
   display: flex;
   justify-content: center;

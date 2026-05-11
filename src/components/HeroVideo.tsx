@@ -125,13 +125,15 @@ export function HeroVideo({ trailImages = HERO_TRAIL_IMAGES }: { trailImages?: s
           <span className="hero-video__logos-sep">｜</span>
           <span className="hero-video__logos-item">设计奖&amp;专利</span>
         </div>
-        <ContactPopover>
-          <Magnet padding={60} magnetStrength={6}>
-            <span className="case-study__btn hero-video__cta hero-video__cta--static">
-              <span>联系我</span>
-            </span>
-          </Magnet>
-        </ContactPopover>
+        <div className="hero-video__cta-trail-safe" data-no-trail>
+          <ContactPopover>
+            <Magnet padding={60} magnetStrength={6}>
+              <span className="case-study__btn hero-video__cta hero-video__cta--static">
+                <span>联系我</span>
+              </span>
+            </Magnet>
+          </ContactPopover>
+        </div>
       </div>
       <ScrollMouse />
     </section>
