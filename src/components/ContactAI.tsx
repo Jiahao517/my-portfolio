@@ -51,6 +51,10 @@ function AssistantAvatar() {
   );
 }
 
+function isAbortError(error: unknown) {
+  return error instanceof DOMException && error.name === "AbortError";
+}
+
 export function ContactAI() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -111,6 +115,18 @@ export function ContactAI() {
         });
       }
     } catch (e) {
+      if (isAbortError(e)) {
+        setError(null);
+        setMessages((curr) => {
+          const updated = [...curr];
+          const last = updated[updated.length - 1];
+          if (last?.role === "assistant" && !last.content) {
+            updated[updated.length - 1] = { role: "assistant", content: "已停止回答。" };
+          }
+          return updated;
+        });
+        return;
+      }
       const msg = e instanceof Error ? e.message : "网络异常，请稍后再试";
       setError(msg);
       setMessages((curr) => curr.slice(0, -1));
@@ -118,6 +134,10 @@ export function ContactAI() {
       setStreaming(false);
       abortRef.current = null;
     }
+  };
+
+  const stop = () => {
+    abortRef.current?.abort();
   };
 
   const showGreeting = messages.length === 0;
@@ -146,7 +166,12 @@ export function ContactAI() {
                     <div className="contact-ai__bubble contact-ai__bubble--bot">
                       {!m.content && streaming && i === messages.length - 1
                         ? <ThinkingDots />
-                        : <ChatMarkdown content={m.content} />
+                        : (
+                          <ChatMarkdown
+                            content={m.content}
+                            onFollowUpClick={streaming && i === messages.length - 1 ? undefined : send}
+                          />
+                        )
                       }
                     </div>
                   </div>
@@ -211,14 +236,25 @@ export function ContactAI() {
                       }}
                     />
                     <button
-                      type="submit"
-                      className="contact-ai__send-btn"
-                      disabled={streaming || !input.trim()}
-                      aria-label="发送"
+                      type={streaming ? "button" : "submit"}
+                      className={`contact-ai__send-btn${streaming ? " contact-ai__send-btn--stop" : ""}`}
+                      disabled={!streaming && !input.trim()}
+                      aria-label={streaming ? "停止回答" : "发送"}
+                      onClick={(e) => {
+                        if (!streaming) return;
+                        e.preventDefault();
+                        stop();
+                      }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                        <path d="M9 15V3M9 3L4 8M9 3l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
-                      </svg>
+                      {streaming ? (
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                          <rect x="4" y="4" width="10" height="10" rx="2" fill="currentColor" />
+                        </svg>
+                      ) : (
+                        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                          <path d="M9 15V3M9 3L4 8M9 3l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                        </svg>
+                      )}
                     </button>
                   </div>
                 </BorderGlow>
