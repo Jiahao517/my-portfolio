@@ -13,6 +13,7 @@ const MAX = 10;
 const MAX_MESSAGES = 24;
 const MAX_CONTENT_CHARS = 2000;
 const MAX_TOTAL_CHARS = 8000;
+const CHAT_MODEL = "gpt-4.1-mini";
 
 function rateLimit(ip: string) {
   const now = Date.now();
@@ -161,11 +162,11 @@ export async function POST(req: NextRequest) {
       authorization: `Bearer ${apiKey}`,
     },
     body: JSON.stringify({
-      model: "gpt-4.1-mini",
+      model: CHAT_MODEL,
       stream: true,
       temperature: 0.5,
       messages: [
-        { role: "system", content: buildSystemPrompt() },
+        { role: "system", content: buildSystemPrompt(CHAT_MODEL) },
         ...inMsgs.slice(-12),
       ],
     }),
@@ -180,7 +181,7 @@ export async function POST(req: NextRequest) {
       userMessage,
       assistantMessage: "",
       durationMs: Date.now() - startedAt,
-      model: "gpt-4.1-mini",
+      model: CHAT_MODEL,
       error: text || `upstream ${upstream.status}`,
     });
     return new Response(text || "上游服务异常", { status: upstream.status });
@@ -235,7 +236,7 @@ export async function POST(req: NextRequest) {
           userMessage,
           assistantMessage: assistantBuffer,
           durationMs: Date.now() - startedAt,
-          model: "gpt-4.1-mini",
+          model: CHAT_MODEL,
           error: streamError,
         });
       }

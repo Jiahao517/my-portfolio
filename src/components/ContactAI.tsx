@@ -135,7 +135,7 @@ export function ContactAI() {
               <div className="contact-ai__row">
                 <AssistantAvatar />
                 <div className="contact-ai__bubble contact-ai__bubble--bot">
-                  <ChatMarkdown content="你好，我是钟家豪的 AI 作品集助理。我基于他的简历、作品集内容，帮助你快速了解他的 AI 产品设计经验、项目方法和能力特点。" />
+                  <ChatMarkdown content="你好，我是钟家豪的 AI 作品集助理。关于他的简历、作品集和项目经历，我会基于已有资料回答；其他通用问题也可以直接问我。" />
                 </div>
               </div>
             ) : (
@@ -225,7 +225,7 @@ export function ContactAI() {
               </form>
 
               <p className="contact-ai__disclaimer">
-                基于简历与作品集内容生成回答，仅作参考，欢迎面试中进一步沟通确认。
+                关于钟家豪的回答基于简历与作品集内容生成，仅作参考，欢迎面试中进一步沟通确认。
               </p>
             </div>
           </div>
