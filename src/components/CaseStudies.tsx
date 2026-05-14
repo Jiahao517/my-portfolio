@@ -109,8 +109,8 @@ export function CaseStudies({ studies }: { studies: CaseStudy[] }) {
       const viewH = window.innerHeight;
       for (const card of studies) {
         const cardH = card.offsetHeight;
-        if (cardH <= viewH - 56 - 24) {
-          card.style.top = "56px";
+        if (cardH <= viewH - 92 - 24) {
+          card.style.top = "92px";
         } else {
           card.style.top = `${viewH - cardH - 24}px`;
         }
