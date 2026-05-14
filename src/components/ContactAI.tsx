@@ -147,6 +147,7 @@ export function ContactAI() {
       <div className="centered contact-ai__centered">
         <div className="contact-ai__col-left">
           <h2 className="contact-ai__title shiny-hover">与我的 AI 作品集助理聊聊</h2>
+          <p className="contact-ai__subtitle">该模块已集成 ChatGPT API，任何问题都可提问</p>
         </div>
 
         <div className={`contact-ai__panel${showGreeting ? "" : " contact-ai__panel--chat"}`}>

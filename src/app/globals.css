@@ -4233,6 +4233,14 @@ a.work-card {
   color: var(--text);
   margin: 0;
 }
+.contact-ai__subtitle {
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: -0.7px;
+  color: var(--neutral-800);
+}
 .contact-ai__panel {
   background: rgba(0, 0, 0, 0.03);
   border-radius: 30px;
