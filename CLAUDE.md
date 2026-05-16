@@ -47,6 +47,8 @@ All portfolio content is plain TypeScript files — no CMS or database. Edit the
 
 **Types (`src/types/portfolio.ts`):** shared types for all data objects (`CaseStudy`, `ExperienceRow`, `Testimonial`, etc.).
 
+**Audio system (`src/lib/sound/`):** Opt-in audio layer (ambient loop + hover/click via Howler.js). Default muted, toggle in the bottom-right corner, preference in `localStorage['portfolio:sound-enabled']`. Fully short-circuited on mobile (viewport < 768px) — no Howler instances, no toggle, no mp3 fetches. Sound files at `public/sounds/{ambient,hover,click}.mp3` with `CREDITS.md`.
+
 ## Styling
 
 All layout and design tokens live in `src/app/globals.css` using raw CSS (not Tailwind utility classes for the site's own styles). Tailwind v4 is used only for shadcn/ui components in `src/components/ui/`.
