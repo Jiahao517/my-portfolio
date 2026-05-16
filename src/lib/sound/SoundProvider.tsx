@@ -9,6 +9,7 @@ import {
   useMemo,
   useRef,
   useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import {
@@ -24,7 +25,10 @@ const AMBIENT_FADE_MS = 400;
 const AMBIENT_VOLUME = 0.35;
 const ONESHOT_VOLUME = 0.6;
 
-function getInitialActive(): boolean {
+// useSyncExternalStore subscribe that never fires (we don't track resize).
+const noopSubscribe = () => () => {};
+
+function getClientActive(): boolean {
   if (typeof window === "undefined") return false;
   return !window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches;
 }
@@ -36,10 +40,12 @@ function getInitialEnabled(): boolean {
 }
 
 export function SoundProvider({ children }: { children: ReactNode }) {
-  // Both `active` and `enabled` are decided once at first client render via lazy
-  // init. We deliberately do not track resize — switching between mobile and
-  // desktop mid-session is rare and the spec accepts that cost.
-  const [active] = useState<boolean>(getInitialActive);
+  // `active` is computed via useSyncExternalStore so SSR consistently sees
+  // false and the client computes the real value AFTER hydration — avoiding a
+  // hydration mismatch when SoundToggle renders null on SSR but a button on
+  // client. The subscribe is a no-op because we deliberately don't react to
+  // resize (spec: mount-only decision).
+  const active = useSyncExternalStore(noopSubscribe, getClientActive, () => false);
   const [enabled, setEnabled] = useState<boolean>(getInitialEnabled);
   const [ready, setReady] = useState(false);
 
