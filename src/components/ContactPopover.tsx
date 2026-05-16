@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import { useContactModal } from "@/components/ContactModal";
+import { useSound } from "@/lib/sound";
 
 interface ContactPopoverProps {
   children: ReactNode;
@@ -22,6 +23,7 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
   const [resolvedPlacement, setResolvedPlacement] = useState<"above" | "below">("above");
   const ref = useRef<HTMLDivElement>(null);
   const { openModal } = useContactModal();
+  const { play } = useSound();
 
   const onCardMove = (e: ReactPointerEvent<HTMLDivElement>) => {
     const card = e.currentTarget;
@@ -57,6 +59,7 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
     .join(" ");
 
   const handleToggle = () => {
+    play("click");
     if (window.matchMedia("(max-width: 600px)").matches) {
       openModal();
       return;
@@ -73,6 +76,7 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
       ref={ref}
       className="contact-popover"
       onClick={handleToggle}
+      onMouseEnter={() => play("hover")}
     >
       <div
         className={panelClass}
