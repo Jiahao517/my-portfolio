@@ -6,7 +6,6 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { caseStudies } from "@/data/case-studies";
 import { ContactPopover } from "@/components/ContactPopover";
-import { useSound } from "@/lib/sound";
 
 const SiteLogo = (
   // eslint-disable-next-line @next/next/no-img-element
@@ -42,7 +41,6 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
   const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const isLight = variant === "light";
-  const { play } = useSound();
 
   useEffect(() => {
     const onScroll = () => {
@@ -120,11 +118,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
         <div className={`pointer-events-auto flex w-[min(94vw,390px)] items-center justify-between rounded-[14px] ${pillBg} px-3 py-2 backdrop-blur-md ring-1 ${pillRing}`}>
           <button
             aria-label={menuOpen ? "Close menu" : "Open menu"}
-            onMouseEnter={() => play("hover")}
-            onClick={() => {
-              play("click");
-              setMenuOpen((v) => !v);
-            }}
+            onClick={() => setMenuOpen((v) => !v)}
             className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${hoverBtn}`}
           >
             {menuOpen ? (
@@ -144,7 +138,6 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
           <ContactPopover placement="below">
             <button
               aria-label="Contact"
-              onMouseEnter={() => play("hover")}
               className={`grid h-10 w-10 place-items-center rounded-full transition-colors ${hoverBtn}`}
             >
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -189,11 +182,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                       href={item.href ?? "#"}
                       className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 first:border-t-0 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
                       style={{ color: menuItemColor(isActive) }}
-                      onMouseEnter={() => play("hover")}
-                      onClick={() => {
-                        play("click");
-                        setMenuOpen(false);
-                      }}
+                      onClick={() => setMenuOpen(false)}
                     >
                       <span>{item.label}</span>
                       <ArrowIcon />
@@ -209,11 +198,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                     href={cs.href}
                     className={`-mx-6 flex items-center justify-between border-t px-6 py-5 text-lg font-medium uppercase tracking-wide transition-colors duration-150 ${isLight ? "hover:bg-black/5" : "hover:bg-white/10"} ${dividerColor}`}
                     style={{ color: menuItemColor(isActive) }}
-                    onMouseEnter={() => play("hover")}
-                    onClick={() => {
-                      play("click");
-                      setMenuOpen(false);
-                    }}
+                    onClick={() => setMenuOpen(false)}
                   >
                     <span>{cs.title}</span>
                     <ArrowIcon />
@@ -245,9 +230,7 @@ export function SiteChrome({ thumbs, variant = "dark" }: { thumbs: Thumb[]; vari
                 <button
                   key={i}
                   ref={(el) => { itemRefs.current[i] = el; }}
-                  onMouseEnter={() => play("hover")}
                   onClick={() => {
-                    play("click");
                     const max = document.documentElement.scrollHeight - window.innerHeight;
                     window.scrollTo({ top: (max * i) / Math.max(1, thumbs.length - 1), behavior: "smooth" });
                   }}

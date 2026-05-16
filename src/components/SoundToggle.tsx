@@ -4,23 +4,16 @@
 import { useSound } from "@/lib/sound";
 
 export function SoundToggle() {
-  const { enabled, active, toggle, play } = useSound();
+  const { enabled, active, toggle } = useSound();
 
   if (!active) return null;
-
-  const handleClick = () => {
-    // Play click on the activating gesture before flipping state.
-    if (enabled) play("click");
-    toggle();
-  };
 
   return (
     <button
       type="button"
       aria-label={enabled ? "关闭声音" : "开启声音"}
       aria-pressed={enabled}
-      onClick={handleClick}
-      onMouseEnter={() => play("hover")}
+      onClick={toggle}
       style={{
         position: "fixed",
         right: 16,

@@ -21,9 +21,14 @@ import {
 
 export const SoundContext = createContext<SoundContextValue | null>(null);
 
+// === Volume knobs ===========================================================
+// Each sound has its own 0..1 volume. Tweak freely.
+const AMBIENT_VOLUME = 0.25;
+const HOVER_VOLUME = 0.35;
+const CLICK_VOLUME = 0.55;
+// ============================================================================
+
 const AMBIENT_FADE_MS = 400;
-const AMBIENT_VOLUME = 0.35;
-const ONESHOT_VOLUME = 0.6;
 
 // useSyncExternalStore subscribe that never fires (we don't track resize).
 const noopSubscribe = () => () => {};
@@ -36,15 +41,32 @@ function getClientActive(): boolean {
 function getInitialEnabled(): boolean {
   if (typeof window === "undefined") return false;
   if (window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches) return false;
-  return window.localStorage.getItem(SOUND_STORAGE_KEY) === "true";
+  const stored = window.localStorage.getItem(SOUND_STORAGE_KEY);
+  if (stored === "true") return true;
+  if (stored === "false") return false;
+  // No stored preference: default ON. Browser autoplay policy still requires
+  // a user gesture before ambient produces sound, so practically this means
+  // sound starts on the very first hover/click anywhere on the page.
+  return true;
+}
+
+// Selector for elements that should auto-play hover/click sounds via delegation.
+const SOUNDABLE_SELECTOR = "button, a[href], [role='button']";
+
+function findSoundableTarget(event: Event): HTMLElement | null {
+  const path = event.composedPath();
+  for (const node of path) {
+    if (!(node instanceof HTMLElement)) continue;
+    if (node.dataset.soundIgnore === "true") return null;
+    if (node.matches(SOUNDABLE_SELECTOR)) return node;
+  }
+  return null;
 }
 
 export function SoundProvider({ children }: { children: ReactNode }) {
-  // `active` is computed via useSyncExternalStore so SSR consistently sees
-  // false and the client computes the real value AFTER hydration — avoiding a
-  // hydration mismatch when SoundToggle renders null on SSR but a button on
-  // client. The subscribe is a no-op because we deliberately don't react to
-  // resize (spec: mount-only decision).
+  // `active` via useSyncExternalStore — SSR sees false consistently, client
+  // computes the real value AFTER hydration, avoiding a hydration mismatch.
+  // Subscribe is no-op because spec says mount-only decision.
   const active = useSyncExternalStore(noopSubscribe, getClientActive, () => false);
   const [enabled, setEnabled] = useState<boolean>(getInitialEnabled);
   const [ready, setReady] = useState(false);
@@ -52,6 +74,17 @@ export function SoundProvider({ children }: { children: ReactNode }) {
   const ambientRef = useRef<Howl | null>(null);
   const hoverRef = useRef<Howl | null>(null);
   const clickRef = useRef<Howl | null>(null);
+  // Refs mirror state so the document-level delegation handlers can read the
+  // latest values without being re-attached on every state change.
+  const enabledRef = useRef(enabled);
+  const readyRef = useRef(ready);
+
+  useEffect(() => {
+    enabledRef.current = enabled;
+  }, [enabled]);
+  useEffect(() => {
+    readyRef.current = ready;
+  }, [ready]);
 
   useEffect(() => {
     if (!active) return;
@@ -65,17 +98,16 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     });
     hoverRef.current = new Howl({
       src: ["/sounds/hover.mp3"],
-      volume: ONESHOT_VOLUME,
+      volume: HOVER_VOLUME,
       preload: true,
     });
     clickRef.current = new Howl({
       src: ["/sounds/click.mp3"],
-      volume: ONESHOT_VOLUME,
+      volume: CLICK_VOLUME,
       preload: true,
     });
 
     const onFirstGesture = () => {
-      // iOS Safari: ensure AudioContext is resumed inside the gesture.
       const ctx = Howler.ctx;
       if (ctx && ctx.state === "suspended") void ctx.resume();
       setReady(true);
@@ -85,9 +117,40 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     window.addEventListener("pointerdown", onFirstGesture, { once: true });
     window.addEventListener("keydown", onFirstGesture, { once: true });
 
+    // Track hover targets so we only fire one hover sound per element entry
+    // (mouseover bubbles on every child element of a hovered button).
+    let hoverTarget: HTMLElement | null = null;
+    const onPointerDown = (e: PointerEvent) => {
+      if (!enabledRef.current) return;
+      const t = findSoundableTarget(e);
+      if (!t) return;
+      // Resume context inside the gesture to satisfy browser autoplay policy.
+      const ctx = Howler.ctx;
+      if (ctx && ctx.state === "suspended") void ctx.resume();
+      clickRef.current?.play();
+    };
+    const onMouseOver = (e: MouseEvent) => {
+      if (!enabledRef.current || !readyRef.current) return;
+      const t = findSoundableTarget(e);
+      if (!t || t === hoverTarget) return;
+      hoverTarget = t;
+      hoverRef.current?.play();
+    };
+    const onMouseOut = (e: MouseEvent) => {
+      const t = findSoundableTarget(e);
+      if (t && t === hoverTarget) hoverTarget = null;
+    };
+
+    document.addEventListener("pointerdown", onPointerDown, true);
+    document.addEventListener("mouseover", onMouseOver, true);
+    document.addEventListener("mouseout", onMouseOut, true);
+
     return () => {
       window.removeEventListener("pointerdown", onFirstGesture);
       window.removeEventListener("keydown", onFirstGesture);
+      document.removeEventListener("pointerdown", onPointerDown, true);
+      document.removeEventListener("mouseover", onMouseOver, true);
+      document.removeEventListener("mouseout", onMouseOut, true);
       ambientRef.current?.unload();
       hoverRef.current?.unload();
       clickRef.current?.unload();
@@ -107,7 +170,6 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     } else if (ambient.playing()) {
       const currentVolume = ambient.volume();
       ambient.fade(currentVolume, 0, AMBIENT_FADE_MS);
-      // Stop after fade so we can resume cleanly later.
       window.setTimeout(() => {
         if (ambient.volume() === 0) ambient.stop();
       }, AMBIENT_FADE_MS + 50);
@@ -125,6 +187,9 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     });
   }, [active]);
 
+  // Imperative play() is kept on the context for components that genuinely
+  // want to trigger a sound on a non-interactive element. Most buttons now
+  // get sound for free via the document-level delegation above.
   const play = useCallback(
     (id: SoundId) => {
       if (!active || !enabled || !ready) return;
