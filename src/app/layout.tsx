@@ -4,6 +4,8 @@ import { Cormorant_Garamond, Inter, Manrope, Noto_Serif_SC } from "next/font/goo
 import { AnalyticsTracker } from "@/components/AnalyticsTracker";
 import { ClarityScript } from "@/components/ClarityScript";
 import { ContactModalProvider } from "@/components/ContactModal";
+import { SoundProvider } from "@/lib/sound";
+import { SoundToggle } from "@/components/SoundToggle";
 import "./globals.css";
 
 const inter = Inter({
@@ -74,7 +76,10 @@ export default function RootLayout({
         ) : null}
       </head>
       <body className="fonts-ready">
-        <ContactModalProvider>{children}</ContactModalProvider>
+        <SoundProvider>
+          <ContactModalProvider>{children}</ContactModalProvider>
+          <SoundToggle />
+        </SoundProvider>
         <AnalyticsTracker />
         <ClarityScript />
       </body>
