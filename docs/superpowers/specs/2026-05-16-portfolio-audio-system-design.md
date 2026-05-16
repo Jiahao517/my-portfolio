@@ -29,7 +29,7 @@ The system must degrade gracefully (no errors if audio fails to load, no UI bloc
 3. **While enabled:** hovering nav links / primary buttons plays a short blip; clicking primary buttons plays a click sound.
 4. **User clicks toggle again:** ambient fades out, hover/click sounds stop firing, localStorage flips to `"false"`.
 5. **Return visit:** preference is read from localStorage. If `"true"`, the toggle shows enabled state — but ambient does NOT auto-start until the user produces any gesture on the page (click, key, etc.). This satisfies browser autoplay policy without a full-screen gate.
-6. **Mobile (viewport < 768px):** toggle is still rendered, but ambient defaults to off even if localStorage says on (hover sounds are meaningless on touch). Click sounds still play when enabled.
+6. **Mobile (viewport < 768px):** the entire audio system is disabled. No toggle button is rendered, no Howler instances are created, no mp3 files are fetched. `useSound().play()` is a no-op. Mobile users see and pay for nothing related to audio.
 
 ## Architecture
 
@@ -53,7 +53,7 @@ type SoundId = 'hover' | 'click';
 - Listens for the first user gesture (`pointerdown` / `keydown`) once globally, sets `ready = true`. Required because browsers block `AudioContext.resume()` until a gesture exists.
 - When `enabled && ready`, calls `ambient.play()` with fade-in. When `enabled` flips off, fades out.
 - Reads `localStorage['portfolio:sound-enabled']` on mount. Writes on toggle.
-- Mobile guard: if `window.matchMedia('(max-width: 768px)').matches`, force `enabled = false` on mount regardless of stored value.
+- **Mobile short-circuit:** if `window.matchMedia('(max-width: 768px)').matches` on mount, the provider exits early: no Howler instances are constructed, no audio files are requested, `play` / `toggle` are permanent no-ops, and `<SoundToggle>` returns `null` so nothing renders. This applies on initial mount only — we don't re-evaluate on resize, since toggling between mobile and desktop layouts mid-session is rare and the cost of doing so is acceptable.
 
 ### 2. `src/lib/sound/useSound.ts` — Hook
 
@@ -115,7 +115,7 @@ Files to touch:
   - Click toggle → ambient fades in, click sound plays.
   - Hover sidebar nav → hover blip.
   - Reload → toggle remembers, but ambient waits for first gesture.
-  - Mobile viewport → ambient stays off even when enabled stored as true.
+  - Mobile viewport (DevTools responsive mode, width < 768px) → no toggle button visible, no `/sounds/*.mp3` requests in the network tab.
   - Toggle off → ambient fades out cleanly.
 - **Automated:** `npm run check` (lint + typecheck + build). No new unit tests — Howler interactions are hard to mock and the value/cost ratio is low.
 
