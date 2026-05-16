@@ -117,14 +117,14 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     window.addEventListener("pointerdown", onFirstGesture, { once: true });
     window.addEventListener("keydown", onFirstGesture, { once: true });
 
-    // Track hover targets so we only fire one hover sound per element entry
-    // (mouseover bubbles on every child element of a hovered button).
+    // Track the soundable element the cursor currently hovers. We only fire
+    // hover.mp3 when the cursor actually crosses INTO a new soundable element,
+    // not when it moves between children of the same one.
     let hoverTarget: HTMLElement | null = null;
     const onPointerDown = (e: PointerEvent) => {
       if (!enabledRef.current) return;
       const t = findSoundableTarget(e);
       if (!t) return;
-      // Resume context inside the gesture to satisfy browser autoplay policy.
       const ctx = Howler.ctx;
       if (ctx && ctx.state === "suspended") void ctx.resume();
       clickRef.current?.play();
@@ -132,13 +132,25 @@ export function SoundProvider({ children }: { children: ReactNode }) {
     const onMouseOver = (e: MouseEvent) => {
       if (!enabledRef.current || !readyRef.current) return;
       const t = findSoundableTarget(e);
-      if (!t || t === hoverTarget) return;
+      if (!t) return;
+      // If we're crossing inside the same soundable element (between its
+      // children), don't replay.
+      if (t === hoverTarget) return;
+      // If we're coming from within the same soundable (related is inside t),
+      // we never actually left it — don't replay.
+      const related = e.relatedTarget;
+      if (related instanceof Node && t.contains(related)) return;
       hoverTarget = t;
       hoverRef.current?.play();
     };
     const onMouseOut = (e: MouseEvent) => {
-      const t = findSoundableTarget(e);
-      if (t && t === hoverTarget) hoverTarget = null;
+      if (!hoverTarget) return;
+      // Only clear when the cursor truly leaves the current hover target
+      // (relatedTarget is null or outside of it). Movement to a child element
+      // counts as "still hovering" and must not clear.
+      const related = e.relatedTarget;
+      if (related instanceof Node && hoverTarget.contains(related)) return;
+      hoverTarget = null;
     };
 
     document.addEventListener("pointerdown", onPointerDown, true);
