@@ -24,26 +24,31 @@ const AMBIENT_FADE_MS = 400;
 const AMBIENT_VOLUME = 0.35;
 const ONESHOT_VOLUME = 0.6;
 
+function getInitialActive(): boolean {
+  if (typeof window === "undefined") return false;
+  return !window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches;
+}
+
+function getInitialEnabled(): boolean {
+  if (typeof window === "undefined") return false;
+  if (window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches) return false;
+  return window.localStorage.getItem(SOUND_STORAGE_KEY) === "true";
+}
+
 export function SoundProvider({ children }: { children: ReactNode }) {
-  const [active, setActive] = useState(false);
-  const [enabled, setEnabled] = useState(false);
+  // Both `active` and `enabled` are decided once at first client render via lazy
+  // init. We deliberately do not track resize — switching between mobile and
+  // desktop mid-session is rare and the spec accepts that cost.
+  const [active] = useState<boolean>(getInitialActive);
+  const [enabled, setEnabled] = useState<boolean>(getInitialEnabled);
   const [ready, setReady] = useState(false);
 
   const ambientRef = useRef<Howl | null>(null);
   const hoverRef = useRef<Howl | null>(null);
   const clickRef = useRef<Howl | null>(null);
 
-  // Decide once on mount: mobile = inactive, no Howler at all.
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    if (window.matchMedia(MOBILE_BREAKPOINT_QUERY).matches) {
-      setActive(false);
-      return;
-    }
-    setActive(true);
-
-    const stored = window.localStorage.getItem(SOUND_STORAGE_KEY);
-    if (stored === "true") setEnabled(true);
+    if (!active) return;
 
     ambientRef.current = new Howl({
       src: ["/sounds/ambient.mp3"],
@@ -84,7 +89,7 @@ export function SoundProvider({ children }: { children: ReactNode }) {
       hoverRef.current = null;
       clickRef.current = null;
     };
-  }, []);
+  }, [active]);
 
   // Drive ambient based on (enabled, ready, active).
   useEffect(() => {
