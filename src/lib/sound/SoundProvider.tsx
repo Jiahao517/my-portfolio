@@ -24,7 +24,7 @@ export const SoundContext = createContext<SoundContextValue | null>(null);
 // === Volume knobs ===========================================================
 // Each sound has its own 0..1 volume. Tweak freely.
 const AMBIENT_VOLUME = 1.0;
-const HOVER_VOLUME = 0.3;
+const HOVER_VOLUME = 0.25;
 const CLICK_VOLUME = 0.3;
 // ============================================================================
 
