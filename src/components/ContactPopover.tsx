@@ -72,7 +72,15 @@ export function ContactPopover({ children, placement = "auto" }: ContactPopoverP
     <div
       ref={ref}
       className="contact-popover"
+      role="button"
+      tabIndex={0}
       onClick={handleToggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          handleToggle();
+        }
+      }}
     >
       <div
         className={panelClass}
